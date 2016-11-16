@@ -1,0 +1,1 @@
+ENH/BUG: Added custom boolval() for ancient versions of PHP
