@@ -3,7 +3,7 @@
 Plugin Name: E20R: Single Use Trial Subscription for Paid Memberships Pro
 Plugin URI: https://eighty20results.com/wordpress-plugin/e20r-single-use-trial/
 Description: Allow a member to sign up for the trial membership level once
-Version: 1.1
+Version: 1.2
 Author: Thomas Sjolshagen @ Eighty/20 Results by Wicked Strong Chicks, LLC <thomas@eighty20results.com>
 Author URI: http://www.eighty20results.com/thomas-sjolshagen/
 Language: e20rsut
@@ -38,30 +38,24 @@ function e20r_single_use_trial_settings() {
 	$level_settings = get_option( 'e20rsut_settings', false );
 
 	if (WP_DEBUG) {
-		error_log("The current level's settings: " . print_r( $level, true));
-	}
+		error_log("Single Use Trial settings for {$level_id}: " . print_r( $level, true));
+	} ?>
+	<h3 class="topborder"><?php _e('Single Use Trial Settings', 'e20rsut');?></h3>
+	<p class="e20r-description"><?php _e("Should we prevent members from signing up for this membership level more than once?", "e20rsut"); ?></p>
+	<table class="form-table">
+		<tbody>
+		<tr>
+			<th scope="row" valign="top"><label
+					for="e20r-single-use-trial"><?php _e( "Limit sign-ups to single use?", "e20rsut" ) ?></label></th>
+			<td>
+				<input type="checkbox" name="e20r-single-use-trial" id="e20r-single-use-trial"
+				       value="1" <?php isset( $level_settings[ $level_id ] ) ? checked( boolval( $level_settings[ $level_id ] ), true ) : null; ?>>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<?php
 
-	if ( empty( $level_id ) || ( ! empty( $level_id ) && pmpro_isLevelFree( $level ) ) ||
-	     ( empty( $level->initial_payment ) && ( ! empty( $level->billing_amount ) && ! empty( $level->cycle_number ) ) ) ||
-	     ( $level->trial_amouunt != 0 )
-	) {
-		?>
-		<h3 class="topborder"><?php _e('Single Use Trial Settings', 'e20rsut');?></h3>
-		<p class="e20r-description"><?php _e("Should we prevent members from signing up for this free/trial membership level more than once?", "e20rsut"); ?></p>
-		<table class="form-table">
-			<tbody>
-			<tr>
-				<th scope="row" valign="top"><label
-						for="e20r-single-use-trial"><?php _e( "Limit trial to single use?", "e20rsut" ) ?></label></th>
-				<td>
-					<input type="checkbox" name="e20r-single-use-trial" id="e20r-single-use-trial"
-					       value="1" <?php isset( $level_settings[ $level_id ] ) ? checked( boolval( $level_settings[ $level_id ] ), true ) : null; ?>>
-				</td>
-			</tr>
-			</tbody>
-		</table>
-		<?php
-	}
 }
 
 add_action( 'pmpro_membership_level_after_other_settings', 'e20r_single_use_trial_settings' );
