@@ -3,14 +3,14 @@ Contributors: sjolshag
 Tags: customizations, memberships, paid memberships pro, trial membership, single use trial membership
 Requires at least: 3.9
 Tested up to: 4.6.1
-Stable tag: 1.1
+Stable tag: 1.2
 
 Limit a member to sign up for a trial level once.
 
 == Description ==
 This plugin requires the Paid Memberships Pro plugin by Stranger Studios, LLC.
 
-The plugin will prevent a single user ID (member) from signing up to a trial membership level more than once.
+The plugin will prevent a single user ID (member) from signing up to a membership level more than once.
 
 NOTE: There are ways for a member to bypass this setting. The easiest being by registering as a new user
 on the site during the checkout process.
@@ -22,6 +22,10 @@ on the site during the checkout process.
 1. Configure via the "Memberships" -> "Membership Levels" settings page, under the "Single Use Trial Settings" section for each level.
 
 = Changelog =
+
+== 1.2 ==
+
+* BUG/ENHANCEMENT: Expanded to allow single-use configuration for any membership type, not just free levels.
 
 == 1.1 ==
 
