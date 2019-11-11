@@ -25,6 +25,10 @@ on your site during the checkout process. Unfortunately, there is no fool-proof 
 
 == 2.0 ==
 
+* ENHANCEMENT: Use the E20R Utilities module for sanitizing REQUEST variables
+* ENHANCEMENT: Use the E20R Utilities module to handle plugin update logic
+* ENHANCEMENT: Updated copyright notice
+
 == 1.2 ==
 
 * BUG/ENHANCEMENT: Expanded to allow single-use configuration for any membership type, not just free levels.
