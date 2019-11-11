@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build script for Eighty/20 Results WordPress plugins
 #
-# Copyright 2014 - 2016 (c) Eighty / 20 Results by Wicked Strong Chicks, LLC
+# Copyright 2014 - 2019 (c) Eighty / 20 Results by Wicked Strong Chicks, LLC
 #
 short_name="e20r-single-use-trial"
 sed=/usr/bin/sed
