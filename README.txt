@@ -1,9 +1,9 @@
 === Eighty/20 Results - Single Use Trial for Paid Memberships Pro ===
-Contributors: sjolshag
+Contributors: eighty20results
 Tags: customizations, memberships, paid memberships pro, trial membership, single use trial membership
 Requires at least: 3.9
-Tested up to: 4.6.1
-Stable tag: 1.2
+Tested up to: 5.4
+Stable tag: 2.0
 
 Limit a member to sign up for a trial level once.
 
@@ -12,8 +12,8 @@ This plugin requires the Paid Memberships Pro plugin by Stranger Studios, LLC.
 
 The plugin will prevent a single user ID (member) from signing up to a membership level more than once.
 
-NOTE: There are ways for a member to bypass this setting. The easiest being by registering as a new user
-on the site during the checkout process.
+WARNING: There are ways for a member to bypass this setting. The simplest workaround is to register as a new user
+on your site during the checkout process. Unfortunately, there is no fool-proof way to disable this workaround.
 
 == Installation ==
 
@@ -22,6 +22,12 @@ on the site during the checkout process.
 1. Configure via the "Memberships" -> "Membership Levels" settings page, under the "Single Use Trial Settings" section for each level.
 
 = Changelog =
+
+== 2.0 ==
+
+* ENHANCEMENT: Use the E20R Utilities module for sanitizing REQUEST variables
+* ENHANCEMENT: Use the E20R Utilities module to handle plugin update logic
+* ENHANCEMENT: Updated copyright notice
 
 == 1.2 ==
 

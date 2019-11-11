@@ -1,11 +1,11 @@
 #!/bin/bash
 # Build script for Eighty/20 Results WordPress plugins
 #
-# Copyright 2014 - 2016 (c) Eighty / 20 Results by Wicked Strong Chicks, LLC
+# Copyright 2014 - 2019 (c) Eighty / 20 Results by Wicked Strong Chicks, LLC
 #
 short_name="e20r-single-use-trial"
 remote_server="eighty20results.com"
-include=(languages plugin-updates ${short_name}.php README.txt)
+include=(inc languages ${short_name}.php README.txt)
 exclude=(*.yml *.phar composer.* vendor)
 build=(plugin-updates/vendor/*.php)
 plugin_path="${short_name}"
@@ -43,10 +43,10 @@ done
 
 cd ${dst_path}/..
 zip -r ${kit_name}.zip ${plugin_path}
-ssh ${remote_server} "cd ./www/protected-content/ ; mkdir -p \"${short_name}\""
-scp ${kit_name}.zip ${remote_server}:./www/protected-content/${short_name}/
-scp ${metadata} ${remote_server}:./www/protected-content/${short_name}/
-ssh ${remote_server} "cd ./www/protected-content/ ; ln -sf \"${short_name}\"/\"${short_name}\"-\"${version}\".zip \"${short_name}\".zip"
+ssh ${remote_server} "cd ./${remote_server}/protected-content/ ; mkdir -p \"${short_name}\""
+scp ${kit_name}.zip ${remote_server}:./${remote_server}/protected-content/${short_name}/
+scp ${metadata} ${remote_server}:./${remote_server}/protected-content/${short_name}/
+ssh ${remote_server} "cd ./${remote_server}/protected-content/ ; ln -sf \"${short_name}\"/\"${short_name}\"-\"${version}\".zip \"${short_name}\".zip"
 rm -rf ${dst_path}
 
 
