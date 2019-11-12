@@ -1,3 +1,2 @@
-ENHANCEMENT: Use the E20R Utilities module for sanitizing REQUEST variables
-ENHANCEMENT: Use the E20R Utilities module to handle plugin update logic
-ENHANCEMENT: Updated copyright notice
+ENH: Added docker environment for test purposes
+ENH: Using autoloader to load Utilities class
