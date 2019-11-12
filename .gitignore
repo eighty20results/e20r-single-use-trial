@@ -50,3 +50,4 @@ fabric.properties
 /build_readmes/readme_changelog.txt
 /build_readmes/json_changelog.txt
 /inc/utilities/
+/docker-env/e20r-single-use-trial.sql

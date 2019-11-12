@@ -1,17 +1,17 @@
 {
   "name" : "Eighty/20 Results - Single Use Trial Memberships for Paid Memberships Pro",
   "slug" : "e20r-single-use-trial",
-  "download_url" : "https://eighty20results.com/protected-content/e20r-single-use-trial/e20r-single-use-trial-2.0.zip",
-  "version" : "2.0",
+  "download_url" : "https://eighty20results.com/protected-content/e20r-single-use-trial/e20r-single-use-trial-2.1.zip",
+  "version" : "2.1",
   "tested" : "5.4",
   "requires" : "4.7",
   "author" : "Thomas Sjolshagen <thomas@eighty20results.com>",
   "author_homepage" : "https://eighty20results.com/thomas-sjolshagen",
-  "last_updated" : "2019-11-10 18:30:00 MST",
+  "last_updated" : "2019-11-12 07:00:00 MST",
   "homepage" : "https://eighty20results.com/paid-memberships-pro/do-it-for-me/",
   "sections" : {
     "description" : "Only allow a Paid Memberships Pro member to sign up for a trial membership level once.",
-    "changelog" : "<h3>2.0</h3><ol><li>ENHANCEMENT: Use the E20R Utilities module for sanitizing REQUEST variables</li><li>ENHANCEMENT: Use the E20R Utilities module to handle plugin update logic</li><li>ENHANCEMENT: Updated copyright notice</li></ol><h3>1.2</h3><ol><li>BUG/ENHANCEMENT: Expanded to allow single-use configuration for any membership type, not just free levels.</li></ol><h3>1.1</h3><ol><li>ENH/BUG: Added custom boolval() for ancient versions of PHP</li></ol><h3>1.0.3</h3><ol><li>ENH: Add GPL v2 license text to source file(s)</li><li>ENH: Add descriptive text to settings section on Membership Level definition page</li></ol><h3>1.0.3</h3><ol><li>BUG: Didn't always load settings on page</li></ol><h3>1.0.2</h3><ol><li>BUG/ENH: Make e20r_force_tls_12() pluggable</li><li>ENH: Add header text to settings page</li></ol><h3>1.0.1</h3><ol><li>Adding debug capabilities</li></ol><h3>1.0</h3><ol><li>Initial Release of the add-on</li></ol>",
+    "changelog" : "<h3>2.1</h3><ol><li>ENH: Added docker environment for test purposes</li><li>ENH: Using autoloader to load Utilities class</li></ol><h3>2.0</h3><ol><li>ENHANCEMENT: Use the E20R Utilities module for sanitizing REQUEST variables</li><li>ENHANCEMENT: Use the E20R Utilities module to handle plugin update logic</li><li>ENHANCEMENT: Updated copyright notice</li></ol><h3>1.2</h3><ol><li>BUG/ENHANCEMENT: Expanded to allow single-use configuration for any membership type, not just free levels.</li></ol><h3>1.1</h3><ol><li>ENH/BUG: Added custom boolval() for ancient versions of PHP</li></ol><h3>1.0.3</h3><ol><li>ENH: Add GPL v2 license text to source file(s)</li><li>ENH: Add descriptive text to settings section on Membership Level definition page</li></ol><h3>1.0.3</h3><ol><li>BUG: Didn't always load settings on page</li></ol><h3>1.0.2</h3><ol><li>BUG/ENH: Make e20r_force_tls_12() pluggable</li><li>ENH: Add header text to settings page</li></ol><h3>1.0.1</h3><ol><li>Adding debug capabilities</li></ol><h3>1.0</h3><ol><li>Initial Release of the add-on</li></ol>",
     "faq" : "<h3>I found a bug in the plugin.</h3>Please report your issue to us by using the <a href='https://github.com/eighty20results/e20r-single-use-trial/issues' target='_blank'>GitHub Issues page</a> and we'll try to respond as quickly as possible to your inquiry."
     }
 }

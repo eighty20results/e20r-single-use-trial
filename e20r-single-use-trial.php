@@ -27,10 +27,6 @@ License: GPLv2
  *
  **/
 
-if ( ! class_exists( '\E20R\Utilities\Utilities' ) ) {
-	require_once( plugin_dir_path( __FILE__ ) . 'inc/utilities/class.utilities.php' );
-}
-
 /**
  * Configuration section on the Membership Levels page (in settings).
  */
