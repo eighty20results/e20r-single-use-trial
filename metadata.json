@@ -1,13 +1,13 @@
 {
   "name" : "Eighty/20 Results - Single Use Trial Memberships for Paid Memberships Pro",
   "slug" : "e20r-single-use-trial",
-  "download_url" : "https://eighty20results.com/protected-content/e20r-single-use-trial/e20r-single-use-trial-2.0.zip",
-  "version" : "2.0",
+  "download_url" : "https://eighty20results.com/protected-content/e20r-single-use-trial/e20r-single-use-trial-2.1.zip",
+  "version" : "2.1",
   "tested" : "5.4",
   "requires" : "4.7",
   "author" : "Thomas Sjolshagen <thomas@eighty20results.com>",
   "author_homepage" : "https://eighty20results.com/thomas-sjolshagen",
-  "last_updated" : "2019-11-10 18:30:00 MST",
+  "last_updated" : "2019-11-12 07:00:00 MST",
   "homepage" : "https://eighty20results.com/paid-memberships-pro/do-it-for-me/",
   "sections" : {
     "description" : "Only allow a Paid Memberships Pro member to sign up for a trial membership level once.",

@@ -3,7 +3,7 @@
 Plugin Name: E20R: Single Use Trial Subscription for Paid Memberships Pro
 Plugin URI: https://eighty20results.com/wordpress-plugin/e20r-single-use-trial/
 Description: Allow a member to sign up for the trial membership level once
-Version: 2.0
+Version: 2.1
 Author: Thomas Sjolshagen @ Eighty/20 Results by Wicked Strong Chicks, LLC <thomas@eighty20results.com>
 Author URI: http://www.eighty20results.com/thomas-sjolshagen/
 Domain: e20r-single-use-trial
@@ -26,10 +26,6 @@ License: GPLv2
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  **/
-
-if ( ! class_exists( '\E20R\Utilities\Utilities' ) ) {
-	require_once( plugin_dir_path( __FILE__ ) . 'inc/utilities/class.utilties.php' );
-}
 
 /**
  * Configuration section on the Membership Levels page (in settings).
@@ -57,7 +53,7 @@ function e20r_single_use_trial_settings() {
             </th>
             <td>
                 <input type="checkbox" name="e20r-single-use-trial" id="e20r-single-use-trial"
-                       value="1" <?php isset( $level_settings[ $level_id ] ) ? checked( (bool)$level_settings[ $level_id ], true ) : null; ?>>
+                       value="1" <?php isset( $level_settings[ $level_id ] ) ? checked( (bool) $level_settings[ $level_id ], true ) : null; ?>>
             </td>
         </tr>
         </tbody>
@@ -213,8 +209,76 @@ if ( ! function_exists( 'boolval' ) ) {
 	 * @return bool The boolean value of $var
 	 */
 	function boolval( $var ) {
-		return !! $var;
+		return ! ! $var;
 	}
+}
+
+/**
+ * Class auto-loader
+ *
+ * @param string $class_name Name of the class to auto-load
+ *
+ * @since  1.0
+ * @access public static
+ */
+if ( ! function_exists( 'e20r_sutl_auto_loader' ) ) {
+	function e20r_sutl_auto_loader( $class_name ) {
+		
+		if ( false === stripos( $class_name, 'e20r' ) ) {
+			return;
+		}
+		
+		$parts     = explode( '\\', $class_name );
+		$c_name    = strtolower( preg_replace( '/_/', '-', $parts[ ( count( $parts ) - 1 ) ] ) );
+		$base_path = plugin_dir_path( __FILE__ ) . 'inc/';
+		
+		if ( file_exists( plugin_dir_path( __FILE__ ) . 'class/' ) ) {
+			$base_path = plugin_dir_path( __FILE__ ) . 'class/';
+		}
+		
+		$filename = "class.{$c_name}.php";
+		$iterator = new \RecursiveDirectoryIterator( $base_path, \RecursiveDirectoryIterator::SKIP_DOTS | \RecursiveIteratorIterator::SELF_FIRST | \RecursiveIteratorIterator::CATCH_GET_CHILD | \RecursiveDirectoryIterator::FOLLOW_SYMLINKS );
+		
+		/**
+		 * Locate class member files, recursively
+		 */
+		$filter = new \RecursiveCallbackFilterIterator( $iterator, function ( $current, $key, $iterator ) use ( $filename ) {
+			
+			$file_name = $current->getFilename();
+			
+			// Skip hidden files and directories.
+			if ( $file_name[0] == '.' || $file_name == '..' ) {
+				return false;
+			}
+			
+			if ( $current->isDir() ) {
+				// Only recurse into intended subdirectories.
+				return $file_name() === $filename;
+			} else {
+				// Only consume files of interest.
+				return strpos( $file_name, $filename ) === 0;
+			}
+		} );
+		
+		foreach ( new \ RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
+			
+			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
+			
+			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
+				require_once( $class_path );
+			}
+		}
+	}
+}
+
+/**
+ * Register the auto-loader and the activation/deactiviation hooks.
+ */
+try {
+	spl_autoload_register( 'e20r_sutl_auto_loader' );
+} catch ( \Exception $e ) {
+	error_log( "Single-Use-Trial-Error: " . $e->getMessage() );
+	wp_die( $e->getMessage() );
 }
 
 // One-click update handler
