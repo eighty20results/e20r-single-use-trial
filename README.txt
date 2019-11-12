@@ -27,6 +27,11 @@ on your site during the checkout process. Unfortunately, there is no fool-proof 
 
 = Changelog =
 
+== 2.1 ==
+
+* ENH: Added docker environment for test purposes
+* ENH: Using autoloader to load Utilities class
+
 == 2.0 ==
 
 * ENHANCEMENT: Use the E20R Utilities module for sanitizing REQUEST variables
