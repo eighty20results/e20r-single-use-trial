@@ -8,10 +8,10 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+Please provide a clear and concise description of what the problem/bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
+Describe the steps needed in order to reproduce the faulty behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
