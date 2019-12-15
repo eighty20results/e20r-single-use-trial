@@ -21,7 +21,10 @@ on your site during the checkout process. Unfortunately, there is no fool-proof 
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Configure via the "Memberships" -> "Membership Levels" settings page, under the "Single Use Trial Settings" section for each level.
 
-= Thank You/Contributions =
+== Reporting Issues/Problems ==
+Please report all issues/problems on the [plugin's GitHub 'Issues' page](https://github.com/eighty20results/e20r-single-use-trial/issues)
+
+== Thank You/Contributions ==
 
 * Muhammad Humayun Rashed (rony2k6 @ github.com: https://github.com/rony2k6)
 
