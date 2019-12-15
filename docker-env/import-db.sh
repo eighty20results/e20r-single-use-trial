@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-PROJECT_NAME='single-use-trial'
+PROJECT_NAME='e20r-single-use-trial'
 echo "Importing database for ${PROJECT_NAME}"
 # sleep 30;
 echo $(pwd)
