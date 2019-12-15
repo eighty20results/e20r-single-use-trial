@@ -3,7 +3,7 @@ Contributors: eighty20results
 Tags: customizations, memberships, paid memberships pro, trial membership, single use trial membership
 Requires at least: 3.9
 Tested up to: 5.4
-Stable tag: 2.0
+Stable tag: 2.2
 
 Limit a member to sign up for a trial level once.
 
@@ -29,6 +29,13 @@ Please report all issues/problems on the [plugin's GitHub 'Issues' page](https:/
 * Muhammad Humayun Rashed (rony2k6 @ github.com: https://github.com/rony2k6)
 
 = Changelog =
+
+== 2.2 ==
+
+* ENH: Added link to GitHub Issues page for the plugin
+* ENH: Incorrect slug name for the plugin in docker environment
+* ENH: Added PMPro PayFast gateway plugin testing to test suite
+* BUG FIX: Fatal error due to undefined class/function
 
 == 2.1 ==
 

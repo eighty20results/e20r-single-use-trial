@@ -1,2 +1,4 @@
-ENH: Added docker environment for test purposes
-ENH: Using autoloader to load Utilities class
+ENH: Added link to GitHub Issues page for the plugin
+ENH: Incorrect slug name for the plugin in docker environment
+ENH: Added PMPro PayFast gateway plugin testing to test suite
+BUG FIX: Fatal error due to undefined class/function
