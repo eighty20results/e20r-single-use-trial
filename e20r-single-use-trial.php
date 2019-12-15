@@ -3,7 +3,7 @@
 Plugin Name: E20R: Single Use Trial Subscription for Paid Memberships Pro
 Plugin URI: https://eighty20results.com/wordpress-plugin/e20r-single-use-trial/
 Description: Allow a member to sign up for the trial membership level once
-Version: 2.1
+Version: 2.2
 Author: Thomas Sjolshagen @ Eighty/20 Results by Wicked Strong Chicks, LLC <thomas@eighty20results.com>
 Author URI: http://www.eighty20results.com/thomas-sjolshagen/
 Domain: e20r-single-use-trial
@@ -213,5 +213,69 @@ if ( ! function_exists( 'boolval' ) ) {
 	}
 }
 
+if ( !function_exists( 'e20r_auto_loader' ) ) {
+	/**
+	 * Class auto-loader for the Enhanced Members List plugin
+	 *
+	 * @param string $class_name Name of the class to auto-load
+	 *
+	 * @since  1.0
+	 * @access public static
+	 */
+	function e20r_auto_loader( $class_name ) {
+		
+		if ( false === stripos( $class_name, 'e20r' ) ) {
+			return;
+		}
+		
+		$parts     = explode( '\\', $class_name );
+		$c_name    = strtolower( preg_replace( '/_/', '-', $parts[ ( count( $parts ) - 1 ) ] ) );
+		$base_path = plugin_dir_path( __FILE__ ) . 'classes/';
+		
+		if ( file_exists( plugin_dir_path( __FILE__ ) . 'inc/' ) ) {
+			$base_path = plugin_dir_path( __FILE__ ) . 'inc/';
+		}
+		
+		$filename = "class.{$c_name}.php";
+		$iterator = new \RecursiveDirectoryIterator( $base_path, \RecursiveDirectoryIterator::SKIP_DOTS | \RecursiveIteratorIterator::SELF_FIRST | \RecursiveIteratorIterator::CATCH_GET_CHILD | \RecursiveDirectoryIterator::FOLLOW_SYMLINKS );
+		
+		/**
+		 * Loate class member files, recursively
+		 */
+		$filter = new \RecursiveCallbackFilterIterator( $iterator, function ( $current, $key, $iterator ) use ( $filename ) {
+			
+			$file_name = $current->getFilename();
+			
+			// Skip hidden files and directories.
+			if ( $file_name[0] == '.' || $file_name == '..' ) {
+				return false;
+			}
+			
+			if ( $current->isDir() ) {
+				// Only recurse into intended subdirectories.
+				return $file_name() === $filename;
+			} else {
+				// Only consume files of interest.
+				return strpos( $file_name, $filename ) === 0;
+			}
+		} );
+		
+		foreach ( new \ RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
+			
+			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
+			
+			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
+				require_once( $class_path );
+			}
+		}
+	}
+}
 // One-click update handler
+try {
+	spl_autoload_register( 'e20r_auto_loader' );
+} catch( \Exception $exception ) {
+	error_log("Unable to register autoloader: " . $exception->getMessage(),E_USER_ERROR );
+	return false;
+}
+
 \E20R\Utilities\Utilities::configureUpdateServerV4( 'e20r-single-use-trial', plugin_dir_path( __FILE__ ) . 'e20r-single-use-trial.php' );
