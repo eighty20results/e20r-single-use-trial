@@ -12,6 +12,7 @@ services:
         - ./:/var/www/html:cached
         - /Volumes/Development/www/clean.local/wp-content/themes/e20r-coaching:/var/www/html/wp-content/themes/e20r-coaching:cached
         - /Volumes/Development/www/clean.local/wp-content/plugins/paid-memberships-pro:/var/www/html/wp-content/plugins/paid-memberships-pro:cached
+        - /Volumes/Development/www/clean.local/wp-content/plugins/pmpro-payfast:/var/www/html/wp-content/plugins/pmpro-payfast:cached
         - /Volumes/Development/www/clean.local/wp-content/plugins/e20r-single-use-trial:/var/www/html/wp-content/plugins/e20r-single-use-trial:cached
         ports:
         - target: 80 # Web server
@@ -45,6 +46,7 @@ services:
         - ./:/var/www/html:cached
         - /Volumes/Development/www/clean.local/wp-content/themes/e20r-coaching:/var/www/html/wp-content/themes/e20r-coaching:cached
         - /Volumes/Development/www/clean.local/wp-content/plugins/paid-memberships-pro:/var/www/html/wp-content/plugins/paid-memberships-pro:cached
+        - /Volumes/Development/www/clean.local/wp-content/plugins/pmpro-payfast:/var/www/html/wp-content/plugins/pmpro-payfast:cached
         - /Volumes/Development/www/clean.local/wp-content/plugins/e20r-single-use-trial:/var/www/html/wp-content/plugins/e20r-single-use-trial:cached
         labels:
         - "traefik.enable=true"
