@@ -33,9 +33,9 @@ references:
     attach_workspace:
       at: *workspace_root
 
-  copy_vendor: &copy_vendor
+  copy_inc: &copy_inc
     run:
-      name: Copy vendor directory
+      name: Copy inc directory
       command: cp -R /tmp/inc .
 
   install_subversion: &install_subversion
@@ -56,7 +56,7 @@ references:
           name: Add WordPress host to hosts file
           command: echo "127.0.0.1 ${WP_HOST}" | sudo tee -a /etc/hosts
       - *attach_workspace
-      - *copy_vendor
+      - *copy_inc
       - run:
           name: Install MySQL client
           command: sudo apt-get install mysql-client
@@ -81,7 +81,7 @@ references:
     steps:
       - checkout
       - *attach_workspace
-      - *copy_vendor
+      - *copy_inc
       - run:
           name: Run PHP unit tests
           command: inc/bin/phpunit
@@ -111,7 +111,7 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
-      - *copy_vendor
+      - *copy_inc
       - run:
           name: Run code quality tests
           command: inc/bin/grumphp run --testsuite=code_quality
