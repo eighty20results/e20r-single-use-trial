@@ -82,3 +82,6 @@ fabric.properties
 /inc/monolog/
 /inc/amphp/
 /inc/symfony/
+/inc/pdepend/
+/inc/php-parallel-lint/
+/inc/phpmd/
