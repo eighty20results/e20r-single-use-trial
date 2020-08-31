@@ -265,6 +265,7 @@ if ( !function_exists( 'e20r_auto_loader' ) ) {
 			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
 			
 			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
+				/** @noinspection PhpIncludeInspection */
 				require_once( $class_path );
 			}
 		}
