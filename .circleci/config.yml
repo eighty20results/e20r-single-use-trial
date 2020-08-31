@@ -208,39 +208,39 @@ workflows:
       - test_php72:
           requires:
             - code_quality
-      - test_php71:
-          requires:
-            - code_quality
-      - test_php70:
-          requires:
-            - code_quality
-      - test_php56:
-          requires:
-            - code_quality
-      - test_php55:
-          requires:
-            - code_quality
-      - test_php54:
-          requires:
-            - code_quality
+#      - test_php71:
+#          requires:
+#            - code_quality
+#      - test_php70:
+#          requires:
+#            - code_quality
+#      - test_php56:
+#          requires:
+#            - code_quality
+#      - test_php55:
+#          requires:
+#            - code_quality
+#      - test_php54:
+#          requires:
+#            - code_quality
       - acceptance_singlesite:
           requires:
             - test_php73
             - test_php72
-            - test_php71
-            - test_php70
-            - test_php56
-            - test_php55
-            - test_php54
+#            - test_php71
+#            - test_php70
+#            - test_php56
+#            - test_php55
+#            - test_php54
       - acceptance_multisite:
           requires:
             - test_php73
             - test_php72
-            - test_php71
-            - test_php70
-            - test_php56
-            - test_php55
-            - test_php54
+#            - test_php71
+#            - test_php70
+#            - test_php56
+#            - test_php55
+#            - test_php54
 #      - deploy_plugin:
 #          filters:
 #            branches:
