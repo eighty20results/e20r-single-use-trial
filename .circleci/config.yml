@@ -36,7 +36,7 @@ references:
   copy_vendor: &copy_vendor
     run:
       name: Copy vendor directory
-      command: cp -R /tmp/vendor .
+      command: cp -R /tmp/inc .
 
   install_subversion: &install_subversion
     run:
@@ -72,7 +72,7 @@ references:
           background: True
       - run:
           name: Run Behat tests
-          command: vendor/bin/behat --config .circleci/behat.yml --format progress --tags=$WP_TYPE
+          command: inc/bin/behat --config .circleci/behat.yml --format progress --tags=$WP_TYPE
 
   # Default configuration for all phpunit testing jobs
   #
@@ -84,7 +84,7 @@ references:
       - *copy_vendor
       - run:
           name: Run PHP unit tests
-          command: vendor/bin/phpunit
+          command: inc/bin/phpunit
 
 jobs:
   build:
@@ -100,7 +100,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - vendor
+            - inc
       - persist_to_workspace:
           root: *workspace_root
           paths:
@@ -114,7 +114,7 @@ jobs:
       - *copy_vendor
       - run:
           name: Run code quality tests
-          command: vendor/bin/grumphp run --testsuite=code_quality
+          command: inc/bin/grumphp run --testsuite=code_quality
 
   test_php73:
     <<: *phpunit_job
