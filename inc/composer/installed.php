@@ -128,6 +128,15 @@
       ),
       'reference' => 'b3ce8b619c26db6abd01b9dcfd6a2c0254060956',
     ),
+    'composer/xdebug-handler' => 
+    array (
+      'pretty_version' => '1.4.3',
+      'version' => '1.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ebd27a9866ae8254e873866f795491f02418c5a5',
+    ),
     'cordoval/hamcrest-php' => 
     array (
       'replaced' => 
@@ -178,6 +187,13 @@
       ),
       'reference' => 'd1fe4676bf1347c08dec84a14a4c5e7110740d72',
     ),
+    'grogy/php-parallel-lint' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
+      ),
+    ),
     'hamcrest/hamcrest-php' => 
     array (
       'pretty_version' => 'v2.0.1',
@@ -186,6 +202,13 @@
       array (
       ),
       'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
+    ),
+    'jakub-onderka/php-parallel-lint' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
+      ),
     ),
     'kodova/hamcrest-php' => 
     array (
@@ -243,6 +266,15 @@
       ),
       'reference' => 'e8d34df855b0a0549a300cb8cb4db472556e8aa9',
     ),
+    'pdepend/pdepend' => 
+    array (
+      'pretty_version' => '2.8.0',
+      'version' => '2.8.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c64472f8e76ca858c79ad9a4cf1e2734b3f8cc38',
+    ),
     'phar-io/manifest' => 
     array (
       'pretty_version' => '2.0.1',
@@ -260,6 +292,15 @@
       array (
       ),
       'reference' => 'c6bb6825def89e0a32220f88337f8ceaf1975fa0',
+    ),
+    'php-parallel-lint/php-parallel-lint' => 
+    array (
+      'pretty_version' => 'v1.2.0',
+      'version' => '1.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '474f18bc6cc6aca61ca40bfab55139de614e51ca',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -287,6 +328,15 @@
       array (
       ),
       'reference' => 'e878a14a65245fbe78f8080eba03b47c3b705651',
+    ),
+    'phpmd/phpmd' => 
+    array (
+      'pretty_version' => '2.8.2',
+      'version' => '2.8.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '714629ed782537f638fe23c4346637659b779a77',
     ),
     'phpro/grumphp' => 
     array (
@@ -405,8 +455,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'sebastian/cli-parser' => 
@@ -516,6 +566,15 @@
       array (
       ),
       'reference' => '127a46f6b057441b201253526f81d5406d6c7840',
+    ),
+    'sebastian/phpcpd' => 
+    array (
+      'pretty_version' => '6.0.2',
+      'version' => '6.0.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4f130523214c755c69d1d59297afdff206c7b029',
     ),
     'sebastian/recursion-context' => 
     array (
