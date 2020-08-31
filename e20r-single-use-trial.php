@@ -1,6 +1,7 @@
 <?php
 namespace E20R\SingleUseTrial;
 
+use E20R\Utilities\Utilities;
 /*
 Plugin Name: E20R: Single Use Trial Subscription for Paid Memberships Pro
 Plugin URI: https://eighty20results.com/wordpress-plugin/e20r-single-use-trial/
@@ -38,7 +39,7 @@ function e20r_single_use_trial_settings() {
 	}
 	
 	
-	$utils    = \E20R\Utilities\Utilities::get_instance();
+	$utils    = Utilities::get_instance();
 	$level_id = $utils->get_variable( 'edit', null );
 	
 	$level_settings = get_option( 'e20rsut_settings', false );
@@ -82,7 +83,7 @@ add_action(
  */
 function e20r_save_single_use_trial( $level_id ) {
 	
-	$utils   = \E20R\Utilities\Utilities::get_instance();
+	$utils   = Utilities::get_instance();
 	$options = get_option( 'e20rsut_settings', false );
 	
 	$setting = (bool) $utils->get_variable( 'e20r-single-use-trial', false );
@@ -204,7 +205,7 @@ function e20r_registration_checks( $value ) {
 	
 	// Grab the list of levels w/a trial policy set
 	$trial_levels = apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
-	$utils        = \E20R\Utilities\Utilities::get_instance();
+	$utils        = Utilities::get_instance();
 	$level_id     = $utils->get_variable( 'level', null );
 	
 	if ( $current_user->ID && in_array( $level_id, $trial_levels ) ) {
@@ -370,7 +371,7 @@ try {
 	return false;
 }
 
-\E20R\Utilities\Utilities::configureUpdateServerV4(
+Utilities::configureUpdateServerV4(
         'e20r-single-use-trial',
         plugin_dir_path( __FILE__ ) . 'e20r-single-use-trial.php'
 );
