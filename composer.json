@@ -1,0 +1,28 @@
+{
+  "config": {
+    "vendor-dir": "inc/"
+  },
+  "name": "eighty20results/e20r-single-use-trial",
+  "description": "Limit (free) trial memberships to a single use per user",
+  "minimum-stability": "stable",
+  "version": "2.2",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Thomas Sjolshagen",
+      "email": "thomas@eighty20results.com",
+      "homepage": "https://eighty20results.com/",
+      "role": "Developer"
+    }
+  ],
+  "require-dev": {
+    "phpro/grumphp": ">=v0.21.0",
+    "behat/behat": ">=3.6.0",
+    "brain/monkey": ">=2.3.1",
+    "mockery/mockery": ">=1.4.2",
+    "antecedent/patchwork": ">=2.1.12",
+    "phpunit/phpunit": ">7.5.0",
+    "squizlabs/php_codesniffer": ">=3.5.6",
+    "tcz/phpunit-mockfunction": "1.0.0"
+  }
+}
