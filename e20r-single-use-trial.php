@@ -41,7 +41,6 @@ function e20r_single_use_trial_settings() {
 	$utils    = \E20R\Utilities\Utilities::get_instance();
 	$level_id = $utils->get_variable( 'edit', null );
 	
-	$level          = pmpro_getLevel( $level_id );
 	$level_settings = get_option( 'e20rsut_settings', false );
 	?>
     <h3 class="topborder"><?php _e( 'Single Use Trial Settings', 'e20r-single-use-trial' ); ?></h3>
@@ -115,16 +114,8 @@ function e20r_get_trial_levels( $level_array ) {
 		$all_levels = pmpro_getAllLevels( true, true );
 		
 		// Add all free levels (trials?) to the filter array
-		foreach ( $all_levels as $level_id => $level ) {
-			if ( TRUE === pmpro_isLevelFree( $level ) &&
-                 ! in_array( $level->id, $level_array )
-            ) {
-				$level_array[] = $level_id;
-            // We shouldn't allow the inclusion of levels that aren't actually free!
-			} else if ( FALSE === pmpro_isLevelFree( $level ) &&
-                        FALSE !== ($l_key = array_search( $level_id, $level_array ) ) ) {
-			    unset( $level_array[$l_key] );
-            }
+		foreach ( $all_levels as $level ) {
+		    $level_array = e20r_update_trial_levels($level_array, $level );
 		}
 	} else {
 		
@@ -146,7 +137,37 @@ add_filter(
         1
 );
 
-//record when users gain the trial level
+/**
+ * Update the list of membership level IDs that should be trial level(s)
+ *
+ * @param array $level_array
+ * @param \stdClass $level
+ *
+ * @return int[]
+ */
+function e20r_update_trial_levels( $level_array, $level ) {
+	
+    // If the level is free _and_ not in the list already
+    if ( TRUE === pmpro_isLevelFree( $level ) &&
+	     ! in_array( $level->id, $level_array )
+	) {
+		$level_array[] = $level->id;
+    // Don't allow the inclusion of levels that aren't free
+	} else if ( FALSE === pmpro_isLevelFree( $level ) &&
+                // And has to exist in the list obviously...
+	            FALSE !== ($l_key = array_search( $level->id, $level_array ) ) ) {
+		unset( $level_array[$l_key] );
+	}
+	
+    return $level_array;
+}
+
+/**
+ * Record that a user checked out for a trial membership
+ *
+ * @param int $level_id
+ * @param int $user_id
+ */
 function e20r_after_change_membership_level( $level_id, $user_id ) {
 	
 	//trial level(s) to allow single sign-ups
@@ -304,10 +325,11 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
         );
 		
 		/**
-		 * Loate class member files, recursively
+		 * Locate class member files, recursively
 		 */
 		$filter = new \RecursiveCallbackFilterIterator(
 		        $iterator,
+                /** @SuppressWarnings("unused") */
                 function ( $current, $key, $iterator ) use ( $filename ) {
 			
 			$file_name = $current->getFilename();
@@ -327,9 +349,11 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 		}
 		);
 		
+		// @SuppressWarnings ('unused')
 		foreach ( new \ RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
 			
-			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
+			// $class_path = $f_file->getPath() . "/" . $f_file->getFilename();
+			$class_path = $f_file->getPath() . "/" . $f_filename;
 			
 			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
 				/** @noinspection PhpIncludeInspection */
