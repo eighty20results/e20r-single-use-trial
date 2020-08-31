@@ -21,9 +21,9 @@
     "brain/monkey": ">=2.3.1",
     "mockery/mockery": ">=1.4.2",
     "antecedent/patchwork": ">=2.1.12",
-    "phpunit/phpunit": ">7.5.0",
+    "phpunit/phpunit": "==8.5.8",
     "squizlabs/php_codesniffer": ">=3.5.6",
-    "sebastian/phpcpd": ">=6.0.2",
+    "sebastian/phpcpd": "^2.0.4",
     "php-parallel-lint/php-parallel-lint": ">=0.9.2",
     "phpmd/phpmd": ">=2.8.2"
   }
