@@ -52,3 +52,5 @@ fabric.properties
 /inc/utilities/
 /docker-env/e20r-single-use-trial.sql
 .DS_Store
+/composer.lock
+/.phpunit.result.cache
