@@ -1,11 +1,17 @@
 grumphp:
     process_timeout: 120
+    environment:
+        paths:
+            - inc/bin
+            - ./
     tasks:
         composer: ~
         gherkin: ~
-        git_commit_message: ~
+#        git_commit_message:
+#            allow_empty_message: false
         phpcpd:
             exclude:
+                - inc
                 - lib
                 - tests
                 - vendor
@@ -17,6 +23,7 @@ grumphp:
             ruleset: ['codesize', 'design', 'naming', 'unusedcode']
             exclude:
                 - lib
+                - inc
                 - tests
                 - vendor
         phpunit:
