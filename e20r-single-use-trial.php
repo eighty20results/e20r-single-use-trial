@@ -6,7 +6,7 @@ use E20R\Utilities\Utilities;
 Plugin Name: E20R: Single Use Trial Subscription for Paid Memberships Pro
 Plugin URI: https://eighty20results.com/wordpress-plugin/e20r-single-use-trial/
 Description: Allow a member to sign up for the trial membership level once
-Version: 2.2
+Version: 2.3
 Author: Thomas Sjolshagen @ Eighty/20 Results by Wicked Strong Chicks, LLC <thomas@eighty20results.com>
 Author URI: http://www.eighty20results.com/thomas-sjolshagen/
 Domain: e20r-single-use-trial
