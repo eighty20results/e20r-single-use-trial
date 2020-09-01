@@ -87,7 +87,7 @@ references:
       - *copy_inc
       - run:
           name: Run PHP unit tests
-          command: inc/bin/phpunit
+          command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml.dist tests/test_*.php
 
 jobs:
   build:

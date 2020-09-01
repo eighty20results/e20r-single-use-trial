@@ -82,6 +82,7 @@ class test_RegistrationChecks extends TestCase {
 		Monkey\Functions\stubs(
 			[
 				'get_current_blog_id' => 0,
+				'is_user_logged_in' => true,
 				'plugins_url' => "http://docker.local/wp-content/plugins/e20r-single-use-trial/",
 				'get_user_meta' => $trial_is_used,
 				'wp_get_current_user' => $this->wpFaker->user(array('ID' => $user_id ) ),
