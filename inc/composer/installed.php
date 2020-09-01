@@ -110,6 +110,22 @@
       ),
       'reference' => '51ac4500c4dc30cbaaabcd2f25694299df666a31',
     ),
+    'behat/mink' => 
+    array (
+      'pretty_version' => 'v1.8.1',
+      'version' => '1.8.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '07c6a9fe3fa98c2de074b25d9ed26c22904e3887',
+    ),
+    'behat/mink-extension' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.4.0',
+      ),
+    ),
     'behat/transliterator' => 
     array (
       'pretty_version' => 'v1.3.0',
@@ -188,6 +204,15 @@
       ),
       'reference' => NULL,
     ),
+    'friends-of-behat/mink-extension' => 
+    array (
+      'pretty_version' => 'v2.4.0',
+      'version' => '2.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ca8796a20f2b39ea275860d1cee7b863447dfe06',
+    ),
     'fzaninotto/faker' => 
     array (
       'pretty_version' => 'v1.9.1',
@@ -240,6 +265,15 @@
       ),
       'reference' => 'f9eee5cec93dfb313a38b6b288741e84e53f02d5',
     ),
+    'mustache/mustache' => 
+    array (
+      'pretty_version' => 'v2.13.0',
+      'version' => '2.13.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e95c5a008c23d3151d59ea72484d4f72049ab7f4',
+    ),
     'myclabs/deep-copy' => 
     array (
       'pretty_version' => '1.10.1',
@@ -262,6 +296,15 @@
       ),
       'reference' => '88e519766fc58bd46b8265561fb79b54e2e00b28',
     ),
+    'ocramius/proxy-manager' => 
+    array (
+      'pretty_version' => '1.0.2',
+      'version' => '1.0.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '57e9272ec0e8deccf09421596e0e2252df440e11',
+    ),
     'opis/closure' => 
     array (
       'pretty_version' => '3.5.6',
@@ -270,6 +313,15 @@
       array (
       ),
       'reference' => 'e8d34df855b0a0549a300cb8cb4db472556e8aa9',
+    ),
+    'paulgibbs/behat-wordpress-extension' => 
+    array (
+      'pretty_version' => 'v3.3.0',
+      'version' => '3.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ebd86dec6e29e827b03e2aff9bbe3de5ad2ec396',
     ),
     'pdepend/pdepend' => 
     array (
@@ -464,6 +516,15 @@
         1 => '1.0',
       ),
     ),
+    'rmccue/requests' => 
+    array (
+      'pretty_version' => 'v1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '87932f52ffad70504d93f04f15690cf16a089546',
+    ),
     'sebastian/cli-parser' => 
     array (
       'pretty_version' => '1.0.0',
@@ -626,6 +687,15 @@
       ),
       'reference' => '590cfec960b77fd55e39b7d9246659e95dd6d337',
     ),
+    'sensiolabs/behat-page-object-extension' => 
+    array (
+      'pretty_version' => 'v2.1.0',
+      'version' => '2.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'bd2a34221ba65ea8c86d8e693992d718de03dbae',
+    ),
     'symfony/config' => 
     array (
       'pretty_version' => 'v5.1.4',
@@ -643,6 +713,15 @@
       array (
       ),
       'reference' => '51ff337ce194bdc3d8db12b20ce8cd54ac9f71e9',
+    ),
+    'symfony/css-selector' => 
+    array (
+      'pretty_version' => 'v5.1.4',
+      'version' => '5.1.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e544e24472d4c97b2d11ade7caacd446727c6bf9',
     ),
     'symfony/dependency-injection' => 
     array (
@@ -862,6 +941,51 @@
       array (
       ),
       'reference' => 'bafc69caeb4d49c39fd0779086c03a3738cbb389',
+    ),
+    'wp-cli/mustangostang-spyc' => 
+    array (
+      'pretty_version' => '0.6.3',
+      'version' => '0.6.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6aa0b4da69ce9e9a2c8402dab8d43cf32c581cc7',
+    ),
+    'wp-cli/php-cli-tools' => 
+    array (
+      'pretty_version' => 'v0.11.11',
+      'version' => '0.11.11.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'fe9c7c44a9e1bf2196ec51dc38da0593dbf2993f',
+    ),
+    'wp-cli/wp-cli' => 
+    array (
+      'pretty_version' => 'v2.4.1',
+      'version' => '2.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ceb18598e79befa9b2a37a51efbb34910628988b',
+    ),
+    'zendframework/zend-code' => 
+    array (
+      'pretty_version' => '2.6.3',
+      'version' => '2.6.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '95033f061b083e16cdee60530ec260d7d628b887',
+    ),
+    'zendframework/zend-eventmanager' => 
+    array (
+      'pretty_version' => '3.2.1',
+      'version' => '3.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a5e2583a211f73604691586b8406ff7296a946dd',
     ),
   ),
 );

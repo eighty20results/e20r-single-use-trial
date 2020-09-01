@@ -86,3 +86,11 @@ fabric.properties
 /inc/php-parallel-lint/
 /inc/phpmd/
 /inc/fzaninotto/
+/inc/friends-of-behat/
+/inc/paulgibbs/
+/inc/ocramius/
+/inc/sensiolabs/
+/inc/zendframework/
+/inc/mustache/
+/inc/rmccue/
+/inc/wp-cli/

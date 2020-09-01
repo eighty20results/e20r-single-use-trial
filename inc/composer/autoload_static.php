@@ -7,18 +7,18 @@ namespace Composer\Autoload;
 class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
 {
     public static $files = array (
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        'e8aa6e4b5a1db2f56ae794f1505391a8' => __DIR__ . '/..' . '/amphp/amp/lib/functions.php',
-        '76cd0796156622033397994f25b0d8fc' => __DIR__ . '/..' . '/amphp/amp/lib/Internal/functions.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        'e8aa6e4b5a1db2f56ae794f1505391a8' => __DIR__ . '/..' . '/amphp/amp/lib/functions.php',
+        '76cd0796156622033397994f25b0d8fc' => __DIR__ . '/..' . '/amphp/amp/lib/Internal/functions.php',
         '6cd5651c4fef5ed6b63e8d8b8ffbf3cc' => __DIR__ . '/..' . '/amphp/byte-stream/lib/functions.php',
         '8dc56fe697ca93c4b40d876df1c94584' => __DIR__ . '/..' . '/amphp/process/lib/functions.php',
         '3da389f428d8ee50333e4391c3f45046' => __DIR__ . '/..' . '/amphp/serialization/src/functions.php',
@@ -30,13 +30,21 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         '861372841bb4b8ba9fdd215894666f40' => __DIR__ . '/..' . '/amphp/parallel-functions/src/functions.php',
         '051bafe20e2674435a162870efa2d2a7' => __DIR__ . '/..' . '/brain/monkey/inc/api.php',
+        'be01b9b16925dcb22165c40b46681ac6' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/cli.php',
+        '3937806105cc8e221b8fa8db5b70d2f2' => __DIR__ . '/..' . '/wp-cli/mustangostang-spyc/includes/functions.php',
         'd4f51041619ca510cd65a9ff0bf377be' => __DIR__ . '/..' . '/brain/faker/inc/functions.php',
+        '0db8ebcefc9116b9e0f2d17e560b7547' => __DIR__ . '/..' . '/paulgibbs/behat-wordpress-extension/src/Util/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'Z' => 
+        array (
+            'Zend\\EventManager\\' => 18,
+            'Zend\\Code\\' => 10,
         ),
         'W' => 
         array (
@@ -63,6 +71,7 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Dotenv\\' => 25,
             'Symfony\\Component\\DependencyInjection\\' => 38,
+            'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
             'Seld\\JsonLint\\' => 14,
@@ -74,6 +83,7 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
+            'PaulGibbs\\WordpressBehatExtension\\' => 34,
             'PDepend\\' => 8,
         ),
         'O' => 
@@ -82,6 +92,7 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         ),
         'M' => 
         array (
+            'Mustangostang\\' => 14,
             'Monolog\\' => 8,
         ),
         'G' => 
@@ -109,6 +120,7 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             'Brain\\Faker\\' => 12,
             'Behat\\Transliterator\\' => 21,
             'Behat\\Testwork\\' => 15,
+            'Behat\\Mink\\' => 11,
             'Behat\\Behat\\' => 12,
         ),
         'A' => 
@@ -130,6 +142,14 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Zend\\EventManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
+        ),
+        'Zend\\Code\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-code/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -211,6 +231,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             0 => __DIR__ . '/..' . '/symfony/dependency-injection',
         ),
+        'Symfony\\Component\\CssSelector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/css-selector',
+        ),
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
@@ -243,6 +267,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'PaulGibbs\\WordpressBehatExtension\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paulgibbs/behat-wordpress-extension/src',
+        ),
         'PDepend\\' => 
         array (
             0 => __DIR__ . '/..' . '/pdepend/pdepend/src/main/php/PDepend',
@@ -250,6 +278,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         'Opis\\Closure\\' => 
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
+        ),
+        'Mustangostang\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wp-cli/mustangostang-spyc/src',
         ),
         'Monolog\\' => 
         array (
@@ -299,6 +331,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             0 => __DIR__ . '/..' . '/behat/behat/src/Behat/Testwork',
         ),
+        'Behat\\Mink\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/behat/mink/src',
+        ),
         'Behat\\Behat\\' => 
         array (
             0 => __DIR__ . '/..' . '/behat/behat/src/Behat/Behat',
@@ -338,8 +374,40 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
     );
 
     public static $prefixesPsr0 = array (
+        'c' => 
+        array (
+            'cli' => 
+            array (
+                0 => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib',
+            ),
+        ),
+        'W' => 
+        array (
+            'WP_CLI' => 
+            array (
+                0 => __DIR__ . '/..' . '/wp-cli/wp-cli/php',
+            ),
+        ),
+        'S' => 
+        array (
+            'SensioLabs\\Behat\\PageObjectExtension\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/sensiolabs/behat-page-object-extension/src',
+            ),
+        ),
+        'R' => 
+        array (
+            'Requests' => 
+            array (
+                0 => __DIR__ . '/..' . '/rmccue/requests/library',
+            ),
+        ),
         'P' => 
         array (
+            'ProxyManager\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
+            ),
             'PHPMD\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpmd/phpmd/src/main/php',
@@ -347,6 +415,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         ),
         'M' => 
         array (
+            'Mustache' => 
+            array (
+                0 => __DIR__ . '/..' . '/mustache/mustache/src',
+            ),
             'Mockery' => 
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
@@ -354,6 +426,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         ),
         'B' => 
         array (
+            'Behat\\MinkExtension' => 
+            array (
+                0 => __DIR__ . '/..' . '/friends-of-behat/mink-extension/src',
+            ),
             'Behat\\Gherkin' => 
             array (
                 0 => __DIR__ . '/..' . '/behat/gherkin/src',

@@ -76,6 +76,8 @@ references:
       - run:
           name: Run Behat tests
           command: inc/bin/behat --config .circleci/behat.yml --format progress --tags=$WP_TYPE
+      - store_test_results:
+          path: test-results
 
   # Default configuration for all phpunit testing jobs
   #
@@ -88,6 +90,8 @@ references:
       - run:
           name: Run PHP unit tests
           command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml.dist tests/test_*.php
+      - store_test_results:
+          path: test-results
 
 jobs:
   build:
