@@ -126,11 +126,11 @@ jobs:
     docker:
       - image: circleci/php:7.3
 
-  test_php72:
-    <<: *phpunit_job
-    docker:
-      - image: circleci/php:7.2
-
+#  test_php72:
+#    <<: *phpunit_job
+#    docker:
+#      - image: circleci/php:7.2
+#
 #  test_php71:
 #    <<: *phpunit_job
 #    docker:
@@ -203,9 +203,9 @@ workflows:
       - test_php73:
           requires:
             - code_quality
-      - test_php72:
-          requires:
-            - code_quality
+#      - test_php72:
+#          requires:
+#            - code_quality
 #      - test_php71:
 #          requires:
 #            - code_quality
@@ -219,7 +219,7 @@ workflows:
           requires:
             - test_php74
             - test_php73
-            - test_php72
+#            - test_php72
 #            - test_php71
 #            - test_php70
 #            - test_php56
@@ -227,7 +227,7 @@ workflows:
           requires:
             - test_php74
             - test_php73
-            - test_php72
+#            - test_php72
 #            - test_php71
 #            - test_php70
 #            - test_php56
