@@ -201,16 +201,16 @@ function e20r_registration_checks( $value ) {
         return $value;
     }
     
-	global $current_user;
+    $user = wp_get_current_user();
 	
 	// Grab the list of levels w/a trial policy set
 	$trial_levels = apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
 	$utils        = Utilities::get_instance();
 	$level_id     = $utils->get_variable( 'level', null );
 	
-	if ( $current_user->ID && in_array( $level_id, $trial_levels ) ) {
+	if ( $user->ID && in_array( $level_id, $trial_levels ) ) {
 		// Does the currently logged in user have a trial level they've used
-		$already = get_user_meta( $current_user->ID, "e20r_trial_level_{$level_id}_used", true );
+		$already = get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_used", true );
 		
 		// They do, so don't let them check out
 		if ( ! empty( $already ) ) {
@@ -231,15 +231,24 @@ function e20r_registration_checks( $value ) {
 
 add_filter( "pmpro_registration_checks", 'E20R\SingleUseTrial\e20r_registration_checks' );
 
-//swap the expiration text if the user has used the trial
+/**
+ * Change the error message text when selecting membership level after the trial has been used
+ *
+ * @param string $text - The text to show if there's an error
+ * @param \stdClass $level - The membership Level info
+ *
+ * @return string|void
+ *
+ * @filter e20r_set_trial_level_ids
+ */
 function e20r_level_expiration_text( $text, $level ) {
-	global $current_user;
 	
+	$user_id = get_current_user_id();
 	$level_id     = $level->id;
 	$trial_levels = apply_filters( 'e20r_set_trial_level_ids', array() );
-	$has_used     = get_user_meta( $current_user->ID, "e20r_trial_level_{$level_id}_used", true );
+	$has_used     = get_user_meta( $user_id, "e20r_trial_level_{$level_id}_used", true );
 	
-	if ( ! empty( $current_user->ID ) &&
+	if ( ! empty( $user_id ) &&
          ! empty( $has_used ) &&
          in_array( $level_id, $trial_levels )
     ) {
@@ -350,11 +359,10 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 		}
 		);
 		
-		// @SuppressWarnings ('unused')
+		/** @SuppressWarnings ("unused") */
 		foreach ( new \ RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
 			
-			// $class_path = $f_file->getPath() . "/" . $f_file->getFilename();
-			$class_path = $f_file->getPath() . "/" . $f_filename;
+			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
 			
 			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
 				/** @noinspection PhpIncludeInspection */
