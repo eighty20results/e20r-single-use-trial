@@ -48,8 +48,8 @@ references:
   behat_job: &behat_job
     <<: *container_config
     docker:
-      - image: circleci/php:7.2
-      - image: circleci/mysql:5.7
+      - image: circleci/php:7.4
+      - image: circleci/mariadb:latest
     steps:
       - checkout
       - run:
@@ -58,8 +58,8 @@ references:
       - *attach_workspace
       - *copy_inc
       - run:
-          name: Install MySQL client
-          command: sudo apt-get install mysql-client
+          name: Install MariaDB client
+          command: sudo apt-get install mariadb-client
       - run:
           name: Install MySQL PHP extension
           command: sudo docker-php-ext-install mysqli
