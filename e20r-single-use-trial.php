@@ -339,7 +339,9 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 		 */
 		$filter = new \RecursiveCallbackFilterIterator(
 		        $iterator,
-                /** @SuppressWarnings("unused") */
+                /**
+                 * @SuppressWarnings("unused")
+                 */
                 function ( $current, $key, $iterator ) use ( $filename ) {
 			
 			$file_name = $current->getFilename();
@@ -359,13 +361,17 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 		}
 		);
 		
-		/** @SuppressWarnings ("unused") */
-		foreach ( new \ RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
+		/**
+		 * @SuppressWarnings ("unused")
+		 */
+		foreach ( new \RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
 			
 			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
 			
 			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
-				/** @noinspection PhpIncludeInspection */
+				/**
+				 * @noinspection PhpIncludeInspection
+				 */
 				require_once( $class_path );
 			}
 		}
