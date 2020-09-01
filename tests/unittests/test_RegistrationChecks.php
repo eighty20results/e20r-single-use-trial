@@ -43,6 +43,8 @@ class test_RegistrationChecks extends TestCase {
 	 * @param $expected
 	 *
 	 * @dataProvider notLoggedInFixture
+	 *
+	 * @covers  E20R\SingleUseTrial\e20r_registration_checks
 	 */
 	public function test_registration_checks_not_logged_in( $value, $expected ) {
 		Brain\Monkey\Functions\stubs( [
@@ -65,6 +67,7 @@ class test_RegistrationChecks extends TestCase {
 	 * @param bool $expected
 	 *
 	 * @dataProvider loggedInFixture
+	 * @covers  E20R\SingleUseTrial\e20r_registration_checks
 	 */
 	public function test_registration_checks_logged_in( $default, $level_id, $user_id, $trial_is_used, $trial_levels, $expected ) {
 		
