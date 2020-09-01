@@ -9,8 +9,8 @@ services:
   nginx:
     volumes:
       - /Volumes/Development/www/clean.local/wp-content/themes/e20r-coaching:/var/www/html/wp-content/themes/e20r-coaching
-      - /Volumes/Development/www/clean.local/wp-content/plugins/paid-memberships-pro:/var/www/html/wp-content/plugins/paid-memberships-pro:ro
-      - /Volumes/Development/www/clean.local/wp-content/plugins/pmpro-payfast:/var/www/html/wp-content/plugins/pmpro-payfast:ro
+      - /Volumes/Development/www/clean.local/wp-content/plugins/paid-memberships-pro:/var/www/html/wp-content/plugins/paid-memberships-pro
+      - /Volumes/Development/www/clean.local/wp-content/plugins/pmpro-payfast:/var/www/html/wp-content/plugins/pmpro-payfast
       - /Volumes/Development/www/clean.local/wp-content/plugins/e20r-single-use-trial:/var/www/html/wp-content/plugins/e20r-single-use-trial:ro
     ports:
     - target: 80 # Web server
@@ -47,8 +47,8 @@ services:
     volumes:
     - ./:/var/www/html
     - /Volumes/Development/www/clean.local/wp-content/themes/e20r-coaching:/var/www/html/wp-content/themes/e20r-coaching
-    - /Volumes/Development/www/clean.local/wp-content/plugins/paid-memberships-pro:/var/www/html/wp-content/plugins/paid-memberships-pro:ro
-    - /Volumes/Development/www/clean.local/wp-content/plugins/pmpro-payfast:/var/www/html/wp-content/plugins/pmpro-payfast:ro
+    - /Volumes/Development/www/clean.local/wp-content/plugins/paid-memberships-pro:/var/www/html/wp-content/plugins/paid-memberships-pro
+    - /Volumes/Development/www/clean.local/wp-content/plugins/pmpro-payfast:/var/www/html/wp-content/plugins/pmpro-payfast
     - /Volumes/Development/www/clean.local/wp-content/plugins/e20r-single-use-trial:/var/www/html/wp-content/plugins/e20r-single-use-trial:ro
     labels:
     - "traefik.enable=true"
