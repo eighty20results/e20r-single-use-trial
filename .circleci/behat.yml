@@ -39,11 +39,11 @@ default:
           roles:
             - administrator
           username: admin
-          password: password
+          password: admin
       database:
         restore_after_test: true
       wpcli:
-        binary: vendor/bin/wp
+        binary: inc/bin/wp
         alias: dev
       site_url: http://behat.local/wp/
 
