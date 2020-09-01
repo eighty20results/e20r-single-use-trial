@@ -85,4 +85,4 @@ fabric.properties
 /inc/pdepend/
 /inc/php-parallel-lint/
 /inc/phpmd/
-
+/inc/fzaninotto/
