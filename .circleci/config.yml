@@ -48,8 +48,8 @@ references:
   behat_job: &behat_job
     <<: *container_config
     docker:
-      - image: circleci/php:7.4
-      - image: circleci/mariadb:latest
+      - image: cimg/php:7.4.9
+      - image: cimg/mariadb:latest
     steps:
       - checkout
       - run:
@@ -58,10 +58,13 @@ references:
       - *attach_workspace
       - *copy_inc
       - run:
-          name: Install MariaDB client
-          command: sudo apt-get install mariadb-client
+          name: Figure out the distro/version
+          command: sudo cat /etc/*-release
       - run:
-          name: Install MySQL PHP extension
+          name: Install MariaDB client
+          command: sudo apt install mariadb-client
+      - run:
+          name: Install MariaDB (MySQL) PHP extension
           command: sudo docker-php-ext-install mysqli
       - run:
           name: Setup WordPress
