@@ -30,7 +30,7 @@ references:
   #
   container_config: &container_config
     docker:
-      - image: circleci/php:7.3
+      - image: circleci/php:7-apache-browsers
     environment:
       - WP_CORE_DIR: *WP_CORE_DIR
       - WP_HOST: *WP_HOST
@@ -61,8 +61,8 @@ references:
   behat_job: &behat_job
     <<: *container_config
     docker:
-      - image: cimg/php:7.4.9
-      - image: cimg/mariadb:10.3
+      - image: circleci/php:7-apache-browsers
+      - image: circleci/mariadb:10.4-focal
     steps:
       - checkout
       - run:
