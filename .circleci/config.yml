@@ -54,7 +54,7 @@ references:
   install_subversion: &install_subversion
     run:
       name: Install subversion
-      command: sudo apt-get install subversion
+      command: sudo -E apt-get install subversion
 
   # Default configuration for all behat testing jobs
   #
@@ -67,24 +67,24 @@ references:
       - checkout
       - run:
           name: Add WordPress host to hosts file
-          command: echo "127.0.0.1 ${WP_HOST}" | sudo tee -a /etc/hosts
+          command: echo "127.0.0.1 ${WP_HOST}" | sudo -E tee -a /etc/hosts
       - *attach_workspace
       - *copy_inc
       - run:
           name: Figure out the distro/version
-          command: sudo cat /etc/*-release
+          command: sudo -E cat /etc/*-release
 #      - run:
 #          name: Install MariaDB client
-#          command: sudo apt install mariadb-client-10.1
+#          command: sudo -E apt install mariadb-client-10.1
       - run:
           name: Install MariaDB (MySQL) PHP extension
-          command: sudo docker-php-ext-install mysqli
+          command: sudo -E docker-php-ext-install mysqli
       - run:
           name: Setup WordPress
           command: .circleci/setup-$WP_TYPE.sh
       - run:
           name: Start PHP server
-          command: sudo php -S $WP_HOST:80 -t $WP_CORE_DIR
+          command: sudo -E php -S $WP_HOST:80 -t $WP_CORE_DIR
           background: True
       - run:
           name: Run Behat tests
