@@ -78,7 +78,9 @@ references:
 #          command: sudo -E apt install mariadb-client-10.1
       - run:
           name: Install MariaDB (MySQL) PHP extension
-          command: sudo -E docker-php-ext-install mysqli
+          command: |
+            sudo -E docker-php-ext-install pdo_mysql
+            sudo -E docker-php-ext-enable pdo_mysql
       - run:
           name: Setup WordPress
           command: .circleci/setup-$WP_TYPE.sh
