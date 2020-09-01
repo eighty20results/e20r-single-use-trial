@@ -60,9 +60,9 @@ references:
       - run:
           name: Figure out the distro/version
           command: sudo cat /etc/*-release
-      - run:
-          name: Install MariaDB client
-          command: sudo apt install mariadb-client
+#      - run:
+#          name: Install MariaDB client
+#          command: sudo apt install mariadb-client-10.1
       - run:
           name: Install MariaDB (MySQL) PHP extension
           command: sudo docker-php-ext-install mysqli
