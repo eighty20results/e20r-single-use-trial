@@ -29,8 +29,9 @@ inc/bin/wp rewrite structure --path="${WP_CORE_DIR}" '/%postname%/'
 # Copy our plugin to WordPress directory
 cp -r ./ ${WP_CORE_DIR}/wp-content/plugins/${WP_ORG_PLUGIN_NAME}
 
-# Install and activate Paid Memberships Pro
-inc/bin/wp plugin install --path="${WP_CORE_DIR}" ${PMPRO_PLUGIN} --activate
+# Install and activate Paid Memberships Pro and it's PayFast add-on
+inc/bin/wp plugin install --path="${WP_CORE_DIR}" paid-memberships-pro --activate
+inc/bin/wp plugin install --path="${WP_CORE_DIR}" pmpro-payfast --activate
 
 # Activate our plugin
 inc/bin/wp plugin activate --path="${WP_CORE_DIR}" ${WP_ORG_PLUGIN_NAME}

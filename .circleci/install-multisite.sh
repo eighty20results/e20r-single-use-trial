@@ -26,8 +26,9 @@ inc/bin/wp db import --path="${WP_CORE_DIR}" --dbuser="${DB_USER}" --dbpass="${D
 inc/bin/wp core multisite-install --path="${WP_CORE_DIR}" --url="http://${WP_HOST}" --title="Plugin Tests" --admin_user="admin" --admin_password="admin" --admin_email="thomas@eighty20results.com"
 inc/bin/wp rewrite structure --path="${WP_CORE_DIR}" '/%postname%/'
 
-# Install and activate Paid Memberships Pro
-inc/bin/wp plugin install --path="${WP_CORE_DIR}" ${PMPRO_PLUGIN} --activate
+# Install and activate Paid Memberships Pro and it's PayFast add-on
+inc/bin/wp plugin install --path="${WP_CORE_DIR}" paid-memberships-pro --activate
+inc/bin/wp plugin install --path="${WP_CORE_DIR}" pmpro-payfast --activate
 
 # Copy our plugin to WordPress directory
 cp -r ./ ${WP_CORE_DIR}/wp-content/plugins/${WP_ORG_PLUGIN_NAME}
