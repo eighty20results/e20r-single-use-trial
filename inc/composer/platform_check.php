@@ -16,7 +16,6 @@ extension_loaded('libxml') || $missingExtensions[] = 'libxml';
 extension_loaded('mbstring') || $missingExtensions[] = 'mbstring';
 extension_loaded('pcre') || $missingExtensions[] = 'pcre';
 extension_loaded('phar') || $missingExtensions[] = 'phar';
-extension_loaded('simplexml') || $missingExtensions[] = 'simplexml';
 extension_loaded('tokenizer') || $missingExtensions[] = 'tokenizer';
 extension_loaded('xml') || $missingExtensions[] = 'xml';
 extension_loaded('xmlwriter') || $missingExtensions[] = 'xmlwriter';

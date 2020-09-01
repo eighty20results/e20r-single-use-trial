@@ -14,8 +14,8 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '2.2',
-    'version' => '2.2.0.0',
+    'pretty_version' => '2.3',
+    'version' => '2.3.0.0',
     'aliases' => 
     array (
     ),
@@ -132,6 +132,16 @@ private static $installed = array (
       ),
       'reference' => '3c4ec1d77c3d05caa1f0bf8fb3aae4845005c7fc',
     ),
+    'brain/faker' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+        0 => '9999999-dev',
+      ),
+      'reference' => 'c657e49f75c058c3081f0bb90fb53e06973a35e9',
+    ),
     'brain/monkey' => 
     array (
       'pretty_version' => '2.4.0',
@@ -184,12 +194,21 @@ private static $installed = array (
     ),
     'eighty20results/e20r-single-use-trial' => 
     array (
-      'pretty_version' => '2.2',
-      'version' => '2.2.0.0',
+      'pretty_version' => '2.3',
+      'version' => '2.3.0.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
+    ),
+    'fzaninotto/faker' => 
+    array (
+      'pretty_version' => 'v1.9.1',
+      'version' => '1.9.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'fc10d778e4b84d5bd315dad194661e091d307c6f',
     ),
     'gitonomy/gitlib' => 
     array (
@@ -200,13 +219,6 @@ private static $installed = array (
       ),
       'reference' => 'd1fe4676bf1347c08dec84a14a4c5e7110740d72',
     ),
-    'grogy/php-parallel-lint' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '*',
-      ),
-    ),
     'hamcrest/hamcrest-php' => 
     array (
       'pretty_version' => 'v2.0.1',
@@ -215,13 +227,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
-    ),
-    'jakub-onderka/php-parallel-lint' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '*',
-      ),
     ),
     'kodova/hamcrest-php' => 
     array (
@@ -308,12 +313,12 @@ private static $installed = array (
     ),
     'php-parallel-lint/php-parallel-lint' => 
     array (
-      'pretty_version' => 'v1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => 'v0.9.2',
+      'version' => '0.9.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '474f18bc6cc6aca61ca40bfab55139de614e51ca',
+      'reference' => '2ead2e4043ab125bee9554f356e0a86742c2d4fa',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -633,15 +638,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '590cfec960b77fd55e39b7d9246659e95dd6d337',
-    ),
-    'squizlabs/php_codesniffer' => 
-    array (
-      'pretty_version' => '3.5.6',
-      'version' => '3.5.6.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'e97627871a7eab2f70e59166072a6b767d5834e0',
     ),
     'symfony/config' => 
     array (

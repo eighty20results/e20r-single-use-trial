@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'ExampleClass' => $vendorDir . '/php-parallel-lint/php-parallel-lint/tests/skip-on-5.3/class.php',
+    'ExampleTrait' => $vendorDir . '/php-parallel-lint/php-parallel-lint/tests/skip-on-5.3/trait.php',
     'Hamcrest\\Arrays\\IsArray' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
     'Hamcrest\\Arrays\\IsArrayContaining' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
     'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',
@@ -75,10 +77,8 @@ return array(
     'Hamcrest\\Type\\IsString' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
-    'JakubOnderka\\PhpParallelLint\\Application' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Application.php',
     'JakubOnderka\\PhpParallelLint\\ArrayIterator' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Settings.php',
     'JakubOnderka\\PhpParallelLint\\Blame' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Error.php',
-    'JakubOnderka\\PhpParallelLint\\CheckstyleOutput' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Output.php',
     'JakubOnderka\\PhpParallelLint\\ConsoleWriter' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Output.php',
     'JakubOnderka\\PhpParallelLint\\Error' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Error.php',
     'JakubOnderka\\PhpParallelLint\\ErrorFormatter' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/ErrorFormatter.php',
@@ -107,6 +107,7 @@ return array(
     'JakubOnderka\\PhpParallelLint\\TextOutput' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Output.php',
     'JakubOnderka\\PhpParallelLint\\TextOutputColored' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Output.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+    'JsonSerializable' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/JsonSerializable.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'PHPUnit\\Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert.php',

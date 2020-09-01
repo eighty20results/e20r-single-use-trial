@@ -29,4 +29,5 @@ return array(
     '538ca81a9a966a6716601ecf48f4eaef' => $vendorDir . '/opis/closure/functions.php',
     '861372841bb4b8ba9fdd215894666f40' => $vendorDir . '/amphp/parallel-functions/src/functions.php',
     '051bafe20e2674435a162870efa2d2a7' => $vendorDir . '/brain/monkey/inc/api.php',
+    'd4f51041619ca510cd65a9ff0bf377be' => $vendorDir . '/brain/faker/inc/functions.php',
 );
