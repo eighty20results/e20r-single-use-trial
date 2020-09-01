@@ -30,9 +30,9 @@ class test_RegistrationChecks extends TestCase {
 		$this->faker = Brain\faker();
 		$this->wpFaker = $this->faker->wp();
 		
-		Monkey\Functions\when( 'plugin_dir_path' )
-			->justReturn( getcwd() . "/" );
-		
+		Brain\Monkey\Functions\when('plugin_dir_path')
+			->justReturn( __DIR__ . "/../../" );
+			
 		require_once __DIR__ . '/../../e20r-single-use-trial.php';
 	}
 	
@@ -49,6 +49,7 @@ class test_RegistrationChecks extends TestCase {
 	public function test_registration_checks_not_logged_in( $value, $expected ) {
 		Brain\Monkey\Functions\stubs( [
 				'is_user_logged_in' => false,
+				'plugin_dir_path' => __DIR__ . "/../../"
 			]
 		);
 		
@@ -87,6 +88,7 @@ class test_RegistrationChecks extends TestCase {
 				'get_current_blog_id' => 0,
 				'is_user_logged_in' => true,
 				'plugins_url' => "http://docker.local/wp-content/plugins/e20r-single-use-trial/",
+				'plugin_dir_path' => __DIR__ . "/../../",
 				'get_user_meta' => $trial_is_used,
 				'wp_get_current_user' => $this->wpFaker->user(array('ID' => $user_id ) ),
 				'__' => null,

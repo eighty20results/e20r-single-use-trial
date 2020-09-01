@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/bootstrap.php" backupGlobals="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" beStrictAboutTestsThatDoNotTestAnything="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-  <coverage>
+  <!-- coverage>
     <report>
       <clover outputFile="coverage/phpunit/clover.xml"/>
       <text outputFile="php://stdout" showUncoveredFiles="true"/>
@@ -13,14 +13,14 @@
       <directory suffix=".php">tests/unittests/</directory>
       <directory suffix=".php">tests/features/</directory>
     </exclude>
-  </coverage>
+  </coverage -->
   <testsuites>
     <testsuite name="unit">
       <directory prefix="test_" suffix=".php">tests/unittests</directory>
     </testsuite>
-    <testsuite name="features">
+    <!-- testsuite name="features">
       <directory>tests/features</directory>
-    </testsuite>
+    </testsuite -->
   </testsuites>
   <logging/>
 </phpunit>

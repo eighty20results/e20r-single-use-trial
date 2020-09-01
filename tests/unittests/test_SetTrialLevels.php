@@ -14,8 +14,8 @@ class test_SetTrialLevels extends TestCase {
 		parent::setUp();
 		Monkey\setUp();
 		
-		Monkey\Functions\when('plugin_dir_path')
-			->justReturn(getcwd() . "/" );
+		Brain\Monkey\Functions\when('plugin_dir_path')
+			->justReturn( __DIR__ . "/../../" );
 		
 		require_once __DIR__ . '/../../e20r-single-use-trial.php';
 	}
@@ -83,6 +83,11 @@ class test_SetTrialLevels extends TestCase {
 	 * @covers E20R\SingleUseTrial\e20r_get_trial_levels
 	 */
 	public function test_e20r_set_trial_levels_all_free_are_single_use($level_array, $expected, $count) {
+		
+//		Brain\Monkey\Functions\stubs( [
+//				'plugin_dir_path' => __DIR__ . "/../../"
+//			]
+//		);
 		
 		/**
 		 * Mock the WordPress apply_filters() function
