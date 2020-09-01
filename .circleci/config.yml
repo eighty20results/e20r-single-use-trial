@@ -49,7 +49,7 @@ references:
     <<: *container_config
     docker:
       - image: cimg/php:7.4.9
-      - image: cimg/mariadb:latest
+      - image: cimg/mariadb:10.4
     steps:
       - checkout
       - run:
