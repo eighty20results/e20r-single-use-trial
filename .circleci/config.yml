@@ -1,6 +1,9 @@
 version: 2.1
 
-# From: https://carlalexander.ca/continuous-deployment-wordpress-directory-circleci/
+# Copyright @carlaalexander.ca
+# "Borrowed" from: https://carlalexander.ca/continuous-deployment-wordpress-directory-circleci/
+#
+# Updated by @eighty20results to match needs for Eight/20 Results plugin development & testing
 
 references:
   # Environment variables
@@ -13,7 +16,14 @@ references:
                         e20r-single-use-trial
   WP_ORG_USERNAME: &WP_ORG_USERNAME
                      eighty20results
-
+  DB_HOST: &DB_HOST
+            wordpress
+  DB_USER: &DB_USER
+            wordpress
+  DB_PASS: &DB_PASS
+            wordpress
+  DB_NAME: &DB_NAME
+             wordpress
   # Default container configuration
   #
   container_config: &container_config
@@ -24,6 +34,7 @@ references:
       - WP_HOST: *WP_HOST
       - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
       - WP_ORG_USERNAME: *WP_ORG_USERNAME
+
     working_directory: ~/e20r-single-use-trial
 
   workspace_root: &workspace_root

@@ -21,9 +21,13 @@ if [[ -z "$WP_ORG_PLUGIN_NAME" ]]; then
 fi
 
 # Install WordPress
-inc/bin/wp config create --path="${WP_CORE_DIR}" --dbhost="127.0.0.1" --dbname="circle_test" --dbuser="root"
-inc/bin/wp core multisite-install --path="${WP_CORE_DIR}" --url="http://${WP_HOST}" --title="Passwords Evolved Test" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
+inc/bin/wp config create --path="${WP_CORE_DIR}" --dbhost="${DB_HOST}" --dbname="${DB_NAME}" --dbuser="${DB_USER} --dbpass=${DB_PASS}"
+inc/bin/wp db import --path="${WP_CORE_DIR}" --dbuser="${DB_USER}" --dbpass="${DB_PASS}" --dbhost="${DB_HOST}" --dbname="${DB_NAME}" tests/database/default_db.sql
+inc/bin/wp core multisite-install --path="${WP_CORE_DIR}" --url="http://${WP_HOST}" --title="Plugin Tests" --admin_user="admin" --admin_password="admin" --admin_email="thomas@eighty20results.com"
 inc/bin/wp rewrite structure --path="${WP_CORE_DIR}" '/%postname%/'
+
+# Install and activate Paid Memberships Pro
+inc/bin/wp plugin install --path="${WP_CORE_DIR}" ${PMPRO_PLUGIN} --activate
 
 # Copy our plugin to WordPress directory
 cp -r ./ ${WP_CORE_DIR}/wp-content/plugins/${WP_ORG_PLUGIN_NAME}
