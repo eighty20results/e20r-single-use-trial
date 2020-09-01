@@ -33,7 +33,7 @@ class test_RegistrationChecks extends TestCase {
 		Monkey\Functions\when( 'plugin_dir_path' )
 			->justReturn( getcwd() . "/" );
 		
-		require_once __DIR__ . '/../e20r-single-use-trial.php';
+		require_once __DIR__ . '/../../e20r-single-use-trial.php';
 	}
 	
 	/**
