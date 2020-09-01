@@ -4,6 +4,8 @@ composer.* export-ignore
 docker-env export-ignore
 grumphp.yml export-ignore
 phpunit* export-ignore
+tests/* export-ignore
+features/* export-ignore
 inc/a* export-ignore
 inc/b* export-ignore
 inc/c* export-ignore
