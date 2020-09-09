@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Codeception\\Util\\Shared\\Asserts' => $vendorDir . '/codeception/lib-asserts/src/Codeception/Util/Shared/Asserts.php',
+    'Codeception\\Util\\Shared\\InheritedAsserts' => $vendorDir . '/codeception/lib-asserts/src/Codeception/Util/Shared/InheritedAsserts.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'ExampleClass' => $vendorDir . '/php-parallel-lint/php-parallel-lint/tests/skip-on-5.3/class.php',
     'ExampleTrait' => $vendorDir . '/php-parallel-lint/php-parallel-lint/tests/skip-on-5.3/trait.php',
@@ -108,6 +110,8 @@ return array(
     'JakubOnderka\\PhpParallelLint\\TextOutputColored' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/Output.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'JsonSerializable' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/JsonSerializable.php',
+    'MySQLDump' => $vendorDir . '/dg/mysql-dump/src/MySQLDump.php',
+    'MySQLImport' => $vendorDir . '/dg/mysql-dump/src/MySQLImport.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'PHPUnit\\Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert.php',

@@ -8,12 +8,11 @@ $baseDir = dirname($vendorDir);
 return array(
     'cli' => array($vendorDir . '/wp-cli/php-cli-tools/lib'),
     'WP_CLI' => array($vendorDir . '/wp-cli/wp-cli/php'),
-    'SensioLabs\\Behat\\PageObjectExtension\\' => array($vendorDir . '/sensiolabs/behat-page-object-extension/src'),
     'Requests' => array($vendorDir . '/rmccue/requests/library'),
-    'ProxyManager\\' => array($vendorDir . '/ocramius/proxy-manager/src'),
     'PHPMD\\' => array($vendorDir . '/phpmd/phpmd/src/main/php'),
+    'Oxymel' => array($vendorDir . '/nb/oxymel'),
     'Mustache' => array($vendorDir . '/mustache/mustache/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
-    'Behat\\MinkExtension' => array($vendorDir . '/friends-of-behat/mink-extension/src'),
+    'Hautelook' => array($vendorDir . '/hautelook/phpass/src'),
     'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
 );
