@@ -286,7 +286,7 @@ if ( !function_exists( "E20R\SingleUseTrial\e20r_auto_loader" ) ) {
 	function e20r_auto_loader( $class_name ) {
 
 		if ( false === stripos( $class_name, 'e20r' ) ) {
-			return;
+			return false;
 		}
 
 		$parts     = explode( '\\', $class_name );
@@ -311,8 +311,8 @@ if ( !function_exists( "E20R\SingleUseTrial\e20r_auto_loader" ) ) {
                 \RecursiveIteratorIterator::CATCH_GET_CHILD |
                 \RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
 
-    // Locate class member files, recursively
-    $filter = new \RecursiveCallbackFilterIterator( $iterator,
+        // Locate class member files, recursively
+        $filter = new \RecursiveCallbackFilterIterator( $iterator,
                 /**
                  * @SuppressWarnings("unused")
                  */
@@ -342,6 +342,7 @@ if ( !function_exists( "E20R\SingleUseTrial\e20r_auto_loader" ) ) {
 			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
 
 			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
+                print("Found {$class_name}\n");
 				/**
 				 * @noinspection PhpIncludeInspection
 				 */
