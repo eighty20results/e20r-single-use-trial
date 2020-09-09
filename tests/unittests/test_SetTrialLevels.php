@@ -93,12 +93,18 @@ class test_SetTrialLevels extends TestCase {
 		 * Mock the WordPress apply_filters() function
 		 */
 		try {
-			Monkey\Functions\expect( 'apply_filters' )
-				->once()
-				->with( 'e20r-all-free-levels-are-single-use-trials', false )
-				->andReturn( true );
+			Monkey\Filters\expectApplied( 'e20r-all-free-levels-are-single-use-trials' )
+                ->with( false )
+                ->once()			
+                ->andReturn( true );
+                
+            Monkey\Filters\expectApplied( 'e20r-licensing-text-domain' )
+                ->with( null )
+                ->once()
+				->andReturn( 'e20r-single-use-trial' );
+
 		} catch (\Exception $e) {
-			print "Unexpected filter name used\n";
+			print "Unexpected filter call used\n";
 		}
 		/**
 		 * Mocked the pmpro_getAllLevels PMPro function

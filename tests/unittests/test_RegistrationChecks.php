@@ -77,13 +77,18 @@ class test_RegistrationChecks extends TestCase {
 		 * Mock the WordPress apply_filters() function
 		 */
 		try {
-			Monkey\Functions\expect( 'apply_filters' )
-				->with( 'e20r_set_single_use_trial_level_ids', false )
-				->andReturn( $trial_levels );
+            Monkey\Filters\expectApplied('e20r_set_single_use_trial_level_ids' )
+                ->with( array() )
+                ->andReturn( $trial_levels );
+                
+            Monkey\Filters\expectApplied( 'e20r-licensing-text-domain' )
+                ->with( null )
+				->andReturn( 'e20r-single-use-trial' );
+
 		} catch ( \Exception $e ) {
-			print "Unexpected filter name supplied\n";
+			printf("Unexpected trial levels filter call supplied\n");
 		}
-		
+
 		Monkey\Functions\stubs(
 			[
 				'get_current_blog_id' => 0,
@@ -98,7 +103,7 @@ class test_RegistrationChecks extends TestCase {
 		
 		global $_REQUEST;
 		
-		$_REQUEST = $this->requestFixture( 'level', $level_id );
+        $_REQUEST = $this->requestFixture( 'level', $level_id );        
 		$result = SUT\e20r_registration_checks( $default );
 		self::assertEquals( $expected, $result );
 	}
