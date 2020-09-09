@@ -91,7 +91,7 @@ references:
       - run:
           name: Run CodeCeption Acceptance tests
           # TODO: Transiton to codeception test execution for WordPress
-          command: inc/bin/codeception --config .circleci/behat.yml --format progress --tags=$WP_TYPE
+          command: inc/bin/codecept --format progress --tags=$WP_TYPE
       - store_test_results:
           path: test-results
 
