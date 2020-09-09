@@ -156,12 +156,7 @@ function e20r_after_change_membership_level( $level_id, $user_id ) {
 	}
 }
 
-add_action(
-        "pmpro_after_change_membership_level",
-        "E20R\SingleUseTrial\e20r_after_change_membership_level",
-        10,
-        2
-);
+add_action( 'pmpro_after_change_membership_level', 'E20R\SingleUseTrial\e20r_after_change_membership_level', 10, 2 );
 
 /**
  * During checkout (for renewals), verify if the user has consumed their trial already.
@@ -180,7 +175,7 @@ function e20r_registration_checks( $value ) {
     /** List of levels with trial policy set */
     $trial_levels = \apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
 
-    $utils      = \E20R\Utilities\Utilities::get_instance();
+    $utils      = Utilities::get_instance();
     $level_id   = $utils->get_variable( 'level', null );
     $user       = \wp_get_current_user();
 
@@ -239,14 +234,9 @@ function e20r_level_expiration_text( $text, $level ) {
 	return $text;
 }
 
-add_filter(
-        "pmpro_level_expiration_text",
-        "E20R\SingleUseTrial\e20r_level_expiration_text",
-        10,
-        2
-);
+add_filter( 'pmpro_level_expiration_text', 'E20R\SingleUseTrial\e20r_level_expiration_text', 10, 2 );
 
-if ( ! function_exists( "e20r_force_tls_12" ) ) {
+if ( ! function_exists( 'e20r_force_tls_12' ) ) {
 	/**
 	 * Connect to the license server using TLS 1.2
 	 *
@@ -259,9 +249,9 @@ if ( ! function_exists( "e20r_force_tls_12" ) ) {
 	}
 }
 
-add_action( "http_api_curl", "E20R\SingleUseTrial\e20r_force_tls_12" );
+add_action( 'http_api_curl', 'E20R\SingleUseTrial\e20r_force_tls_12' );
 
-if ( ! function_exists( "boolval" ) ) {
+if ( ! function_exists( 'boolval' ) ) {
 	/**
 	 * Get the boolean value of a variable
 	 *
@@ -274,7 +264,7 @@ if ( ! function_exists( "boolval" ) ) {
 	}
 }
 
-if ( !function_exists( "E20R\SingleUseTrial\e20r_auto_loader" ) ) {
+if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 	/**
 	 * Class auto-loader for the Enhanced Members List plugin
 	 *
@@ -341,8 +331,7 @@ if ( !function_exists( "E20R\SingleUseTrial\e20r_auto_loader" ) ) {
 
 			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
 
-			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
-                print("Found {$class_name}\n");
+			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {                
 				/**
 				 * @noinspection PhpIncludeInspection
 				 */
