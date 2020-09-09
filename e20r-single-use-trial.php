@@ -1,6 +1,7 @@
 <?php
 namespace E20R\SingleUseTrial;
 
+use E20R\SingleUseTrial\Views\Settings;
 use E20R\Utilities\Utilities;
 /*
 Plugin Name: E20R: Single Use Trial Subscription for Paid Memberships Pro
@@ -42,36 +43,11 @@ function e20r_single_use_trial_settings() {
 	$utils    = Utilities::get_instance();
 	$level_id = $utils->get_variable( 'edit', null );
 	
-	$level_settings = get_option( 'e20rsut_settings', false );
-	?>
-    <h3 class="topborder"><?php _e( 'Single Use Trial Settings', 'e20r-single-use-trial' ); ?></h3>
-    <p class="e20r-description">
-        <?php _e(
-            "Should we prevent members from signing up for this membership level more than once?",
-            "e20r-single-use-trial"
-        ); ?>
-    </p>
-    <table class="form-table">
-        <tbody>
-        <tr>
-            <th scope="row" valign="top"><label for="e20r-single-use-trial">
-                    <?php _e( "Limit sign-ups to single use?", "e20r-single-use-trial" ) ?>
-                </label>
-            </th>
-            <td>
-                <input type="checkbox" name="e20r-single-use-trial" id="e20r-single-use-trial"
-                       value="1" <?php isset( $level_settings[ $level_id ] ) ?
-                    checked( (bool)$level_settings[ $level_id ], true ) :
-                    null; ?>>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-	<?php
-	
+	$level_settings = \get_option( 'e20rsut_settings', false );
+    echo Settings::membership_level($level_settings, $level_id);
 }
 
-add_action(
+\add_action(
         'pmpro_membership_level_after_other_settings',
         'E20R\SingleUseTrial\e20r_single_use_trial_settings'
 );
