@@ -1,8 +1,8 @@
 <?php
 
-namespace E20R\SingleUseTrial\Views
+namespace E20R\SingleUseTrial\Views;
 
-class Settings() {
+class Settings {
 
     public static function membership_level( $level_settings, $level_id ) {
 
