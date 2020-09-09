@@ -26,7 +26,7 @@
     "phpmd/phpmd": "^2.8.2",
     "fzaninotto/faker": "v1.9.1",
     "brain/faker": "dev-master",
-    "sebastian/phpcpd": "6.0.2",
+    "sebastian/phpcpd": "6.0.2"
   },
   "require": {
     "wp-cli/wp-cli": "^v2.4.1"
