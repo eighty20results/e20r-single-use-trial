@@ -56,9 +56,9 @@ references:
       name: Install subversion
       command: sudo -E apt-get install subversion
 
-  # Default configuration for all behat testing jobs
+  # Default configuration for all Acceptance testing jobs
   #
-  behat_job: &behat_job
+  acceptance_job: &acceptance_job
     <<: *container_config
     docker:
       - image: circleci/php:7-apache-browsers
@@ -89,8 +89,9 @@ references:
           command: sudo -E php -S $WP_HOST:80 -t $WP_CORE_DIR
           background: True
       - run:
-          name: Run Behat tests
-          command: inc/bin/behat --config .circleci/behat.yml --format progress --tags=$WP_TYPE
+          name: Run CodeCeption Acceptance tests
+          # TODO: Transiton to codeception test execution for WordPress
+          command: inc/bin/codeception --config .circleci/behat.yml --format progress --tags=$WP_TYPE
       - store_test_results:
           path: test-results
 
@@ -169,7 +170,7 @@ jobs:
 #      - image: circleci/php:5.6
 
   acceptance_singlesite:
-    <<: *behat_job
+    <<: *acceptance_job
     environment:
       - WP_CORE_DIR: *WP_CORE_DIR
       - WP_HOST: *WP_HOST
@@ -178,7 +179,7 @@ jobs:
       - WP_TYPE: singlesite
 
   acceptance_multisite:
-    <<: *behat_job
+    <<: *acceptance_job
     environment:
       - WP_CORE_DIR: *WP_CORE_DIR
       - WP_HOST: *WP_HOST

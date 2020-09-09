@@ -38,7 +38,7 @@ class Settings {
         $level_html .= sprintf('\t<p class="e20r-description">\n');
         $level_html .= sprintf('\t\t<p class="e20r-description">\n');
         $level_html .= sprintf('\t\t\t%s\n</p>\n', \__(
-                "Should we prevent members from signing up for this membership level more than once?",
+                "Prevent members from signing up for this membership level more than once?",
                 "e20r-single-use-trial"));
         $level_html .= sprintf('\t<table class="form-table">\n');
         $level_html .= sprintf('\t\t<tbody>\n');
