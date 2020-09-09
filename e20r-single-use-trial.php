@@ -172,41 +172,41 @@ add_action(
  */
 function e20r_registration_checks( $value ) {
 
-  // Skip if we're not logged in - so not a renewal
-  if ( function_exists( 'is_user_logged_in' ) && is_user_logged_in() == false ) {
-    return $value;
-  }
+    // Skip if we're not logged in - so not a renewal
+    if ( function_exists( 'is_user_logged_in' ) && \is_user_logged_in() == false ) {
+        return $value;
+    }
 
-  /** List of levels with trial policy set */
-	$trial_levels = apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
+    /** List of levels with trial policy set */
+    $trial_levels = \apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
 
-	$utils        = Utilities::get_instance();
-  $level_id     = $utils->get_variable( 'level', null );
-  $user         = wp_get_current_user();
+    $utils      = \E20R\Utilities\Utilities::get_instance();
+    $level_id   = $utils->get_variable( 'level', null );
+    $user       = \wp_get_current_user();
 
 	if ( $user->ID && in_array( $level_id, $trial_levels ) ) {
 
-    // Does the currently logged in user have a trial level they've used
-    $already = get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_used", true );
+        // Does the currently logged in user have a trial level they've used
+        $already = \get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_used", true );
 
-    if ( ! empty( $already ) ) {
+        if ( ! empty( $already ) ) {
 
-      global $pmpro_msg, $pmpro_msgt;
+            global $pmpro_msg, $pmpro_msgt;
 
-		  $pmpro_msg  = __(
-		    "You have already used your trial subscription. Please select a full subscription to checkout.",
-        "e20r-single-use-trial"
-      );
-			$pmpro_msgt = "pmpro_error";
+            $pmpro_msg  = \__(
+                "You have already used your trial subscription. Please select a full subscription to checkout.",
+                "e20r-single-use-trial"
+            );
+            $pmpro_msgt = "pmpro_error";
 
-      $value = false;
+            $value = false;
+        }
     }
-  }
 
   return $value;
 }
 
-add_filter( "pmpro_registration_checks", 'E20R\SingleUseTrial\e20r_registration_checks' );
+\add_filter( "pmpro_registration_checks", 'E20R\SingleUseTrial\e20r_registration_checks' );
 
 /**
  * Change the error message text when selecting membership level after the trial has been used

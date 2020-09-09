@@ -6,6 +6,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
 use Brain\Faker;
 use Faker\Generator;
+use E20R\Utilities\Utilities;
 
 class test_RegistrationChecks extends TestCase {
 	use MockeryPHPUnitIntegration;
