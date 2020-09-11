@@ -80,6 +80,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'c' => 
+        array (
+            'cweagans\\Composer\\' => 18,
+        ),
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
@@ -218,6 +222,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'cweagans\\Composer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -625,7 +633,6 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
     public static $classMap = array (
         'Codeception\\Util\\Shared\\Asserts' => __DIR__ . '/..' . '/codeception/lib-asserts/src/Codeception/Util/Shared/Asserts.php',
         'Codeception\\Util\\Shared\\InheritedAsserts' => __DIR__ . '/..' . '/codeception/lib-asserts/src/Codeception/Util/Shared/InheritedAsserts.php',
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'ExampleClass' => __DIR__ . '/..' . '/php-parallel-lint/php-parallel-lint/tests/skip-on-5.3/class.php',
         'ExampleTrait' => __DIR__ . '/..' . '/php-parallel-lint/php-parallel-lint/tests/skip-on-5.3/trait.php',
         'Hamcrest\\Arrays\\IsArray' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
