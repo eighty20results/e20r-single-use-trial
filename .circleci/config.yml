@@ -171,6 +171,10 @@ jobs:
 
   acceptance_singlesite:
     <<: *acceptance_job
+    filters:
+      branches:
+        only:
+          - master
     environment:
       - WP_CORE_DIR: *WP_CORE_DIR
       - WP_HOST: *WP_HOST
@@ -180,6 +184,10 @@ jobs:
 
   acceptance_multisite:
     <<: *acceptance_job
+    filters:
+      branches:
+        only:
+          - master
     environment:
       - WP_CORE_DIR: *WP_CORE_DIR
       - WP_HOST: *WP_HOST
