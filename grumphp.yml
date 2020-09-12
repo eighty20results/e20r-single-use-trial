@@ -12,6 +12,7 @@ grumphp:
         phpcpd:
             exclude:
                 - inc
+                - src/utilities
                 - lib
                 - tests
                 - vendor
@@ -24,6 +25,7 @@ grumphp:
             exclude:
                 - lib
                 - inc
+                - src/utilities
                 - tests
                 - vendor
         phpunit:
