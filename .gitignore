@@ -49,7 +49,6 @@ fabric.properties
 /build/
 /build_readmes/readme_changelog.txt
 /build_readmes/json_changelog.txt
-/src/utilities/
 /docker-env/e20r-single-use-trial.sql
 .DS_Store
 /composer.lock
