@@ -2151,13 +2151,8 @@
     },
     {
         "name": "illuminate/contracts",
-<<<<<<< HEAD
         "version": "v8.1.0",
         "version_normalized": "8.1.0.0",
-=======
-        "version": "v8.0.4",
-        "version_normalized": "8.0.4.0",
->>>>>>> fd68401b5bdc41daff9c98dcf00afabb57614df7
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/contracts.git",
@@ -2202,13 +2197,8 @@
     },
     {
         "name": "illuminate/macroable",
-<<<<<<< HEAD
         "version": "v8.1.0",
-        "version_normalized": "8.1.0.0",
-=======
-        "version": "v8.0.4",
-        "version_normalized": "8.0.4.0",
->>>>>>> fd68401b5bdc41daff9c98dcf00afabb57614df7
+        "version_normalized": "8.1.0.0"
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/macroable.git",
@@ -2251,13 +2241,8 @@
     },
     {
         "name": "illuminate/support",
-<<<<<<< HEAD
         "version": "v8.1.0",
         "version_normalized": "8.1.0.0",
-=======
-        "version": "v8.0.4",
-        "version_normalized": "8.0.4.0",
->>>>>>> fd68401b5bdc41daff9c98dcf00afabb57614df7
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/support.git",
