@@ -34,15 +34,15 @@ License: GPLv2
  * Configuration section on the Membership Levels page (in settings).
  */
 function e20r_single_use_trial_settings() {
-	
+
 	if ( ! function_exists( 'pmpro_getLevel' ) ) {
 		return;
 	}
-	
-	
+
+
 	$utils    = Utilities::get_instance();
 	$level_id = $utils->get_variable( 'edit', null );
-	
+
 	$level_settings = \get_option( 'e20rsut_settings', false );
     echo Settings::membership_level($level_settings, $level_id);
 }
@@ -58,18 +58,18 @@ function e20r_single_use_trial_settings() {
  * @param int $level_id ID of level being saved
  */
 function e20r_save_single_use_trial( $level_id ) {
-	
+
 	$utils   = Utilities::get_instance();
 	$options = get_option( 'e20rsut_settings', false );
-	
+
 	$setting = (bool) $utils->get_variable( 'e20r-single-use-trial', false );
-	
+
 	if ( ! is_array( $options ) ) {
 		$options = array();
 	}
-	
+
 	$options[ $level_id ] = $setting;
-	
+
 	update_option( 'e20rsut_settings', $options, false );
 }
 
@@ -84,18 +84,18 @@ add_action( 'pmpro_save_membership_level', 'E20R\SingleUseTrial\e20r_save_single
  *
  */
 function e20r_get_trial_levels( $level_array ) {
-	
+
 	if ( function_exists( 'pmpro_isLevelFree' ) &&
 	     true === apply_filters( 'e20r-all-free-levels-are-single-use-trials', false ) ) {
-		
+
 		$all_levels = pmpro_getAllLevels( true, true );
-		
+
 		// Add all free levels (trials?) to the filter array
 		foreach ( $all_levels as $level ) {
 		    $level_array = e20r_update_trial_levels($level_array, $level );
 		}
 	} else {
-		
+
 		$settings = get_option( 'e20rsut_settings', false );
 		foreach ( $settings as $level_id => $is_sut ) {
 			if ( false != $is_sut && ! in_array( $level_id, $level_array ) ) {
@@ -103,7 +103,7 @@ function e20r_get_trial_levels( $level_array ) {
 			}
 		}
 	}
-	
+
 	return $level_array;
 }
 
@@ -123,7 +123,7 @@ add_filter(
  * @return int[]
  */
 function e20r_update_trial_levels( $level_array, $level ) {
-	
+
     // If the level is free _and_ not in the list already
     if ( TRUE === pmpro_isLevelFree( $level ) &&
 	     ! in_array( $level->id, $level_array )
@@ -135,7 +135,7 @@ function e20r_update_trial_levels( $level_array, $level ) {
 	            FALSE !== ($l_key = array_search( $level->id, $level_array ) ) ) {
 		unset( $level_array[$l_key] );
 	}
-	
+
     return $level_array;
 }
 
@@ -289,8 +289,8 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
         );
 		$base_path = plugin_dir_path( __FILE__ ) . 'classes/';
 
-		if ( file_exists( plugin_dir_path( __FILE__ ) . 'inc/' ) ) {
-			$base_path = plugin_dir_path( __FILE__ ) . 'inc/';
+		if ( file_exists( plugin_dir_path( __FILE__ ) . 'src/' ) ) {
+			$base_path = plugin_dir_path( __FILE__ ) . 'src/';
 		}
 
 		$filename = "class.{$c_name}.php";
@@ -331,7 +331,7 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 
 			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
 
-			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {                
+			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
 				/**
 				 * @noinspection PhpIncludeInspection
 				 */

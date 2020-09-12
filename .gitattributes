@@ -22,4 +22,5 @@ inc/w* export-ignore
 .circleci export-ignore
 .github export-ignore
 .phpcs* export-ignore
+.gitpod* export-ignore
 README.md export-ignore
