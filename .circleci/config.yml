@@ -239,6 +239,10 @@ workflows:
 #          requires:
 #            - code_quality
       - acceptance_singlesite:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - test_php74
             - test_php73
@@ -247,6 +251,10 @@ workflows:
 #            - test_php70
 #            - test_php56
       - acceptance_multisite:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - test_php74
             - test_php73
