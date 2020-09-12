@@ -6,20 +6,20 @@ use Brain\Monkey;
 
 class test_SetTrialLevels extends TestCase {
 	use MockeryPHPUnitIntegration;
-	
+
 	/**
 	 * Test setUp
 	 */
 	public function setUp(): void {
 		parent::setUp();
 		Monkey\setUp();
-		
+
 		Brain\Monkey\Functions\when('plugin_dir_path')
 			->justReturn( __DIR__ . "/../../" );
-		
+
 		require_once __DIR__ . '/../../e20r-single-use-trial.php';
 	}
-	
+
 	/**
 	 * Test tear-down function
 	 */
@@ -27,7 +27,7 @@ class test_SetTrialLevels extends TestCase {
 		Monkey\tearDown();
 		parent::tearDown();
 	}
-	
+
 	/**
 	 * Exercise code when specific levels are free and "trial levels"
 	 *
@@ -56,21 +56,21 @@ class test_SetTrialLevels extends TestCase {
 				foreach ( range(1,5) as $level_id ) {
 					$settings[$level_id] = (($level_id % 2) == 0);
 				}
-				
+
 				return $settings;
 			});
-		
+
 		Monkey\Filters\doing('e20r-all-free-levels-are-single-use-trials' );
-		
+
 		$trial_levels = SUT\e20r_get_trial_levels($level_array);
-		
+
 		foreach( $expected as $exp_key => $exp_value ) {
 			self::assertArrayHasKey( $exp_key, $trial_levels );
 			self::assertEquals( $expected[$exp_key], $trial_levels[$exp_key] );
 			self::assertCount( $count, $trial_levels );
 		}
 	}
-	
+
 	/**
 	 * Exercise code when all free membership level level(s) are configured for single-use trials
 	 *
@@ -83,24 +83,24 @@ class test_SetTrialLevels extends TestCase {
 	 * @covers E20R\SingleUseTrial\e20r_get_trial_levels
 	 */
 	public function test_e20r_set_trial_levels_all_free_are_single_use($level_array, $expected, $count) {
-		
+
 //		Brain\Monkey\Functions\stubs( [
 //				'plugin_dir_path' => __DIR__ . "/../../"
 //			]
 //		);
-		
+
 		/**
 		 * Mock the WordPress apply_filters() function
 		 */
 		try {
+			// TODO: Number of invocations should be added ->once()
 			Monkey\Filters\expectApplied( 'e20r-all-free-levels-are-single-use-trials' )
                 ->with( false )
-                ->once()			
                 ->andReturn( true );
-                
+
+			// TODO: Number of invocations should be added ->once()
             Monkey\Filters\expectApplied( 'e20r-licensing-text-domain' )
                 ->with( null )
-                ->once()
 				->andReturn( 'e20r-single-use-trial' );
 
 		} catch (\Exception $e) {
@@ -118,15 +118,15 @@ class test_SetTrialLevels extends TestCase {
 				}
 				return $levels;
 			});
-		
+
 		Monkey\Functions\when('pmpro_isLevelFree' )
 			->alias(function( $level ) {
 					return $this->fixture_LevelIsFree( $level->id );
 				}
 		);
-		
+
 		$trial_levels = SUT\e20r_get_trial_levels($level_array);
-		
+
 		if (count($trial_levels) > 0) {
 			foreach ( $expected as $exp_key => $exp_value ) {
 				self::assertTrue( in_array( $expected[ $exp_key ], $trial_levels ) );
@@ -135,10 +135,10 @@ class test_SetTrialLevels extends TestCase {
 		} else {
 			self::assertCount( $count, $trial_levels );
 		}
-		
+
 		// self::assertTrue( Monkey\Filters\applied('e20r-all-free-levels-are-single-use-trials' ) > 0);
 	}
-	
+
 	/**
 	 * Parameterized fixture for test_e20r_set_trial_levels_specific tests
 	 *
@@ -154,7 +154,7 @@ class test_SetTrialLevels extends TestCase {
 			array( array(2, 5), array(2, 4, 5 ), 3 ),
 		);
 	}
-	
+
 	/**
 	 * Parameterized fixture for test_e20r_set_trial_levels_specific tests
 	 *
@@ -167,7 +167,7 @@ class test_SetTrialLevels extends TestCase {
 			array( array(1,2), array( 1, 2, 4 ), 3 )
 		);
 	}
-	
+
 	/**
 	 * Fixture determines if the level ID specified is a free membership level
 	 *
@@ -180,7 +180,7 @@ class test_SetTrialLevels extends TestCase {
 		$level_info = array( 1 => false, 2 => true, 3 => false, 4 => true, 5 => true);
 		return $level_info[$level_id];
 	}
-	
+
 	/**
 	 * Generate membership level fixture
 	 *
@@ -191,7 +191,7 @@ class test_SetTrialLevels extends TestCase {
 	public function fixture_LevelInfo($level_id) {
 		$signup_choices = array(1, 0);
 		$price_choices = array( '0.00', '1.00');
-		
+
 		$level = new \stdClass();
 		$level->id = $level_id;
 		$level->name = "Test Level " . $level_id;
@@ -207,7 +207,7 @@ class test_SetTrialLevels extends TestCase {
 		$level->billing_amount = array_rand($price_choices);
 		$level->trial_amount = '0.00';
 		$level->allow_signups = array_rand($signup_choices);
-		
+
 		return $level;
 	}
 }
