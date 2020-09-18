@@ -6,9 +6,11 @@ grumphp.yml export-ignore
 phpunit* export-ignore
 tests/* export-ignore
 features/* export-ignore
+conf* export-ignore
 inc/a* export-ignore
 inc/b* export-ignore
 inc/c* export-ignore
+inc/composer export
 inc/d* export-ignore
 inc/h* export-ignore
 inc/m* export-ignore
@@ -17,10 +19,13 @@ inc/p* export-ignore
 inc/s* export-ignore
 inc/t* export-ignore
 inc/w* export-ignore
+tests* export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .circleci export-ignore
 .github export-ignore
 .phpcs* export-ignore
 .gitpod* export-ignore
+.init.sh export-ignore
+.editorconfig
 README.md export-ignore
