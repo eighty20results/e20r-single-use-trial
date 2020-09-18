@@ -39,10 +39,6 @@ License: GPLv2
  */
 function e20r_single_use_trial_settings() {
 
-	if ( ! function_exists( 'pmpro_getLevel' ) ) {
-		return;
-	}
-  
 	$utils    = Utilities::get_instance();
 	$level_id = $utils->get_variable( 'edit', null );
 	$level_settings = \get_option( 'e20rsut_settings', false );

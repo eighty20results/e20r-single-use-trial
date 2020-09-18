@@ -134,10 +134,7 @@ class test_OptionSave extends TestCase {
 
 		// Make sure the pmpro_getLevel function 'exists'
 		if ( true === $exists_status ) {
-			printf("\nMocking the pmpro_getLevel() function: ");
 			$mock_list['pmpro_getLevel'] = $exists_status;
-		} else {
-			printf("\nNOT mocking the pmpro_getLevel() function!  ");
 		}
 
 		Brain\Monkey\Functions\stubs( $mock_list );
@@ -156,7 +153,6 @@ class test_OptionSave extends TestCase {
 				->atLeast()
 				->once()
 				->andReturnUsing( function ( $request, $current, $echo ) {
-					printf("Should we return something? %s", ($request === $current ? 'Yes' : 'No'));
 					return $request === $current ? 'checked="checked"' : '';
 				} );
 
