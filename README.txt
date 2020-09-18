@@ -1,11 +1,11 @@
 === Eighty/20 Results - Single Use Trial for Paid Memberships Pro ===
 Contributors: eighty20results
 Tags: customizations, memberships, paid memberships pro, trial membership, single use trial membership
-Requires at least: 3.9
-Tested up to: 5.4
-Stable tag: 2.2
+Requires at least: 5.0
+Tested up to: 5.5.1
+Stable tag: 2.3
 
-Limit a member to sign up for a trial level once.
+Limits a registered PMPro member from signing up for a specific membership level more than once.
 
 == Description ==
 This plugin requires the Paid Memberships Pro plugin by Stranger Studios, LLC.
@@ -29,6 +29,31 @@ Please report all issues/problems on the [plugin's GitHub 'Issues' page](https:/
 * Muhammad Humayun Rashed (rony2k6 @ github.com: https://github.com/rony2k6)
 
 = Changelog =
+
+== 2.3 ==
+
+* REFACTOR: Remove submodule and add Utilities as subtree instead
+* REFACTOR: Namespace clarity
+* ENH: Adding CircleCI assets
+* ENH: Adding a couple of unittests
+* ENH: Updated .gitattributes and .gitignore
+* ENH: Initial commit for circleci configuration file
+* ENH: Added all of the included composer files
+* ENH: Updated grumphp.yml config
+* BUG FIX: composer 'vendor' directory is called 'inc' in this repo
+* BUG FIX: Less complex code when updating trial levels
+* BUG FIX: Shouldn't allow levels to be added if they're not free (when the 'all free levels are trial levels' filter is true
+* BUG FIX: Removed unused variable
+* BUG FIX: Added required tools and less stuff in inc/
+* BUG FIX: Added path to commands and exclude inc
+* BUG FIX: Added xdebug-handler code for composer
+* BUG FIX: More linting tools for CircleCI
+* BUG FIX: Not using vendor
+* BUG FIX: Not using mock-function
+* BUG FIX: Exclude all composer dependencies
+* BUG FIX: Adding namespace so updated filter/action hooks
+* BUG FIX: Only supporting PHP 7.2 -> 7.4
+* BUG FIX: Using phpunit 8.5.x
 
 == 2.2 ==
 

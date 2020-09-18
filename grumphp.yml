@@ -1,0 +1,41 @@
+grumphp:
+    process_timeout: 120
+    environment:
+        paths:
+            - inc/bin
+            - ./
+    tasks:
+        composer: ~
+        gherkin: ~
+#        git_commit_message:
+#            allow_empty_message: false
+        phpcpd:
+            exclude:
+                - inc
+                - src/utilities
+                - lib
+                - tests
+                - vendor
+        phpcs:
+            whitelist_patterns:
+                - /^src
+        phplint: ~
+        phpmd:
+            ruleset: ['codesize', 'design', 'naming', 'unusedcode']
+            exclude:
+                - lib
+                - inc
+                - src/utilities
+                - tests
+                - vendor
+        phpunit:
+            always_execute: true
+    testsuites:
+        code_quality:
+            tasks:
+                - composer
+                - gherkin
+                - phpcpd
+                - phpcs
+                - phplint
+                - phpmd

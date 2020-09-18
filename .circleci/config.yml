@@ -1,0 +1,272 @@
+version: 2.1
+
+# Copyright @carlaalexander.ca
+# "Borrowed" from: https://carlalexander.ca/continuous-deployment-wordpress-directory-circleci/
+#
+# Updated by @eighty20results to match needs for Eight/20 Results plugin development & testing
+
+references:
+  # Environment variables
+  #
+  WP_CORE_DIR: &WP_CORE_DIR
+                 /tmp/wordpress
+  WP_HOST: &WP_HOST
+             e20r-single-use-trial.test
+  WP_ORG_PLUGIN_NAME: &WP_ORG_PLUGIN_NAME
+                        e20r-single-use-trial
+  WP_ORG_USERNAME: &WP_ORG_USERNAME
+                     eighty20results
+  DB_HOST: &DB_HOST
+            wordpress
+  DB_USER: &DB_USER
+            wordpress
+  DB_PASS: &DB_PASS
+            wordpress
+  DB_NAME: &DB_NAME
+             wordpress
+  DEV_COMPOSER: &DEV_COMPOSER
+                  composer.json
+  # Default container configuration
+  #
+  container_config: &container_config
+    docker:
+      - image: circleci/php:7-apache-browsers
+    environment:
+      - WP_CORE_DIR: *WP_CORE_DIR
+      - WP_HOST: *WP_HOST
+      - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
+      - WP_ORG_USERNAME: *WP_ORG_USERNAME
+
+    working_directory: ~/e20r-single-use-trial
+
+  workspace_root: &workspace_root
+                    /tmp
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
+  copy_inc: &copy_inc
+    run:
+      name: Copy inc directory
+      command: cp -R /tmp/inc .
+
+  install_subversion: &install_subversion
+    run:
+      name: Install subversion
+      command: sudo -E apt-get install subversion
+
+  # Default configuration for all Acceptance testing jobs
+  #
+  acceptance_job: &acceptance_job
+    <<: *container_config
+    docker:
+      - image: circleci/php:7-apache-browsers
+      - image: circleci/mariadb:10.4-focal
+    steps:
+      - checkout
+      - run:
+          name: Add WordPress host to hosts file
+          command: echo "127.0.0.1 ${WP_HOST}" | sudo -E tee -a /etc/hosts
+      - *attach_workspace
+      - *copy_inc
+      - run:
+          name: Figure out the distro/version
+          command: sudo -E cat /etc/*-release
+#      - run:
+#          name: Install MariaDB client
+#          command: sudo -E apt install mariadb-client-10.1
+      - run:
+          name: Install MariaDB (MySQL) PHP extension
+          command: |
+            sudo -E docker-php-ext-install pdo_mysql
+            sudo -E docker-php-ext-enable pdo_mysql
+      - run:
+          name: Setup WordPress
+          command: .circleci/setup-$WP_TYPE.sh
+      - run:
+          name: Start PHP server
+          command: sudo -E php -S $WP_HOST:80 -t $WP_CORE_DIR
+          background: True
+      - run:
+          name: Run CodeCeption Acceptance tests
+          # TODO: Transiton to codeception test execution for WordPress
+          command: inc/bin/codecept --format progress --tags=$WP_TYPE
+      - store_test_results:
+          path: test-results
+
+  # Default configuration for all phpunit testing jobs
+  #
+  phpunit_job: &phpunit_job
+    <<: *container_config
+    steps:
+      - checkout
+      - *attach_workspace
+      - *copy_inc
+      - run:
+          name: Run PHP unit tests
+          command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml tests/unittests/test_*.php
+      - store_test_results:
+          path: test-results
+
+jobs:
+  build:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: COMPOSER=$DEV_COMPOSER composer install -n -o
+      - run:
+          name: Install WordPress
+          command: bash .circleci/install-wp.sh
+      - persist_to_workspace:
+          root: .
+          paths:
+            - inc
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - wordpress
+
+  code_quality:
+    <<: *container_config
+    steps:
+      - checkout
+      - *attach_workspace
+      - *copy_inc
+      - run:
+          name: Run code quality tests
+          command: inc/bin/grumphp run --testsuite=code_quality
+
+  test_php74:
+    <<: *phpunit_job
+    docker:
+      - image: circleci/php:7.4
+
+  test_php73:
+    <<: *phpunit_job
+    docker:
+      - image: circleci/php:7.3
+
+#  test_php72:
+#    <<: *phpunit_job
+#    docker:
+#      - image: circleci/php:7.2
+#
+#  test_php71:
+#    <<: *phpunit_job
+#    docker:
+#      - image: circleci/php:7.1
+#
+#  test_php70:
+#    <<: *phpunit_job
+#    docker:
+#      - image: circleci/php:7.0
+#
+#  test_php56:
+#    <<: *phpunit_job
+#    docker:
+#      - image: circleci/php:5.6
+
+  acceptance_singlesite:
+    <<: *acceptance_job
+    environment:
+      - WP_CORE_DIR: *WP_CORE_DIR
+      - WP_HOST: *WP_HOST
+      - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
+      - WP_ORG_USERNAME: *WP_ORG_USERNAME
+      - WP_TYPE: singlesite
+
+  acceptance_multisite:
+    <<: *acceptance_job
+    environment:
+      - WP_CORE_DIR: *WP_CORE_DIR
+      - WP_HOST: *WP_HOST
+      - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
+      - WP_ORG_USERNAME: *WP_ORG_USERNAME
+      - WP_TYPE: multisite
+
+#  deploy_assets:
+#    <<: *container_config
+#    steps:
+#      - checkout
+#      - *attach_workspace
+#      # - *install_subversion
+#      - run:
+#          name: Deploy assets to WordPress plugin directory
+#          command: .circleci/deploy-assets.sh
+#
+#  deploy_plugin:
+#    <<: *container_config
+#    steps:
+#      - checkout
+#      - *attach_workspace
+#      # - *install_subversion
+#      - run:
+#          name: Deploy new version to WordPress plugin directory
+#          command: .circleci/deploy-plugin.sh
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+#      - deploy_assets:
+#          filters:
+#            branches:
+#              only:
+#                - master
+      - code_quality:
+          requires:
+            - build
+      - test_php74:
+          requires:
+            - code_quality
+      - test_php73:
+          requires:
+            - code_quality
+#      - test_php72:
+#          requires:
+#            - code_quality
+#      - test_php71:
+#          requires:
+#            - code_quality
+#      - test_php70:
+#          requires:
+#            - code_quality
+#      - test_php56:
+#          requires:
+#            - code_quality
+      - acceptance_singlesite:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - test_php74
+            - test_php73
+#            - test_php72
+#            - test_php71
+#            - test_php70
+#            - test_php56
+      - acceptance_multisite:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - test_php74
+            - test_php73
+#            - test_php72
+#            - test_php71
+#            - test_php70
+#            - test_php56
+#      - deploy_plugin:
+#          filters:
+#            branches:
+#              only:
+#                - master
+#          requires:
+#            - acceptance_singlesite
+#            - acceptance_multisite
