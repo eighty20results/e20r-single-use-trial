@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 namespace E20R\SingleUseTrial\Views;
 
 /**
@@ -24,39 +25,39 @@ namespace E20R\SingleUseTrial\Views;
  */
 class Settings {
 
-    /**
-     * Generate the view for the Membership Level Settings
-     * 
-     * @param array $level_settings
-     * @param int $level_id
-     * 
-     * @return string
-     */
-    public static function membership_level( $level_settings, $level_id ) {
-        $level_html = "";
-        $level_html .= sprintf("\t<h3 class='topborder'>%s</h3>\n", \__("Single Use Trial Settings", "e20r-single-use-trial" ));
-        $level_html .= sprintf("\t<p class='e20r-description'>\n");
-        $level_html .= sprintf("\t\t<p class='e20r-description'>\n");
-        $level_html .= sprintf("\t\t\t%s\n</p>\n", \__(
-                "Prevent members from signing up for this membership level more than once?",
-                "e20r-single-use-trial"));
-        $level_html .= sprintf("\t<table class='form-table'>\n");
-        $level_html .= sprintf("\t\t<tbody>\n");
-        $level_html .= sprintf("\t\t\t<tr>\n");
-        $level_html .= sprintf("\t\t\t\t<th scope='row' valign='top'><label for='e20r-single-use-trial'>\n");
-        $level_html .= sprintf("\t\t\t\t\t%s\n", __( "Limit sign-ups to single use?", "e20r-single-use-trial" ));
-        $level_html .= sprintf("\t\t\t\t\t</label>\n");
-        $level_html .= sprintf("\t\t\t\t</th>\n");
-        $level_html .= sprintf("\t\t\t\t<td>\n");
-        $checked_html = isset( $level_settings[ $level_id ] ) ?
-                        \checked( (bool)$level_settings[ $level_id ], true ) :
-                        null;
-        $level_html .= sprintf("\t\t\t\t\t<input type='checkbox' name='e20r-single-use-trial' id='e20r-single-use-trial' value='1' %s>\n", $checked_html);
-        $level_html .= sprintf("\t\t\t\t</td>\n");
-        $level_html .= sprintf("\t\t\t</tr>\n");
-        $level_html .= sprintf("\t\t</tbody>\n");
-        $level_html .= sprintf("\t</table>\n");
+	/**
+	 * Generate the view for the Membership Level Settings
+	 *
+	 * @param array $level_settings
+	 * @param int   $level_id
+	 *
+	 * @return string
+	 */
+	public static function membership_level( $level_settings, $level_id ) {
+		$level_html   = "";
+		$level_html   .= sprintf( "\t<h3 class='topborder'>%s</h3>\n", \__( "Single Use Trial Settings", "e20r-single-use-trial" ) );
+		$level_html   .= sprintf( "\t<p class='e20r-description'>\n" );
+		$level_html   .= sprintf( "\t\t<p class='e20r-description'>\n" );
+		$level_html   .= sprintf( "\t\t\t%s\n</p>\n", \__(
+			"Prevent members from signing up for this membership level more than once?",
+			"e20r-single-use-trial" ) );
+		$level_html   .= sprintf( "\t<table class='form-table'>\n" );
+		$level_html   .= sprintf( "\t\t<tbody>\n" );
+		$level_html   .= sprintf( "\t\t\t<tr>\n" );
+		$level_html   .= sprintf( "\t\t\t\t<th scope='row' valign='top'><label for='e20r-single-use-trial'>\n" );
+		$level_html   .= sprintf( "\t\t\t\t\t%s\n", __( "Limit sign-ups to single use?", "e20r-single-use-trial" ) );
+		$level_html   .= sprintf( "\t\t\t\t\t</label>\n" );
+		$level_html   .= sprintf( "\t\t\t\t</th>\n" );
+		$level_html   .= sprintf( "\t\t\t\t<td>\n" );
+		$checked_html = ( $level_settings !== null && isset( $level_settings[ $level_id ] ) ) ?
+			checked( (bool) $level_settings[ $level_id ], true, true ) :
+			null;
+		$level_html   .= sprintf( "\t\t\t\t\t<input type='checkbox' name='e20r-single-use-trial' id='e20r-single-use-trial' value='1' %s>\n", $checked_html );
+		$level_html   .= sprintf( "\t\t\t\t</td>\n" );
+		$level_html   .= sprintf( "\t\t\t</tr>\n" );
+		$level_html   .= sprintf( "\t\t</tbody>\n" );
+		$level_html   .= sprintf( "\t</table>\n" );
 
-        return $level_html;
-    }
+		return $level_html;
+	}
 }

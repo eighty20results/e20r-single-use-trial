@@ -32,19 +32,24 @@ License: GPLv2
 
 /**
  * Configuration section on the Membership Levels page (in settings).
+ *
+ * @return string|null
+ *
+ * @uses $_REQUEST['edit']
  */
 function e20r_single_use_trial_settings() {
 
-	if ( ! function_exists( 'pmpro_getLevel' ) ) {
-		return;
-	}
-
-
 	$utils    = Utilities::get_instance();
 	$level_id = $utils->get_variable( 'edit', null );
-
 	$level_settings = \get_option( 'e20rsut_settings', false );
-    echo Settings::membership_level($level_settings, $level_id);
+	$html = Settings::membership_level($level_settings, $level_id);
+
+	if ( isset( $_SERVER['REQUEST_METHOD'] ) ) {
+		echo $html;
+		return null;
+	}
+
+	return  $html;
 }
 
 \add_action(
@@ -56,21 +61,32 @@ function e20r_single_use_trial_settings() {
  * Save settings for a given membership level.
  *
  * @param int $level_id ID of level being saved
+ *
+ * @return bool
  */
-function e20r_save_single_use_trial( $level_id ) {
+function e20r_save_single_use_trial( $level_id = 0 ) {
 
 	$utils   = Utilities::get_instance();
 	$options = get_option( 'e20rsut_settings', false );
 
+	// Make sure we have a valid Level ID number to process
+	if ( $level_id == 0 ) {
+		return false;
+	}
+
+	// Get the setting value from the $_REQUEST array
 	$setting = (bool) $utils->get_variable( 'e20r-single-use-trial', false );
 
-	if ( ! is_array( $options ) ) {
+	// If the options are empty or not an array, create one (array)
+	if ( false === $options || ! is_array( $options ) ) {
 		$options = array();
 	}
 
+	// Set the single-use trial setting for the specific level ID
 	$options[ $level_id ] = $setting;
 
-	update_option( 'e20rsut_settings', $options, false );
+	// Save the settings
+	return update_option( 'e20rsut_settings', $options, 'no' );
 }
 
 add_action( 'pmpro_save_membership_level', 'E20R\SingleUseTrial\e20r_save_single_use_trial' );
