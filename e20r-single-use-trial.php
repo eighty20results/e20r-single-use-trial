@@ -39,6 +39,10 @@ License: GPLv2
  */
 function e20r_single_use_trial_settings() {
 
+	if ( ! function_exists( 'pmpro_getLevel' ) ) {
+		return;
+	}
+  
 	$utils    = Utilities::get_instance();
 	$level_id = $utils->get_variable( 'edit', null );
 	$level_settings = \get_option( 'e20rsut_settings', false );
@@ -99,6 +103,7 @@ add_action( 'pmpro_save_membership_level', 'E20R\SingleUseTrial\e20r_save_single
  * @return int[]             Array of level ID(s).
  *
  */
+
 function e20r_get_trial_levels( $level_array ) {
 
 	if ( function_exists( 'pmpro_isLevelFree' ) &&
@@ -244,7 +249,7 @@ function e20r_level_expiration_text( $text, $level ) {
 		$text = __(
 		          "You have already used your trial subscription. Please select a full subscription to checkout.",
               "e20r-single-use-trial"
-   );
+    );
 	}
 
 	return $text;
@@ -357,6 +362,7 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 	}
 }
 
+
 // The one--click update handler
 try {
 	spl_autoload_register( 'E20R\SingleUseTrial\e20r_auto_loader' );
@@ -369,4 +375,3 @@ Utilities::configureUpdateServerV4(
         "e20r-single-use-trial",
         plugin_dir_path( __FILE__ ) . "e20r-single-use-trial.php"
 );
-
