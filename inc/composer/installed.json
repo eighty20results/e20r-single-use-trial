@@ -3036,17 +3036,17 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "2.6.11",
-            "version_normalized": "2.6.11.0",
+            "version": "2.6.12",
+            "version_normalized": "2.6.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "a974a621602045c0907ce74762836887378890dc"
+                "reference": "31c723b52a578dabd7cb31fe7dcc1518e0ee0778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/a974a621602045c0907ce74762836887378890dc",
-                "reference": "a974a621602045c0907ce74762836887378890dc",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/31c723b52a578dabd7cb31fe7dcc1518e0ee0778",
+                "reference": "31c723b52a578dabd7cb31fe7dcc1518e0ee0778",
                 "shasum": ""
             },
             "require": {
@@ -3084,7 +3084,7 @@
                 "gumlet/php-image-resize": "To handle runtime image modification in the WPDb::haveAttachmentInDatabase method.",
                 "vlucas/phpdotenv": "To manage env file based configuration of the suites."
             },
-            "time": "2020-09-15T11:58:52+00:00",
+            "time": "2020-09-17T08:27:46+00:00",
             "type": "library",
             "extra": {
                 "_hash": "484f861f69198089cab0e642f27e5653"
@@ -3120,7 +3120,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lucatume/wp-browser/issues",
-                "source": "https://github.com/lucatume/wp-browser/tree/2.6.11"
+                "source": "https://github.com/lucatume/wp-browser/tree/2.6.12"
             },
             "install-path": "../lucatume/wp-browser"
         },
@@ -4122,17 +4122,17 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.2.1",
-            "version_normalized": "5.2.1.0",
+            "version": "5.2.2",
+            "version_normalized": "5.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d870572532cd70bc3fab58f2e23ad423c8404c44"
+                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d870572532cd70bc3fab58f2e23ad423c8404c44",
-                "reference": "d870572532cd70bc3fab58f2e23ad423c8404c44",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/069a785b2141f5bcf49f3e353548dc1cce6df556",
+                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556",
                 "shasum": ""
             },
             "require": {
@@ -4145,7 +4145,7 @@
             "require-dev": {
                 "mockery/mockery": "~1.3.2"
             },
-            "time": "2020-08-15T11:14:08+00:00",
+            "time": "2020-09-03T19:13:55+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4173,21 +4173,25 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/master"
+            },
             "install-path": "../phpdocumentor/reflection-docblock"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.3.0",
-            "version_normalized": "1.3.0.0",
+            "version": "1.4.0",
+            "version_normalized": "1.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "e878a14a65245fbe78f8080eba03b47c3b705651"
+                "reference": "6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/e878a14a65245fbe78f8080eba03b47c3b705651",
-                "reference": "e878a14a65245fbe78f8080eba03b47c3b705651",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0",
+                "reference": "6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0",
                 "shasum": ""
             },
             "require": {
@@ -4197,7 +4201,7 @@
             "require-dev": {
                 "ext-tokenizer": "*"
             },
-            "time": "2020-06-27T10:12:23+00:00",
+            "time": "2020-09-17T18:55:26+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4221,6 +4225,10 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.4.0"
+            },
             "install-path": "../phpdocumentor/type-resolver"
         },
         {
@@ -4484,17 +4492,17 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.1.9",
-            "version_normalized": "9.1.9.0",
+            "version": "9.1.10",
+            "version_normalized": "9.1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "cf6582906d4b2502c5f4c6be6a3d0b4cd5b3ef7f"
+                "reference": "5134e2a65ec48e2f7126d12f1503a9889c660bdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf6582906d4b2502c5f4c6be6a3d0b4cd5b3ef7f",
-                "reference": "cf6582906d4b2502c5f4c6be6a3d0b4cd5b3ef7f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5134e2a65ec48e2f7126d12f1503a9889c660bdf",
+                "reference": "5134e2a65ec48e2f7126d12f1503a9889c660bdf",
                 "shasum": ""
             },
             "require": {
@@ -4519,7 +4527,7 @@
                 "ext-pcov": "*",
                 "ext-xdebug": "*"
             },
-            "time": "2020-09-15T06:14:11+00:00",
+            "time": "2020-09-18T05:25:29+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4552,7 +4560,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.1.9"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.1.10"
             },
             "funding": [
                 {

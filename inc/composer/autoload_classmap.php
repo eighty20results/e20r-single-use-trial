@@ -537,6 +537,7 @@ return array(
     'SebastianBergmann\\CodeCoverage\\Driver\\PcovNotAvailableException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/PcovNotAvailableException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\PhpdbgDriver' => $vendorDir . '/phpunit/php-code-coverage/src/Driver/PhpdbgDriver.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\PhpdbgNotAvailableException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/PhpdbgNotAvailableException.php',
+    'SebastianBergmann\\CodeCoverage\\Driver\\Selector' => $vendorDir . '/phpunit/php-code-coverage/src/Driver/Selector.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\WriteOperationFailedException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/WriteOperationFailedException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\WrongXdebugVersionException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/WrongXdebugVersionException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\Xdebug2Driver' => $vendorDir . '/phpunit/php-code-coverage/src/Driver/Xdebug2Driver.php',

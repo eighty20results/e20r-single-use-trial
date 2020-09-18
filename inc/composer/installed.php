@@ -467,12 +467,12 @@
     ),
     'lucatume/wp-browser' => 
     array (
-      'pretty_version' => '2.6.11',
-      'version' => '2.6.11.0',
+      'pretty_version' => '2.6.12',
+      'version' => '2.6.12.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a974a621602045c0907ce74762836887378890dc',
+      'reference' => '31c723b52a578dabd7cb31fe7dcc1518e0ee0778',
     ),
     'mck89/peast' => 
     array (
@@ -628,21 +628,21 @@
     ),
     'phpdocumentor/reflection-docblock' => 
     array (
-      'pretty_version' => '5.2.1',
-      'version' => '5.2.1.0',
+      'pretty_version' => '5.2.2',
+      'version' => '5.2.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd870572532cd70bc3fab58f2e23ad423c8404c44',
+      'reference' => '069a785b2141f5bcf49f3e353548dc1cce6df556',
     ),
     'phpdocumentor/type-resolver' => 
     array (
-      'pretty_version' => '1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e878a14a65245fbe78f8080eba03b47c3b705651',
+      'reference' => '6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0',
     ),
     'phpmd/phpmd' => 
     array (
@@ -673,12 +673,12 @@
     ),
     'phpunit/php-code-coverage' => 
     array (
-      'pretty_version' => '9.1.9',
-      'version' => '9.1.9.0',
+      'pretty_version' => '9.1.10',
+      'version' => '9.1.10.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'cf6582906d4b2502c5f4c6be6a3d0b4cd5b3ef7f',
+      'reference' => '5134e2a65ec48e2f7126d12f1503a9889c660bdf',
     ),
     'phpunit/php-file-iterator' => 
     array (
