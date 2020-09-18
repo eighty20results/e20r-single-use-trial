@@ -130,7 +130,7 @@ if ( ! class_exists( '\E20R\Utilities\Utilities' ) ) {
 		 */
 		public function maybeMaskEmail( $email, $minLength = 3, $maxLength = 10, $mask = '***' ) {
 
-			if ( ! is_email( $email ) ) {
+			if ( ! \is_email( $email ) ) {
 				return $email;
 			}
 
@@ -726,7 +726,7 @@ if ( ! class_exists( '\E20R\Utilities\Utilities' ) ) {
 					}
 				}
 
-				if ( ! is_email( $field ) && ( ( ! is_array( $field ) ) && ctype_alpha( $field ) ||
+				if ( ! \is_email( $field ) && ( ( ! is_array( $field ) ) && ctype_alpha( $field ) ||
 				                               ( ( ! is_array( $field ) ) && strtotime( $field ) ) ||
 				                               ( ( ! is_array( $field ) ) && is_string( $field ) ) )
 				) {
@@ -742,7 +742,7 @@ if ( ! class_exists( '\E20R\Utilities\Utilities' ) ) {
 					}
 				}
 
-				if ( function_exists( 'is_email' ) && is_email( $field ) ) {
+				if ( function_exists( '\is_email' ) && \is_email( $field ) ) {
 					$field = sanitize_email( $field );
 				}
 
