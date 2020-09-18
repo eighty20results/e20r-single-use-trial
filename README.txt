@@ -2,10 +2,10 @@
 Contributors: eighty20results
 Tags: customizations, memberships, paid memberships pro, trial membership, single use trial membership
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5.1
 Stable tag: 2.3
 
-Limit a member to sign up for a trial level once.
+Limits a registered PMPro member from signing up for a specific membership level more than once.
 
 == Description ==
 This plugin requires the Paid Memberships Pro plugin by Stranger Studios, LLC.
