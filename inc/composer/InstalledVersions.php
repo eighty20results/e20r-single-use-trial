@@ -428,8 +428,8 @@ private static $installed = array (
     ),
     'illuminate/collections' => 
     array (
-      'pretty_version' => 'v8.4.0',
-      'version' => '8.4.0.0',
+      'pretty_version' => 'v8.5.0',
+      'version' => '8.5.0.0',
       'aliases' => 
       array (
       ),
@@ -437,8 +437,8 @@ private static $installed = array (
     ),
     'illuminate/contracts' => 
     array (
-      'pretty_version' => 'v8.4.0',
-      'version' => '8.4.0.0',
+      'pretty_version' => 'v8.5.0',
+      'version' => '8.5.0.0',
       'aliases' => 
       array (
       ),
@@ -446,8 +446,8 @@ private static $installed = array (
     ),
     'illuminate/macroable' => 
     array (
-      'pretty_version' => 'v8.4.0',
-      'version' => '8.4.0.0',
+      'pretty_version' => 'v8.5.0',
+      'version' => '8.5.0.0',
       'aliases' => 
       array (
       ),
@@ -455,12 +455,12 @@ private static $installed = array (
     ),
     'illuminate/support' => 
     array (
-      'pretty_version' => 'v8.4.0',
-      'version' => '8.4.0.0',
+      'pretty_version' => 'v8.5.0',
+      'version' => '8.5.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '30c044d0b629249e942e65e315745e082869db44',
+      'reference' => 'f7a139ff6adf8fb6afffe895195a9de04c12a128',
     ),
     'justinrainbow/json-schema' => 
     array (
@@ -569,12 +569,12 @@ private static $installed = array (
     ),
     'nikic/php-parser' => 
     array (
-      'pretty_version' => 'v4.9.1',
-      'version' => '4.9.1.0',
+      'pretty_version' => 'v4.10.0',
+      'version' => '4.10.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '88e519766fc58bd46b8265561fb79b54e2e00b28',
+      'reference' => '1c13d05035deff45f1230ca68bd7d74d621762d9',
     ),
     'opis/closure' => 
     array (
@@ -686,12 +686,12 @@ private static $installed = array (
     ),
     'phpunit/php-code-coverage' => 
     array (
-      'pretty_version' => '9.1.10',
-      'version' => '9.1.10.0',
+      'pretty_version' => '9.1.11',
+      'version' => '9.1.11.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5134e2a65ec48e2f7126d12f1503a9889c660bdf',
+      'reference' => 'c9394cb9d07ecfa9351b96f2e296bad473195f4d',
     ),
     'phpunit/php-file-iterator' => 
     array (
@@ -1016,6 +1016,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '8674b1d84ffb47cc59a101f5d5a3b61e87d23796',
+    ),
+    'squizlabs/php_codesniffer' => 
+    array (
+      'pretty_version' => '3.5.6',
+      'version' => '3.5.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e97627871a7eab2f70e59166072a6b767d5834e0',
     ),
     'symfony/browser-kit' => 
     array (
@@ -1568,6 +1577,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'bae1e975ed1277470e3dcc7fd0ef99c2d4f4c7a8',
+    ),
+    'wp-coding-standards/wpcs' => 
+    array (
+      'pretty_version' => '2.3.0',
+      'version' => '2.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7da1894633f168fe244afc6de00d141f27517b62',
     ),
     'zordius/lightncandy' => 
     array (

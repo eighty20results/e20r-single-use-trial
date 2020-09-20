@@ -40,13 +40,12 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         '888e1afeed2e8d13ef5a662692091e6e' => __DIR__ . '/..' . '/amphp/parallel/lib/Sync/functions.php',
         '384cf4f2eb4d2f896db72315a76066ad' => __DIR__ . '/..' . '/amphp/parallel/lib/Worker/functions.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        '60799491728b879e74601d83e38b2cad' => __DIR__ . '/..' . '/illuminate/collections/helpers.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         '30cbb6e4122dc988e494c6b9c0438233' => __DIR__ . '/..' . '/wp-cli/import-command/import-command.php',
         '5e099d3cac677dd2bec1003ea7707745' => __DIR__ . '/..' . '/wp-cli/media-command/media-command.php',
         'ac949ce40a981819ba132473518a9a31' => __DIR__ . '/..' . '/wp-cli/wp-config-transformer/src/WPConfigTransformer.php',
+        '60799491728b879e74601d83e38b2cad' => __DIR__ . '/..' . '/illuminate/collections/helpers.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '5deaf6ce9c8bbdfb65104c7e938d5875' => __DIR__ . '/..' . '/wp-cli/config-command/config-command.php',
         '68c39b88215b6cf7a0da164166670ef9' => __DIR__ . '/..' . '/wp-cli/core-command/core-command.php',
         '7654e00bf0e632580764400bd8293a9c' => __DIR__ . '/..' . '/wp-cli/cron-command/cron-command.php',
@@ -62,6 +61,7 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         '129d58fa8151374aceb8571bcaa97504' => __DIR__ . '/..' . '/wp-cli/shell-command/shell-command.php',
         '8519779bbb65eeb842af2f629ce7b6f8' => __DIR__ . '/..' . '/wp-cli/super-admin-command/super-admin-command.php',
         '1f05372afcc7d0c51a305cef1d56dd01' => __DIR__ . '/..' . '/wp-cli/widget-command/widget-command.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '861372841bb4b8ba9fdd215894666f40' => __DIR__ . '/..' . '/amphp/parallel-functions/src/functions.php',
         '051bafe20e2674435a162870efa2d2a7' => __DIR__ . '/..' . '/brain/monkey/inc/api.php',
         '2a3c2110e8e0295330dc3d11a4cbc4cb' => __DIR__ . '/..' . '/php-webdriver/webdriver/lib/Exception/TimeoutException.php',
@@ -225,8 +225,8 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -427,8 +427,8 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         ),
         'Illuminate\\Support\\' => 
         array (
-            0 => __DIR__ . '/..' . '/illuminate/collections',
-            1 => __DIR__ . '/..' . '/illuminate/macroable',
+            0 => __DIR__ . '/..' . '/illuminate/macroable',
+            1 => __DIR__ . '/..' . '/illuminate/collections',
             2 => __DIR__ . '/..' . '/illuminate/support',
         ),
         'Illuminate\\Contracts\\' => 

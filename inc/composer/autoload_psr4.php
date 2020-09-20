@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
     'tad\\' => array($vendorDir . '/lucatume/wp-browser/src/tad'),
-    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'WP_CLI\\MaintenanceMode\\' => array($vendorDir . '/wp-cli/maintenance-mode-command/src'),
     'WP_CLI\\I18n\\' => array($vendorDir . '/wp-cli/i18n-command/src'),
@@ -58,7 +58,7 @@ return array(
     'MikeMcLin\\WpPassword\\' => array($vendorDir . '/mikemclin/laravel-wp-password/src'),
     'LightnCandy\\' => array($vendorDir . '/zordius/lightncandy/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
-    'Illuminate\\Support\\' => array($vendorDir . '/illuminate/collections', $vendorDir . '/illuminate/macroable', $vendorDir . '/illuminate/support'),
+    'Illuminate\\Support\\' => array($vendorDir . '/illuminate/macroable', $vendorDir . '/illuminate/collections', $vendorDir . '/illuminate/support'),
     'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
