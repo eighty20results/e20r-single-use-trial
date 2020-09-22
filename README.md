@@ -22,12 +22,15 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+[![CircleCI][circle-ci-shield]][circleci-shield-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 
 
@@ -176,6 +179,8 @@ Project Link: [https://github.com/eighty20results/e20r-single-use-trial](https:/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[circleci-shield-url]: https://github.com/eighty20results/e20r-single-use-trial
+[circle-ci-shield]: https://circleci.com/gh/eighty20results/e20r-single-use-trial/tree/master.svg?style=shield
 [contributors-shield]: https://img.shields.io/github/contributors/eighty20results/repo.svg?style=flat-square
 [contributors-url]: https://github.com/eighty20results/e20r-single-use-trial/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/eighty20results/repo.svg?style=flat-square
