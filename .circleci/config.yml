@@ -36,7 +36,6 @@ references:
       - WP_HOST: *WP_HOST
       - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
       - WP_ORG_USERNAME: *WP_ORG_USERNAME
-
     working_directory: ~/e20r-single-use-trial
 
   workspace_root: &workspace_root
@@ -104,6 +103,29 @@ references:
       - *attach_workspace
       - *copy_inc
       - run:
+          name: Install the PHPUnit package for this version of PHP
+          command: |
+            export PHP_VERSION=$(sed -i "s/test_php//g" <<< "${CIRCLE_JOB}")
+            # Install the specified version of PHPUnit depending on the PHP version:
+            case "${PHP_VERSION}" in
+              73|74|70|56|55|54|nightly)
+                # Use composer to install a compatible version of phpunit
+                inc/bin/composer global require "phpunit/phpunit:>4.0 <6 || ^7.0"
+                ;;
+              72)
+                echo "Using PHPUnit 6.0"
+                inc/bin/composer global require "phpunit/phpunit=6.0.*"
+                ;;
+              71)
+                echo "Using PHPUnit 5.7"
+                inc/bin/composer global require "phpunit/phpunit=5.7.*"
+                ;;
+              *)
+                echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
+                exit 1
+                ;;
+            esac
+      - run:
           name: Run PHP unit tests
           command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml tests/unittests/test_*.php
       - store_test_results:
@@ -149,10 +171,10 @@ jobs:
     docker:
       - image: circleci/php:7.3
 
-#  test_php72:
-#    <<: *phpunit_job
-#    docker:
-#      - image: circleci/php:7.2
+  test_php72:
+    <<: *phpunit_job
+    docker:
+      - image: circleci/php:7.2
 #
 #  test_php71:
 #    <<: *phpunit_job
@@ -226,9 +248,9 @@ workflows:
       - test_php73:
           requires:
             - code_quality
-#      - test_php72:
-#          requires:
-#            - code_quality
+      - test_php72:
+          requires:
+            - code_quality
 #      - test_php71:
 #          requires:
 #            - code_quality
