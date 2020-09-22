@@ -105,7 +105,8 @@ references:
       - run:
           name: Install the PHPUnit package for this version of PHP
           command: |
-            export PHP_VERSION=$(sed -i "s/test_php//g" \<\<\< "${CIRCLE_JOB}")
+            export PHP_VERSION=$(echo "${CIRCLE_JOB}" | sed -i "s/test_php//g")
+            echo "Select phpunit for PHP ${PHP_VERSION}"
             # Install the specified version of PHPUnit depending on the PHP version:
             case "${PHP_VERSION}" in
               73|74|70|56|55|54|nightly)
