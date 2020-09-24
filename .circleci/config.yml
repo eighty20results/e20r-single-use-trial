@@ -16,6 +16,9 @@ references:
                         e20r-single-use-trial
   WP_ORG_USERNAME: &WP_ORG_USERNAME
                      eighty20results
+  WP_DEPENDENCY_LIST: &WP_DEPENDENCY_LIST
+            paid-memberships-pro pmpro-payfast
+
   DB_HOST: &DB_HOST
             wordpress
   DB_USER: &DB_USER
@@ -35,6 +38,7 @@ references:
       - WP_CORE_DIR: *WP_CORE_DIR
       - WP_HOST: *WP_HOST
       - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
+      - WP_DEPENDENCY_LIST: *WP_DEPENDENCY_LIST
       - WP_ORG_USERNAME: *WP_ORG_USERNAME
     working_directory: ~/e20r-single-use-trial
 
@@ -48,12 +52,49 @@ references:
   copy_inc: &copy_inc
     run:
       name: Copy inc directory
-      command: cp -R /tmp/inc .
+      command: if [[ -d /tmp/inc ]]; then cp -R /tmp/inc .; fi
 
   install_subversion: &install_subversion
     run:
       name: Install subversion
-      command: sudo -E apt-get install subversion
+      command: sudo -E apt-get install subversion -y
+
+  # Installs composer dependencies
+  #
+  dependency_install: &dependency_install
+    <<: *container_config
+    steps:
+      - checkout
+      - *attach_workspace
+      - *copy_inc
+      - run:
+          name: Install the PHPUnit package for this version of PHP
+          command: |
+            if [[ -f composer.lock ]]; then
+              echo "Remove the composer.lock file"
+              rm -f composer.lock
+            fi
+            echo "Select phpunit for PHP ${PHP_VERSION}"
+            # Install the specified version of PHPUnit depending on the PHP version:
+            case "${PHP_VERSION}" in
+              7.[3-4].*|nightly)
+                # Use composer to install a compatible version of phpunit
+                inc/bin/composer global require "phpunit/phpunit=^9.0"
+                ;;
+              7.2.*)
+                echo "Using PHPUnit 6.0 for PHP ${PHP_VERSION}"
+                inc/bin/composer global require "phpunit/phpunit<=6.0.*"
+                ;;
+              5.6.*|7.[0-1].*)
+                echo "Using PHPUnit 5.7 for PHP ${PHP_VERSION}"
+                inc/bin/composer global require "phpunit/phpunit<=5.7.*"
+                ;;
+              *)
+                echo "No PHPUnit version handling for PHP version ${PHP_VERSION}"
+                exit 1
+                ;;
+            esac
+
 
   # Default configuration for all Acceptance testing jobs
   #
@@ -69,6 +110,7 @@ references:
           command: echo "127.0.0.1 ${WP_HOST}" | sudo -E tee -a /etc/hosts
       - *attach_workspace
       - *copy_inc
+#      - *dependency_install
       - run:
           name: Figure out the distro/version
           command: sudo -E cat /etc/*-release
@@ -89,7 +131,7 @@ references:
           background: True
       - run:
           name: Run CodeCeption Acceptance tests
-          # TODO: Transiton to codeception test execution for WordPress
+          # TODO: Transition to codeception test execution for WordPress
           command: inc/bin/codecept --format progress --tags=$WP_TYPE
       - store_test_results:
           path: test-results
@@ -102,30 +144,7 @@ references:
       - checkout
       - *attach_workspace
       - *copy_inc
-      - run:
-          name: Install the PHPUnit package for this version of PHP
-          command: |
-            export PHP_VERSION=$(echo "${CIRCLE_JOB}" | sed -i "s/test_php//g")
-            echo "Select phpunit for PHP ${PHP_VERSION}"
-            # Install the specified version of PHPUnit depending on the PHP version:
-            case "${PHP_VERSION}" in
-              73|74|70|56|55|54|nightly)
-                # Use composer to install a compatible version of phpunit
-                inc/bin/composer global require "phpunit/phpunit:>4.0 <6 || ^7.0"
-                ;;
-              72)
-                echo "Using PHPUnit 6.0"
-                inc/bin/composer global require "phpunit/phpunit=6.0.*"
-                ;;
-              71)
-                echo "Using PHPUnit 5.7"
-                inc/bin/composer global require "phpunit/phpunit=5.7.*"
-                ;;
-              *)
-                echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
-                exit 1
-                ;;
-            esac
+#      - *dependency_install
       - run:
           name: Run PHP unit tests
           command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml tests/unittests/test_*.php
@@ -137,9 +156,6 @@ jobs:
     <<: *container_config
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: COMPOSER=$DEV_COMPOSER composer install -n -o
       - run:
           name: Install WordPress
           command: bash .circleci/install-wp.sh
@@ -158,6 +174,7 @@ jobs:
       - checkout
       - *attach_workspace
       - *copy_inc
+#      - *dependency_install
       - run:
           name: Run code quality tests
           command: inc/bin/grumphp run --testsuite=code_quality
@@ -172,26 +189,6 @@ jobs:
     docker:
       - image: circleci/php:7.3
 
-  test_php72:
-    <<: *phpunit_job
-    docker:
-      - image: circleci/php:7.2
-#
-#  test_php71:
-#    <<: *phpunit_job
-#    docker:
-#      - image: circleci/php:7.1
-#
-#  test_php70:
-#    <<: *phpunit_job
-#    docker:
-#      - image: circleci/php:7.0
-#
-#  test_php56:
-#    <<: *phpunit_job
-#    docker:
-#      - image: circleci/php:5.6
-
   acceptance_singlesite:
     <<: *acceptance_job
     environment:
@@ -199,6 +196,7 @@ jobs:
       - WP_HOST: *WP_HOST
       - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
       - WP_ORG_USERNAME: *WP_ORG_USERNAME
+      - WP_DEPENDENCY_LIST: *WP_DEPENDENCY_LIST
       - WP_TYPE: singlesite
 
   acceptance_multisite:
@@ -208,6 +206,7 @@ jobs:
       - WP_HOST: *WP_HOST
       - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
       - WP_ORG_USERNAME: *WP_ORG_USERNAME
+      - WP_DEPENDENCY_LIST: *WP_DEPENDENCY_LIST
       - WP_TYPE: multisite
 
 #  deploy_assets:
@@ -220,15 +219,15 @@ jobs:
 #          name: Deploy assets to WordPress plugin directory
 #          command: .circleci/deploy-assets.sh
 #
-#  deploy_plugin:
-#    <<: *container_config
-#    steps:
-#      - checkout
-#      - *attach_workspace
-#      # - *install_subversion
-#      - run:
-#          name: Deploy new version to WordPress plugin directory
-#          command: .circleci/deploy-plugin.sh
+  release_plugin:
+    <<: *container_config
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: Create new release for GitHub
+          # TODO: Create script to generate a release tag for the repository
+          command: .circleci/release-plugin.sh
 
 workflows:
   version: 2
@@ -240,6 +239,7 @@ workflows:
 #            branches:
 #              only:
 #                - master
+#                - release-*
       - code_quality:
           requires:
             - build
@@ -249,47 +249,29 @@ workflows:
       - test_php73:
           requires:
             - code_quality
-      - test_php72:
-          requires:
-            - code_quality
-#      - test_php71:
-#          requires:
-#            - code_quality
-#      - test_php70:
-#          requires:
-#            - code_quality
-#      - test_php56:
-#          requires:
-#            - code_quality
       - acceptance_singlesite:
           filters:
             branches:
               only:
                 - master
+                - release-*
           requires:
             - test_php74
             - test_php73
-#            - test_php72
-#            - test_php71
-#            - test_php70
-#            - test_php56
-      - acceptance_multisite:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - test_php74
-            - test_php73
-#            - test_php72
-#            - test_php71
-#            - test_php70
-#            - test_php56
-#      - deploy_plugin:
+#      - acceptance_multisite:
 #          filters:
 #            branches:
 #              only:
 #                - master
+#                - release-*
 #          requires:
-#            - acceptance_singlesite
+#            - test_php74
+#            - test_php73
+      - release_plugin:
+          filters:
+            branches:
+              only:
+                - release-*
+          requires:
+            - acceptance_singlesite
 #            - acceptance_multisite
