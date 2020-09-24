@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
 {
     public static $files = array (
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -22,14 +23,25 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         '8a0ad02df6a5087f2c380f8fd52db273' => __DIR__ . '/..' . '/wp-cli/cache-command/cache-command.php',
         'f3f0199a3ecd9f501d0a3b361bd2f61c' => __DIR__ . '/..' . '/wp-cli/entity-command/entity-command.php',
         '3f201033d5aceb2293314273be88f7c6' => __DIR__ . '/..' . '/wp-cli/extension-command/extension-command.php',
+        'e8aa6e4b5a1db2f56ae794f1505391a8' => __DIR__ . '/..' . '/amphp/amp/lib/functions.php',
+        '76cd0796156622033397994f25b0d8fc' => __DIR__ . '/..' . '/amphp/amp/lib/Internal/functions.php',
         'c65f753375faee349b7adc48c2ee7cc2' => __DIR__ . '/..' . '/wp-cli/db-command/db-command.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '6cd5651c4fef5ed6b63e8d8b8ffbf3cc' => __DIR__ . '/..' . '/amphp/byte-stream/lib/functions.php',
         'd979c11fe80ba96ae3037b43429fe546' => __DIR__ . '/..' . '/wp-cli/scaffold-command/scaffold-command.php',
         '5c6ec5cff8f9d625772c8ed147f6b894' => __DIR__ . '/..' . '/wp-cli/export-command/export-command.php',
         'b66d29757fcb2fb7a9608d068e3716b0' => __DIR__ . '/..' . '/wp-cli/checksum-command/checksum-command.php',
+        '8dc56fe697ca93c4b40d876df1c94584' => __DIR__ . '/..' . '/amphp/process/lib/functions.php',
+        '3da389f428d8ee50333e4391c3f45046' => __DIR__ . '/..' . '/amphp/serialization/src/functions.php',
+        'bcb7d4fc55f4b1a7e10f5806723e9892' => __DIR__ . '/..' . '/amphp/sync/src/functions.php',
+        'e187e371b30897d6dc51cac6a8c94ff6' => __DIR__ . '/..' . '/amphp/sync/src/ConcurrentIterator/functions.php',
+        '430de19db8b7ee88fdbe5c545d82d33d' => __DIR__ . '/..' . '/amphp/parallel/lib/Context/functions.php',
+        '888e1afeed2e8d13ef5a662692091e6e' => __DIR__ . '/..' . '/amphp/parallel/lib/Sync/functions.php',
+        '384cf4f2eb4d2f896db72315a76066ad' => __DIR__ . '/..' . '/amphp/parallel/lib/Worker/functions.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '60799491728b879e74601d83e38b2cad' => __DIR__ . '/..' . '/illuminate/collections/helpers.php',
+        '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         '30cbb6e4122dc988e494c6b9c0438233' => __DIR__ . '/..' . '/wp-cli/import-command/import-command.php',
         '5e099d3cac677dd2bec1003ea7707745' => __DIR__ . '/..' . '/wp-cli/media-command/media-command.php',
         'ac949ce40a981819ba132473518a9a31' => __DIR__ . '/..' . '/wp-cli/wp-config-transformer/src/WPConfigTransformer.php',
@@ -50,8 +62,8 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         '129d58fa8151374aceb8571bcaa97504' => __DIR__ . '/..' . '/wp-cli/shell-command/shell-command.php',
         '8519779bbb65eeb842af2f629ce7b6f8' => __DIR__ . '/..' . '/wp-cli/super-admin-command/super-admin-command.php',
         '1f05372afcc7d0c51a305cef1d56dd01' => __DIR__ . '/..' . '/wp-cli/widget-command/widget-command.php',
+        '861372841bb4b8ba9fdd215894666f40' => __DIR__ . '/..' . '/amphp/parallel-functions/src/functions.php',
         '051bafe20e2674435a162870efa2d2a7' => __DIR__ . '/..' . '/brain/monkey/inc/api.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '2a3c2110e8e0295330dc3d11a4cbc4cb' => __DIR__ . '/..' . '/php-webdriver/webdriver/lib/Exception/TimeoutException.php',
         'd4f51041619ca510cd65a9ff0bf377be' => __DIR__ . '/..' . '/brain/faker/inc/functions.php',
         '41ac945ee97c4f5461ef1c0ccb568262' => __DIR__ . '/..' . '/lucatume/wp-browser/src/tad/WPBrowser/utils.php',
@@ -70,6 +82,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'c' => 
+        array (
+            'cweagans\\Composer\\' => 18,
         ),
         'W' => 
         array (
@@ -98,9 +114,11 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             'Symfony\\Component\\Translation\\' => 30,
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Process\\' => 26,
+            'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\EventDispatcher\\' => 34,
+            'Symfony\\Component\\Dotenv\\' => 25,
             'Symfony\\Component\\DomCrawler\\' => 29,
             'Symfony\\Component\\DependencyInjection\\' => 38,
             'Symfony\\Component\\CssSelector\\' => 30,
@@ -124,9 +142,14 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             'Peast\\' => 6,
             'PDepend\\' => 8,
         ),
+        'O' => 
+        array (
+            'Opis\\Closure\\' => 13,
+        ),
         'M' => 
         array (
             'Mustangostang\\' => 14,
+            'Monolog\\' => 8,
             'MikeMcLin\\WpPassword\\' => 21,
         ),
         'L' => 
@@ -147,6 +170,8 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'GrumPHP\\' => 8,
+            'Gitonomy\\Git\\' => 13,
             'Gettext\\Languages\\' => 18,
             'Gettext\\' => 8,
         ),
@@ -159,6 +184,7 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Inflector\\' => 19,
+            'Doctrine\\Common\\Collections\\' => 28,
             'DeepCopy\\' => 9,
         ),
         'C' => 
@@ -178,6 +204,17 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             'Brain\\Monkey\\' => 13,
             'Brain\\Faker\\' => 12,
         ),
+        'A' => 
+        array (
+            'Amp\\Sync\\' => 9,
+            'Amp\\Serialization\\' => 18,
+            'Amp\\Process\\' => 12,
+            'Amp\\Parser\\' => 11,
+            'Amp\\Parallel\\' => 13,
+            'Amp\\ParallelFunctions\\' => 22,
+            'Amp\\ByteStream\\' => 15,
+            'Amp\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -194,6 +231,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'cweagans\\Composer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -272,6 +313,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
+        'Symfony\\Component\\OptionsResolver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/options-resolver',
+        ),
         'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
@@ -283,6 +328,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         'Symfony\\Component\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
+        ),
+        'Symfony\\Component\\Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dotenv',
         ),
         'Symfony\\Component\\DomCrawler\\' => 
         array (
@@ -360,9 +409,17 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             0 => __DIR__ . '/..' . '/pdepend/pdepend/src/main/php/PDepend',
         ),
+        'Opis\\Closure\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/opis/closure/src',
+        ),
         'Mustangostang\\' => 
         array (
             0 => __DIR__ . '/..' . '/wp-cli/mustangostang-spyc/src',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'MikeMcLin\\WpPassword\\' => 
         array (
@@ -398,6 +455,14 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'GrumPHP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpro/grumphp/src',
+        ),
+        'Gitonomy\\Git\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gitonomy/gitlib/src/Gitonomy/Git',
+        ),
         'Gettext\\Languages\\' => 
         array (
             0 => __DIR__ . '/..' . '/gettext/languages/src',
@@ -421,6 +486,10 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         'Doctrine\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
+        ),
+        'Doctrine\\Common\\Collections\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
         ),
         'DeepCopy\\' => 
         array (
@@ -471,6 +540,38 @@ class ComposerStaticInit74880cb6cf91b78f6f8966fd51e860ff
         'Brain\\Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/brain/faker/src',
+        ),
+        'Amp\\Sync\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/sync/src',
+        ),
+        'Amp\\Serialization\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/serialization/src',
+        ),
+        'Amp\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/process/lib',
+        ),
+        'Amp\\Parser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/parser/lib',
+        ),
+        'Amp\\Parallel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/parallel/lib',
+        ),
+        'Amp\\ParallelFunctions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/parallel-functions/src',
+        ),
+        'Amp\\ByteStream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/byte-stream/lib',
+        ),
+        'Amp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/amp/lib',
         ),
     );
 
