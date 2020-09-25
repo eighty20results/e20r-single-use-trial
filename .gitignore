@@ -54,3 +54,4 @@ fabric.properties
 /composer.lock
 /.phpunit.result.cache
 /inc/
+/process.yml
