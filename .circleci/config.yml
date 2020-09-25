@@ -190,13 +190,21 @@ jobs:
 #
   release_plugin:
     <<: *container_config
+    docker:
+      - image: cibuilds/github:0.10
     steps:
       - checkout
-      - *attach_workspace
+      - attach_workspace
+          at: ./artifacts
       - run:
-          name: Create new release for GitHub
+          name: Publish release on GitHub.com
           # TODO: Create script to generate a release tag for the repository
           command: .circleci/release-plugin.sh
+    filters:
+      branches:
+        ignore: /.*/
+      tags:
+        only: /^\d+\.\d+\.\d+$/
 
 workflows:
   version: 2
