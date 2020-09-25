@@ -59,46 +59,18 @@ references:
       name: Install subversion
       command: sudo -E apt-get install subversion -y
 
-  # Installs composer dependencies
-  #
-  dependency_install: &dependency_install
-    <<: *container_config
-    steps:
-      - checkout
-      - *attach_workspace
-      - *copy_inc
-      - run:
-          name: Install the PHPUnit package for this version of PHP
-          command: |
-            if [[ -f composer.lock ]]; then
-              echo "Remove the composer.lock file"
-              rm -f composer.lock
-            fi
-            echo "Select phpunit for PHP ${PHP_VERSION}"
-            # Install the specified version of PHPUnit depending on the PHP version:
-            case "${PHP_VERSION}" in
-              7.[3-4].*|nightly)
-                # Use composer to install a compatible version of phpunit
-                inc/bin/composer global require "phpunit/phpunit=^9.0"
-                ;;
-              7.2.*)
-                echo "Using PHPUnit 6.0 for PHP ${PHP_VERSION}"
-                inc/bin/composer global require "phpunit/phpunit<=6.0.*"
-                ;;
-              5.6.*|7.[0-1].*)
-                echo "Using PHPUnit 5.7 for PHP ${PHP_VERSION}"
-                inc/bin/composer global require "phpunit/phpunit<=5.7.*"
-                ;;
-              *)
-                echo "No PHPUnit version handling for PHP version ${PHP_VERSION}"
-                exit 1
-                ;;
-            esac
-
+  install_dependencies: &install_dependencies
+    run:
+      name: Update (Install) composer dependencies
+      command: |
+        echo "Running 'composer install'"
+        php composer.phar install
+        echo "Running 'composer update'"
+        inc/bin/composer update
 
   # Default configuration for all Acceptance testing jobs
   #
-  acceptance_job: &acceptance_job
+  acceptance_test_job: &acceptance_test_job
     <<: *container_config
     docker:
       - image: circleci/php:7-apache-browsers
@@ -110,18 +82,15 @@ references:
           command: echo "127.0.0.1 ${WP_HOST}" | sudo -E tee -a /etc/hosts
       - *attach_workspace
       - *copy_inc
-#      - *dependency_install
       - run:
           name: Figure out the distro/version
           command: sudo -E cat /etc/*-release
-#      - run:
-#          name: Install MariaDB client
-#          command: sudo -E apt install mariadb-client-10.1
       - run:
           name: Install MariaDB (MySQL) PHP extension
           command: |
             sudo -E docker-php-ext-install pdo_mysql
             sudo -E docker-php-ext-enable pdo_mysql
+      - *install_dependencies
       - run:
           name: Setup WordPress
           command: .circleci/setup-$WP_TYPE.sh
@@ -144,7 +113,7 @@ references:
       - checkout
       - *attach_workspace
       - *copy_inc
-#      - *dependency_install
+      - *install_dependencies
       - run:
           name: Run PHP unit tests
           command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml tests/unittests/test_*.php
@@ -174,7 +143,7 @@ jobs:
       - checkout
       - *attach_workspace
       - *copy_inc
-#      - *dependency_install
+      - *install_dependencies
       - run:
           name: Run code quality tests
           command: inc/bin/grumphp run --testsuite=code_quality
@@ -189,8 +158,8 @@ jobs:
     docker:
       - image: circleci/php:7.3
 
-  acceptance_singlesite:
-    <<: *acceptance_job
+  acceptance_test_singlesite:
+    <<: *acceptance_test_job
     environment:
       - WP_CORE_DIR: *WP_CORE_DIR
       - WP_HOST: *WP_HOST
@@ -199,15 +168,15 @@ jobs:
       - WP_DEPENDENCY_LIST: *WP_DEPENDENCY_LIST
       - WP_TYPE: singlesite
 
-  acceptance_multisite:
-    <<: *acceptance_job
-    environment:
-      - WP_CORE_DIR: *WP_CORE_DIR
-      - WP_HOST: *WP_HOST
-      - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
-      - WP_ORG_USERNAME: *WP_ORG_USERNAME
-      - WP_DEPENDENCY_LIST: *WP_DEPENDENCY_LIST
-      - WP_TYPE: multisite
+#  acceptance_test_multisite:
+#    <<: *acceptance_test_job
+#    environment:
+#      - WP_CORE_DIR: *WP_CORE_DIR
+#      - WP_HOST: *WP_HOST
+#      - WP_ORG_PLUGIN_NAME: *WP_ORG_PLUGIN_NAME
+#      - WP_ORG_USERNAME: *WP_ORG_USERNAME
+#      - WP_DEPENDENCY_LIST: *WP_DEPENDENCY_LIST
+#      - WP_TYPE: multisite
 
 #  deploy_assets:
 #    <<: *container_config
@@ -231,15 +200,9 @@ jobs:
 
 workflows:
   version: 2
-  build_test_deploy:
+  build_test_release:
     jobs:
       - build
-#      - deploy_assets:
-#          filters:
-#            branches:
-#              only:
-#                - master
-#                - release-*
       - code_quality:
           requires:
             - build
@@ -249,29 +212,29 @@ workflows:
       - test_php73:
           requires:
             - code_quality
-      - acceptance_singlesite:
+      - acceptance_test_singlesite:
           filters:
             branches:
               only:
                 - master
-                - release-*
+                - release*
           requires:
             - test_php74
             - test_php73
+      - release_plugin:
+          filters:
+            branches:
+              only:
+                - release*
+          requires:
+            - acceptance_test_singlesite
+
 #      - acceptance_multisite:
 #          filters:
 #            branches:
 #              only:
 #                - master
-#                - release-*
+#                - release*
 #          requires:
 #            - test_php74
 #            - test_php73
-      - release_plugin:
-          filters:
-            branches:
-              only:
-                - release-*
-          requires:
-            - acceptance_singlesite
-#            - acceptance_multisite
