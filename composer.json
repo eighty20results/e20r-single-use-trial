@@ -38,5 +38,13 @@
   },
   "require": {
     "wp-cli/wp-cli": "^v2.4"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "inc/bin/phpcs --config-set installed_paths inc/wp-coding-standards/wpcs"
+    ],
+    "post-update-cmd": [
+      "inc/bin/phpcs --config-set installed_paths inc/wp-coding-standards/wpcs"
+    ]
   }
 }

@@ -61,12 +61,10 @@ references:
 
   install_dependencies: &install_dependencies
     run:
-      name: Update (Install) composer dependencies
+      name: Install build dependencies (composer)
       command: |
-        echo "Running 'composer install'"
         php composer.phar install
-        echo "Running 'composer update'"
-        inc/bin/composer update
+        inc/bin/phpcs -i
 
   # Default configuration for all Acceptance testing jobs
   #
@@ -188,23 +186,23 @@ jobs:
 #          name: Deploy assets to WordPress plugin directory
 #          command: .circleci/deploy-assets.sh
 #
-  release_plugin:
-    <<: *container_config
-    docker:
-      - image: cibuilds/github:0.10
-    steps:
-      - checkout
-      - attach_workspace
-          at: ./artifacts
-      - run:
-          name: Publish release on GitHub.com
-          # TODO: Create script to generate a release tag for the repository
-          command: .circleci/release-plugin.sh
-    filters:
-      branches:
-        ignore: /.*/
-      tags:
-        only: /^\d+\.\d+\.\d+$/
+#  release_plugin:
+#    <<: *container_config
+#    docker:
+#      - image: cibuilds/github:0.10
+#    steps:
+#      - checkout
+##      - attach_workspace
+##          at: ./artifacts
+#      - run:
+#          name: Publish release on GitHub.com
+#          # TODO: Create script to generate a release tag for the repository
+#          command: .circleci/release-plugin.sh
+#    filters:
+#      branches:
+#        ignore: /.*/
+#      tags:
+#        only: /^\d+\.\d+\.\d+$/
 
 workflows:
   version: 2
@@ -229,13 +227,13 @@ workflows:
           requires:
             - test_php74
             - test_php73
-      - release_plugin:
-          filters:
-            branches:
-              only:
-                - release*
-          requires:
-            - acceptance_test_singlesite
+#      - release_plugin:
+#          filters:
+#            branches:
+#              only:
+#                - release*
+#          requires:
+#            - acceptance_test_singlesite
 
 #      - acceptance_multisite:
 #          filters:
