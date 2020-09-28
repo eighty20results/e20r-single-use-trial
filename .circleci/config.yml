@@ -62,9 +62,7 @@ references:
   install_dependencies: &install_dependencies
     run:
       name: Install build dependencies (composer)
-      command: |
-        php composer.phar install
-        inc/bin/phpcs -i
+      command: php composer.phar install
 
   # Default configuration for all Acceptance testing jobs
   #
