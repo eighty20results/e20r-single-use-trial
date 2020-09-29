@@ -112,7 +112,7 @@ references:
       - *install_dependencies
       - run:
           name: Run PHP unit tests
-          command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml tests/unittests/test_*.php
+          command: inc/bin/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml tests/unittests/class-test-*.php
       - store_test_results:
           path: test-results
 
