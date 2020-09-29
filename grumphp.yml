@@ -21,11 +21,6 @@ grumphp:
       standard: Wordpress-Extra
       whitelist_patterns:
         - /^e20r-(.*)\.php/
-        - /^tests\/unittests\/*\.php/
-        - /^tests\/acceptance\/(.*)\.php/
-        - /^tests\/functional\/(.*)\.php/
-        - /^tests\/wpunit\/(.*)\.php/
-        - /^tests\/unit\/(.*)\.php/
         - /^src\/class\.(.*)\.php/
     phplint: ~
     phpmd:

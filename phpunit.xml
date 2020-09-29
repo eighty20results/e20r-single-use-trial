@@ -33,7 +33,7 @@
   </coverage -->
   <testsuites>
     <testsuite name="unit">
-      <directory prefix="class-test-" suffix=".php">tests/unittests</directory>
+      <directory prefix="test_" suffix=".php">tests/unittests</directory>
     </testsuite>
     <!-- testsuite name="features">
       <directory>tests/features</directory>
