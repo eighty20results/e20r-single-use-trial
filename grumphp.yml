@@ -16,6 +16,7 @@ grumphp:
         - lib
         - vendor
         - conf
+        - tests/_support
     phpcs:
       standard: Wordpress-Extra
       whitelist_patterns:
