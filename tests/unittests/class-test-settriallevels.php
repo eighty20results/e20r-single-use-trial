@@ -1,4 +1,21 @@
 <?php
+/*
+ * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 use E20R\SingleUseTrial as SUT;
 use PHPUnit\Framework\TestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -60,7 +77,7 @@ class test_SetTrialLevels extends TestCase {
 				return $settings;
 			});
 
-		Monkey\Filters\doing('e20r-all-free-levels-are-single-use-trials' );
+		Monkey\Filters\doing('e20r_all_free_levels_are_single_use_trials' );
 
 		$trial_levels = SUT\e20r_get_trial_levels($level_array);
 
@@ -94,7 +111,7 @@ class test_SetTrialLevels extends TestCase {
 		 */
 		try {
 			// TODO: Number of invocations should be added ->once()
-			Monkey\Filters\expectApplied( 'e20r-all-free-levels-are-single-use-trials' )
+			Monkey\Filters\expectApplied( 'e20r_all_free_levels_are_single_use_trials' )
                 ->with( false )
                 ->andReturn( true );
 
@@ -136,7 +153,7 @@ class test_SetTrialLevels extends TestCase {
 			self::assertCount( $count, $trial_levels );
 		}
 
-		// self::assertTrue( Monkey\Filters\applied('e20r-all-free-levels-are-single-use-trials' ) > 0);
+		// self::assertTrue( Monkey\Filters\applied('e20r_all_free_levels_are_single_use_trials' ) > 0);
 	}
 
 	/**

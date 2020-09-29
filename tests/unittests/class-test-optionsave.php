@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016-2020 - Eighty/20 Results (Thomas Sjolshagen <thomas@eighty20results.com>). ALL RIGHTS RESERVED
+ * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,8 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- **/
+ */
 
 use E20R\SingleUseTrial as SUT;
 use PHPUnit\Framework\TestCase;
@@ -69,6 +68,8 @@ class test_OptionSave extends TestCase {
 
 		$mock_list = array(
 			'plugin_dir_path' => __DIR__ . "/../../",
+			'plugins_url' => 'http://wordpress.local/wp-content/plugins/',
+			'get_current_blog_id' => 0,
 			'is_email' => false,
 		);
 

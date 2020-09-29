@@ -1,4 +1,21 @@
 <?php
+/*
+ * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 namespace E20R\SingleUseTrial;
 
 use E20R\SingleUseTrial\Views\Settings;
@@ -39,22 +56,22 @@ License: GPLv2
  */
 function e20r_single_use_trial_settings() {
 
-	$utils    = Utilities::get_instance();
-	$level_id = $utils->get_variable( 'edit', null );
+	$utils          = Utilities::get_instance();
+	$level_id       = $utils->get_variable( 'edit', null );
 	$level_settings = \get_option( 'e20rsut_settings', false );
-	$html = Settings::membership_level($level_settings, $level_id);
+	$html           = Settings::membership_level( $level_settings, $level_id );
 
 	if ( isset( $_SERVER['REQUEST_METHOD'] ) ) {
-		echo $html;
+		echo $html; // phpcs:ignore
 		return null;
 	}
 
-	return  $html;
+	return $html;
 }
 
 \add_action(
-        'pmpro_membership_level_after_other_settings',
-        'E20R\SingleUseTrial\e20r_single_use_trial_settings'
+	'pmpro_membership_level_after_other_settings',
+	'E20R\SingleUseTrial\e20r_single_use_trial_settings'
 );
 
 /**
@@ -70,7 +87,7 @@ function e20r_save_single_use_trial( $level_id = 0 ) {
 	$options = get_option( 'e20rsut_settings', false );
 
 	// Make sure we have a valid Level ID number to process
-	if ( $level_id == 0 ) {
+	if ( 0 === $level_id ) {
 		return false;
 	}
 
@@ -103,19 +120,19 @@ add_action( 'pmpro_save_membership_level', 'E20R\SingleUseTrial\e20r_save_single
 function e20r_get_trial_levels( $level_array ) {
 
 	if ( function_exists( 'pmpro_isLevelFree' ) &&
-	     true === apply_filters( 'e20r-all-free-levels-are-single-use-trials', false ) ) {
+		true === apply_filters( 'e20r_all_free_levels_are_single_use_trials', false ) ) {
 
 		$all_levels = pmpro_getAllLevels( true, true );
 
 		// Add all free levels (trials?) to the filter array
 		foreach ( $all_levels as $level ) {
-		    $level_array = e20r_update_trial_levels($level_array, $level );
+			$level_array = e20r_update_trial_levels( $level_array, $level );
 		}
 	} else {
 
 		$settings = get_option( 'e20rsut_settings', false );
 		foreach ( $settings as $level_id => $is_sut ) {
-			if ( false != $is_sut && ! in_array( $level_id, $level_array ) ) {
+			if ( false !== $is_sut && ! in_array( $level_id, $level_array, true ) ) {
 				$level_array[] = $level_id;
 			}
 		}
@@ -125,10 +142,10 @@ function e20r_get_trial_levels( $level_array ) {
 }
 
 add_filter(
-        'e20r_set_single_use_trial_level_ids',
-        'E20R\SingleUseTrial\e20r_get_trial_levels',
-        1,
-        1
+	'e20r_set_single_use_trial_level_ids',
+	'E20R\SingleUseTrial\e20r_get_trial_levels',
+	1,
+	1
 );
 
 /**
@@ -141,19 +158,19 @@ add_filter(
  */
 function e20r_update_trial_levels( $level_array, $level ) {
 
-    // If the level is free _and_ not in the list already
-    if ( TRUE === pmpro_isLevelFree( $level ) &&
-	     ! in_array( $level->id, $level_array )
+	// If the level is free _and_ not in the list already
+	if ( true === pmpro_isLevelFree( $level ) &&
+		! in_array( $level->id, $level_array, true )
 	) {
 		$level_array[] = $level->id;
-    // Don't allow the inclusion of levels that aren't free
-	} else if ( FALSE === pmpro_isLevelFree( $level ) &&
-                // And has to exist in the list obviously...
-	            FALSE !== ($l_key = array_search( $level->id, $level_array ) ) ) {
-		unset( $level_array[$l_key] );
+		// Don't allow the inclusion of levels that aren't free
+		// And has to exist in the list obviously...
+	} elseif ( false === pmpro_isLevelFree( $level ) &&
+		false !== ( $l_key = array_search( $level->id, $level_array, true ) ) ) { // phpcs:ignore
+		unset( $level_array[ $l_key ] );
 	}
 
-    return $level_array;
+	return $level_array;
 }
 
 /**
@@ -167,7 +184,7 @@ function e20r_after_change_membership_level( $level_id, $user_id ) {
 	// Level(s) where we limit sign-up to one for a given user ID
 	$trial_levels = apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
 
-	if ( in_array( $level_id, $trial_levels ) ) {
+	if ( in_array( $level_id, $trial_levels, true ) ) {
 		// Usermeta is used to record the user's previous trial (free) membership level(s)
 		update_user_meta( $user_id, "e20r_trial_level_{$level_id}_used", true );
 	}
@@ -184,41 +201,40 @@ add_action( 'pmpro_after_change_membership_level', 'E20R\SingleUseTrial\e20r_aft
  */
 function e20r_registration_checks( $value ) {
 
-    // Skip if we're not logged in - so not a renewal
-    if ( function_exists( 'is_user_logged_in' ) && \is_user_logged_in() == false ) {
-        return $value;
-    }
+	// Skip if we're not logged in - so not a renewal
+	if ( function_exists( 'is_user_logged_in' ) && false === \is_user_logged_in() ) {
+		return $value;
+	}
 
-    /** List of levels with trial policy set */
-    $trial_levels = \apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
+	/** List of levels with trial policy set */
+	$trial_levels = \apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
+	$utils        = Utilities::get_instance();
+	$level_id     = $utils->get_variable( 'level', null );
+	$user         = \wp_get_current_user();
 
-    $utils      = Utilities::get_instance();
-    $level_id   = $utils->get_variable( 'level', null );
-    $user       = \wp_get_current_user();
+	if ( $user->ID && in_array( $level_id, $trial_levels, true ) ) {
 
-	if ( $user->ID && in_array( $level_id, $trial_levels ) ) {
+		// Does the currently logged in user have a trial level they've used
+		$already = \get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_used", true );
 
-        // Does the currently logged in user have a trial level they've used
-        $already = \get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_used", true );
+		if ( ! empty( $already ) ) {
 
-        if ( ! empty( $already ) ) {
+			global $pmpro_msg, $pmpro_msgt;
 
-            global $pmpro_msg, $pmpro_msgt;
+			$pmpro_msg  = \__(
+				'You have already used your trial subscription. Please select a full subscription to checkout.',
+				'e20r-single-use-trial'
+			);
+			$pmpro_msgt = 'pmpro_error';
 
-            $pmpro_msg  = \__(
-                "You have already used your trial subscription. Please select a full subscription to checkout.",
-                "e20r-single-use-trial"
-            );
-            $pmpro_msgt = "pmpro_error";
+			$value = false;
+		}
+	}
 
-            $value = false;
-        }
-    }
-
-  return $value;
+	return $value;
 }
 
-\add_filter( "pmpro_registration_checks", 'E20R\SingleUseTrial\e20r_registration_checks' );
+\add_filter( 'pmpro_registration_checks', 'E20R\SingleUseTrial\e20r_registration_checks' );
 
 /**
  * Change the error message text when selecting membership level after the trial has been used
@@ -232,20 +248,17 @@ function e20r_registration_checks( $value ) {
  */
 function e20r_level_expiration_text( $text, $level ) {
 
-  $user_id = get_current_user_id();
-  $level_id     = $level->id;
-  $trial_levels = apply_filters( 'e20r_set_trial_level_ids', array() );
-  $has_used     = get_user_meta( $user_id, "e20r_trial_level_{$level_id}_used", true );
+	$user_id      = get_current_user_id();
+	$level_id     = $level->id;
+	$trial_levels = apply_filters( 'e20r_set_trial_level_ids', array() );
+	$has_used     = get_user_meta( $user_id, "e20r_trial_level_{$level_id}_used", true );
 
-  if ( ! empty( $user_id ) &&
-       ! empty( $has_used ) &&
-       in_array( $level_id, $trial_levels )
-    ) {
+	if ( ! empty( $user_id ) && ! empty( $has_used ) && in_array( $level_id, $trial_levels, true ) ) {
 
 		$text = __(
-		          "You have already used your trial subscription. Please select a full subscription to checkout.",
-              "e20r-single-use-trial"
-    );
+			'You have already used your trial subscription. Please select a full subscription to checkout.',
+			'e20r-single-use-trial'
+		);
 	}
 
 	return $text;
@@ -262,7 +275,7 @@ if ( ! function_exists( 'e20r_force_tls_12' ) ) {
 	function e20r_force_tls_12( $handle ) {
 
 		// set the CURL option to use.
-		curl_setopt( $handle, CURLOPT_SSLVERSION, 6 );
+		curl_setopt( $handle, CURLOPT_SSLVERSION, 6 ); // phpcs:ignore
 	}
 }
 
@@ -272,21 +285,22 @@ if ( ! function_exists( 'boolval' ) ) {
 	/**
 	 * Get the boolean value of a variable
 	 *
-	 * @param mixed $var Teh scalar value being converted to a boolean
+	 * @param mixed $var The scalar value being converted to a boolean
 	 *
 	 * @return bool The boolean value of $var
 	 */
 	function boolval( $var ) {
-		return !! $var;
+		return ! ! $var;
 	}
 }
 
-if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
+if ( ! function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 	/**
 	 * Class auto-loader for the Enhanced Members List plugin
 	 *
 	 * @param string $class_name Name of the class to auto-load
 	 *
+	 * @return bool
 	 * @since  1.0
 	 * @access public static
 	 */
@@ -297,62 +311,55 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 		}
 
 		$parts     = explode( '\\', $class_name );
-		$c_name    = strtolower(
-                preg_replace(
-                        '/_/',
-                        '-',
-                        $parts[ ( count( $parts ) - 1 ) ]
-                    )
-        );
+		$c_name    = preg_replace( '/_/', '-', $parts[ ( count( $parts ) - 1 ) ] );
+		$c_name    = strtolower( $c_name );
 		$base_path = plugin_dir_path( __FILE__ ) . 'classes/';
+		$src_path  = plugin_dir_path( __FILE__ ) . 'src/';
 
-		if ( file_exists( plugin_dir_path( __FILE__ ) . 'src/' ) ) {
-			$base_path = plugin_dir_path( __FILE__ ) . 'src/';
+		if ( file_exists( $src_path ) ) {
+			$base_path = $src_path;
 		}
 
-		$filename = "class.{$c_name}.php";
+		$filename = "class-{$c_name}.php";
+
 		$iterator = new \RecursiveDirectoryIterator(
-		        $base_path,
-                \RecursiveDirectoryIterator::SKIP_DOTS |
-                \RecursiveIteratorIterator::SELF_FIRST |
-                \RecursiveIteratorIterator::CATCH_GET_CHILD |
-                \RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
+			$base_path,
+			\RecursiveDirectoryIterator::SKIP_DOTS |
+			\RecursiveIteratorIterator::SELF_FIRST |
+			\RecursiveIteratorIterator::CATCH_GET_CHILD |
+			\RecursiveDirectoryIterator::FOLLOW_SYMLINKS
+		);
 
-        // Locate class member files, recursively
-        $filter = new \RecursiveCallbackFilterIterator( $iterator,
-                /**
-                 * @SuppressWarnings("unused")
-                 */
-        function ( $current, $key, $iterator ) use ( $filename ) {
+		// Locate class member files, recursively
+		$filter = new \RecursiveCallbackFilterIterator(
+			$iterator,
+			/** @SuppressWarnings("unused") */
+			function( $current, $key, $iterator ) use ( $filename ) {
+				$file_name = $current->getFilename();
 
-			    $file_name = $current->getFilename();
+				// Skip hidden files and directories.
+				if ( '.' === $file_name[0] || '..' === $file_name ) {
+					return false;
+				}
 
-          // Skip hidden files and directories.
-          if ( $file_name[0] == '.' || $file_name == '..' ) {
-            return false;
-          }
+				if ( $current->isDir() ) {
+					// Only recurse into intended subdirectories.
+					return $file_name() === $filename;
+				} else {
+					// Only consume files of interest.
+					return strpos( $file_name, $filename ) === 0;
+				}
+			}
+		);
 
-			    if ( $current->isDir() ) {
-				    // Only recurse into intended subdirectories.
-				    return $file_name() === $filename;
-			    } else {
-				    // Only consume files of interest.
-				    return strpos( $file_name, $filename ) === 0;
-			    }
-		    });
-
-    /**
-		 * @SuppressWarnings ("unused")
-		 */
+		/** @SuppressWarnings("unused") */
 		foreach ( new \RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
 
-			$class_path = $f_file->getPath() . "/" . $f_file->getFilename();
+			$class_path = sprintf( '%s/%s', $f_file->getPath(), basename( $f_filename ) );
 
 			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
-				/**
-				 * @noinspection PhpIncludeInspection
-				 */
-				require_once( $class_path );
+				/** @noinspection PhpIncludeInspection */
+				require_once $class_path;
 			}
 		}
 	}
@@ -362,12 +369,13 @@ if ( !function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 // The one--click update handler
 try {
 	spl_autoload_register( 'E20R\SingleUseTrial\e20r_auto_loader' );
-} catch( \Exception $exception ) {
-	error_log( "Unable to register autoloader: " . $exception->getMessage(),E_USER_ERROR );
+} catch ( \Exception $exception ) {
+	// phpcs:ignore
+	error_log( 'Unable to register autoloader: ' . $exception->getMessage(), E_USER_ERROR );
 	return false;
 }
 
 Utilities::configureUpdateServerV4(
-        "e20r-single-use-trial",
-        plugin_dir_path( __FILE__ ) . "e20r-single-use-trial.php"
+	'e20r-single-use-trial',
+	plugin_dir_path( __FILE__ ) . 'e20r-single-use-trial.php'
 );

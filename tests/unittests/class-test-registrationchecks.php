@@ -1,4 +1,20 @@
 <?php
+/*
+ * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 use E20R\SingleUseTrial as SUT;
 use PHPUnit\Framework\TestCase;
@@ -10,33 +26,33 @@ use E20R\Utilities\Utilities;
 
 class test_RegistrationChecks extends TestCase {
 	use MockeryPHPUnitIntegration;
-	
+
 	/**
 	 * @var Generator
 	 */
 	protected $faker;
-	
+
 	/**
 	 * @var Faker\Providers
 	 */
 	protected $wpFaker;
-	
+
 	/**
 	 * Test setUp
 	 */
 	public function setUp(): void {
 		parent::setUp();
 		Monkey\setUp();
-		
+
 		$this->faker = Brain\faker();
 		$this->wpFaker = $this->faker->wp();
-		
+
 		Brain\Monkey\Functions\when('plugin_dir_path')
 			->justReturn( __DIR__ . "/../../" );
-			
+
 		require_once __DIR__ . '/../../e20r-single-use-trial.php';
 	}
-	
+
 	/**
 	 * Test the registration check if user isn't logged in
 	 *
@@ -53,11 +69,11 @@ class test_RegistrationChecks extends TestCase {
 				'plugin_dir_path' => __DIR__ . "/../../"
 			]
 		);
-		
+
 		$result = SUT\e20r_registration_checks( $value );
 		self::assertEquals( $expected, $result );
 	}
-	
+
 	/**
 	 * Test the registration check when the user is logged in
 	 *
@@ -72,7 +88,7 @@ class test_RegistrationChecks extends TestCase {
 	 * @covers  E20R\SingleUseTrial\e20r_registration_checks
 	 */
 	public function test_registration_checks_logged_in( $default, $level_id, $user_id, $trial_is_used, $trial_levels, $expected ) {
-		
+
 		/**
 		 * Mock the WordPress apply_filters() function
 		 */
@@ -80,7 +96,7 @@ class test_RegistrationChecks extends TestCase {
             Monkey\Filters\expectApplied('e20r_set_single_use_trial_level_ids' )
                 ->with( array() )
                 ->andReturn( $trial_levels );
-                
+
             Monkey\Filters\expectApplied( 'e20r-licensing-text-domain' )
                 ->with( null )
 				->andReturn( 'e20r-single-use-trial' );
@@ -99,15 +115,15 @@ class test_RegistrationChecks extends TestCase {
 				'wp_get_current_user' => $this->wpFaker->user(array('ID' => $user_id ) ),
 				'__' => null,
 			]);
-		
-		
+
+
 		global $_REQUEST;
-		
-        $_REQUEST = $this->requestFixture( 'level', $level_id );        
+
+        $_REQUEST = $this->requestFixture( 'level', $level_id );
 		$result = SUT\e20r_registration_checks( $default );
 		self::assertEquals( $expected, $result );
 	}
-	
+
 	/**
 	 * Fixture generating a mock $_REQUEST (global) value
 	 *
@@ -119,7 +135,7 @@ class test_RegistrationChecks extends TestCase {
 	public function requestFixture( $key, $value ) {
 		return array( $key => $value );
 	}
-	
+
 	/**
 	 * Fixture for the registration check when a user isn't logged in
 	 *
@@ -131,7 +147,7 @@ class test_RegistrationChecks extends TestCase {
 			array( false, false ),
 		);
 	}
-	
+
 	/**
 	 * Fixture for the registration check when the user is logged in
 	 *
@@ -152,10 +168,10 @@ class test_RegistrationChecks extends TestCase {
 			array( true, 4, 1000, false, array(1, 2, 4), true ),
 			array( true, 5, 1000, true, array(1, 2, 4), true ),
 			array( true, 5, 1000, false, array(1, 2, 4), true ),
-		
+
 		);
 	}
-	
+
 	/**
 	 * Test tear-down function
 	 */

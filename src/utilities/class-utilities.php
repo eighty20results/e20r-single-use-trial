@@ -76,8 +76,8 @@ if ( ! class_exists( '\E20R\Utilities\Utilities' ) ) {
 		 */
 		private function __construct() {
 
-			self::$LIBRARY_URL  = plugins_url( null, __FILE__ );
-			self::$LIBRARY_PATH = plugin_dir_path( __FILE__ );
+			self::$LIBRARY_URL  = \plugins_url( null, __FILE__ );
+			self::$LIBRARY_PATH = \plugin_dir_path( __FILE__ );
 
 			if ( empty( self::$plugin_slug ) ) {
 				self::$plugin_slug = apply_filters( 'e20r-licensing-text-domain', null );
@@ -85,7 +85,7 @@ if ( ! class_exists( '\E20R\Utilities\Utilities' ) ) {
 
 			$this->log( 'Plugin Slug: ' . self::$plugin_slug );
 
-			$this->blog_id = get_current_blog_id();
+			$this->blog_id = \get_current_blog_id();
 
 			self::$cache_key = "e20r_pw_utils_{$this->blog_id}";
 			$messages        = new \E20R\Utilities\Message();
