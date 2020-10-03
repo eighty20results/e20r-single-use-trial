@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+.github
+artifacts/
+assets/
+bin/
+build/
+build_readmes/
+conf/
+docker-env/
+inc/
+composer.lock
+process.yml
+*.phar
