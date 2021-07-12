@@ -47,11 +47,9 @@ fabric.properties
 
 .idea/
 /build/
-/build_readmes/readme_changelog.txt
-/build_readmes/json_changelog.txt
 /docker-env/e20r-single-use-trial.sql
 .DS_Store
 /composer.lock
 /.phpunit.result.cache
+/composer.phar
 /inc/
-/process.yml
