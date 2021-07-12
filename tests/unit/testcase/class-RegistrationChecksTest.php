@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ * Copyright (c) 2016 - 2021. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace E20R\Tests\Unit\TestCase;
+
 use E20R\SingleUseTrial as SUT;
-use PHPUnit\Framework\TestCase;
+
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
 use Brain\Faker;
 use Faker\Generator;
-use E20R\Utilities\Utilities;
 
-class test_RegistrationChecks extends TestCase {
+class RegistrationCheckTests extends \Codeception\Test\Unit {
 	use MockeryPHPUnitIntegration;
 
 	/**
@@ -48,7 +49,7 @@ class test_RegistrationChecks extends TestCase {
 		$this->wpFaker = $this->faker->wp();
 
 		Brain\Monkey\Functions\when('plugin_dir_path')
-			->justReturn( __DIR__ . "/../../" );
+			->justReturn('/var/www/html/wp-content/plugins/e20r-single-use-trial/' );
 
 		require_once __DIR__ . '/../../e20r-single-use-trial.php';
 	}
@@ -66,7 +67,7 @@ class test_RegistrationChecks extends TestCase {
 	public function test_registration_checks_not_logged_in( $value, $expected ) {
 		Brain\Monkey\Functions\stubs( [
 				'is_user_logged_in' => false,
-				'plugin_dir_path' => __DIR__ . "/../../"
+				'plugin_dir_path' => '/var/www/html/wp-content/plugins/e20r-single-use-trial/'
 			]
 		);
 
@@ -110,7 +111,7 @@ class test_RegistrationChecks extends TestCase {
 				'get_current_blog_id' => 0,
 				'is_user_logged_in' => true,
 				'plugins_url' => "http://docker.local/wp-content/plugins/e20r-single-use-trial/",
-				'plugin_dir_path' => __DIR__ . "/../../",
+				'plugin_dir_path' => '/var/www/html/wp-content/plugins/e20r-single-use-trial/',
 				'get_user_meta' => $trial_is_used,
 				'wp_get_current_user' => $this->wpFaker->user(array('ID' => $user_id ) ),
 				'__' => null,

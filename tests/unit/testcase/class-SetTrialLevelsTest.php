@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ * Copyright (c) 2016 - 2021. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace E20R\Tests\Unit\TestCase;
 
 use E20R\SingleUseTrial as SUT;
 use PHPUnit\Framework\TestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
+use Brain\Monkey\Functions;
+use Brain\Monkey\Filters;
 
-class test_SetTrialLevels extends TestCase {
+class SetTrialLevelsTest extends \Codeception\Test\Unit {
 	use MockeryPHPUnitIntegration;
 
 	/**
@@ -31,8 +34,8 @@ class test_SetTrialLevels extends TestCase {
 		parent::setUp();
 		Monkey\setUp();
 
-		Brain\Monkey\Functions\when('plugin_dir_path')
-			->justReturn( __DIR__ . "/../../" );
+		Functions\when( 'plugin_dir_path' )
+			->justReturn( '/var/www/html/wp-content/plugins/e20r-single-use-trial/' );
 
 		require_once __DIR__ . '/../../e20r-single-use-trial.php';
 	}
@@ -54,13 +57,13 @@ class test_SetTrialLevels extends TestCase {
 	 *
 	 * @dataProvider createDataSpecificLevelsAreFree
 	 *
-	 * @covers E20R\SingleUseTrial\e20r_get_trial_levels
+	 * @covers SUT\e20r_get_trial_levels
 	 */
 	public function test_e20r_set_trial_levels_specific_levels_are_free($level_array, $expected, $count ) {
 		/**
 		 * Mocked the get_option WP function
 		 */
-		Monkey\Functions\when('get_option')
+		Functions\when('get_option')
 			->alias(function( $key, $default ) {
 				$settings = array();
 				if ($key != 'e20rsut_settings' ) {
@@ -77,7 +80,7 @@ class test_SetTrialLevels extends TestCase {
 				return $settings;
 			});
 
-		Monkey\Filters\doing('e20r_all_free_levels_are_single_use_trials' );
+		Filters\doing('e20r_all_free_levels_are_single_use_trials' );
 
 		$trial_levels = SUT\e20r_get_trial_levels($level_array);
 
@@ -97,7 +100,7 @@ class test_SetTrialLevels extends TestCase {
 	 *
 	 * @dataProvider createDataAllFreeAreSingleUse
 	 *
-	 * @covers E20R\SingleUseTrial\e20r_get_trial_levels
+	 * @covers SUT\e20r_get_trial_levels
 	 */
 	public function test_e20r_set_trial_levels_all_free_are_single_use($level_array, $expected, $count) {
 
@@ -111,12 +114,12 @@ class test_SetTrialLevels extends TestCase {
 		 */
 		try {
 			// TODO: Number of invocations should be added ->once()
-			Monkey\Filters\expectApplied( 'e20r_all_free_levels_are_single_use_trials' )
+			Filters\expectApplied( 'e20r_all_free_levels_are_single_use_trials' )
                 ->with( false )
                 ->andReturn( true );
 
 			// TODO: Number of invocations should be added ->once()
-            Monkey\Filters\expectApplied( 'e20r-licensing-text-domain' )
+            Filters\expectApplied( 'e20r-licensing-text-domain' )
                 ->with( null )
 				->andReturn( 'e20r-single-use-trial' );
 
@@ -126,7 +129,7 @@ class test_SetTrialLevels extends TestCase {
 		/**
 		 * Mocked the pmpro_getAllLevels PMPro function
 		 */
-		Monkey\Functions\when('pmpro_getAllLevels')
+		Functions\when('pmpro_getAllLevels')
 			->alias(function( $include_hidden, $force ) {
 				$levels = array();
 				$end_value = $include_hidden ? 5 : 4;
@@ -136,7 +139,7 @@ class test_SetTrialLevels extends TestCase {
 				return $levels;
 			});
 
-		Monkey\Functions\when('pmpro_isLevelFree' )
+		Functions\when('pmpro_isLevelFree' )
 			->alias(function( $level ) {
 					return $this->fixture_LevelIsFree( $level->id );
 				}
@@ -146,7 +149,7 @@ class test_SetTrialLevels extends TestCase {
 
 		if (count($trial_levels) > 0) {
 			foreach ( $expected as $exp_key => $exp_value ) {
-				self::assertTrue( in_array( $expected[ $exp_key ], $trial_levels ) );
+				self::assertTrue( in_array( $exp_value, $trial_levels ) );
 				self::assertCount( $count, $trial_levels );
 			}
 		} else {
@@ -203,7 +206,7 @@ class test_SetTrialLevels extends TestCase {
 	 *
 	 * @param int $level_id
 	 *
-	 * @return stdClass
+	 * @return \stdClass
 	 */
 	public function fixture_LevelInfo($level_id) {
 		$signup_choices = array(1, 0);

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ * Copyright (c) 2016 - 2021. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace E20R\Tests\Unit\TestCase;
+
 use E20R\SingleUseTrial as SUT;
-use PHPUnit\Framework\TestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
 use Brain\Faker;
 use Faker\Generator;
-use E20R\Utilities\Utilities;
 
-class test_OptionSave extends TestCase {
+class OptionSaveTest extends \Codeception\Test\Unit {
 	use MockeryPHPUnitIntegration;
 
 	/**
@@ -48,9 +48,17 @@ class test_OptionSave extends TestCase {
 		$this->wpFaker = $this->faker->wp();
 
 		Brain\Monkey\Functions\when( 'plugin_dir_path' )
-			->justReturn( __DIR__ . "/../../" );
+			->justReturn(__DIR__ . "/../e20r-single-use-trial/");
 
 		require_once __DIR__ . '/../../e20r-single-use-trial.php';
+	}
+
+	/**
+	 * Test tear-down function
+	 */
+	protected function tearDown(): void {
+		Monkey\tearDown();
+		parent::tearDown();
 	}
 
 	/**
@@ -67,8 +75,8 @@ class test_OptionSave extends TestCase {
 	public function test_e20r_save_single_use_trial( $options, $level_id, $expected ) {
 
 		$mock_list = array(
-			'plugin_dir_path' => __DIR__ . "/../../",
-			'plugins_url' => 'http://wordpress.local/wp-content/plugins/',
+			'plugin_dir_path' => '/var/www/html/wp-content/plugins/e20r-single-use-trial/',
+			'plugins_url' => 'http://localhost.local:7353/wp-content/plugins/',
 			'get_current_blog_id' => 0,
 			'is_email' => false,
 		);
@@ -105,7 +113,7 @@ class test_OptionSave extends TestCase {
 		}
 
 		// Set the "request" variable so it can be tested
-		$_REQUEST['e20r-single-use-trial'] = isset( $options[ $level_id ] ) ? $options[ $level_id ] : null;
+		$_REQUEST['e20r-single-use-trial'] = $options[$level_id] ?? null;
 		$result                            = SUT\e20r_save_single_use_trial( $level_id );
 
 		self::assertEquals( $expected, $result );
@@ -126,7 +134,7 @@ class test_OptionSave extends TestCase {
 	public function test_e20r_single_use_trial_settings( $level_id, $exists_status, $options, $checked_text ) {
 
 		$mock_list = array(
-			'plugin_dir_path' => __DIR__ . "/../../",
+			'plugin_dir_path' => __DIR__ . "/../e20r-single-use-trial/",
 			'get_option'      => $options,
 		);
 
@@ -222,13 +230,5 @@ class test_OptionSave extends TestCase {
 				array( $this->fixture_level_settings(), 0, false ) // Not a valid membership level ID
 			)
 		);
-	}
-
-	/**
-	 * Test tear-down function
-	 */
-	protected function tearDown(): void {
-		Monkey\tearDown();
-		parent::tearDown();
 	}
 }
