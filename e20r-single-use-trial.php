@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ * Copyright (c) 2016 - 2021. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,6 @@
 
 namespace E20R\SingleUseTrial;
 
-use E20R\SingleUseTrial\Views\Settings;
-use E20R\Utilities\Utilities;
 /*
 Plugin Name: E20R: Single Use Trial Subscription for Paid Memberships Pro
 Plugin URI: https://eighty20results.com/wordpress-plugin/e20r-single-use-trial/
@@ -46,6 +44,9 @@ License: GPLv2
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  **/
+
+use E20R\SingleUseTrial\Views\Settings;
+use E20R\Utilities\Utilities;
 
 /**
  * Configuration section on the Membership Levels page (in settings).
@@ -296,75 +297,110 @@ if ( ! function_exists( 'boolval' ) ) {
 
 if ( ! function_exists( 'E20R\SingleUseTrial\e20r_auto_loader' ) ) {
 	/**
-	 * Class auto-loader for the Enhanced Members List plugin
+	 * Auto-loader for the E20R Single Use Trial plugin
 	 *
 	 * @param string $class_name Name of the class to auto-load
 	 *
-	 * @return bool
 	 * @since  1.0
 	 * @access public static
 	 */
 	function e20r_auto_loader( $class_name ) {
 
 		if ( false === stripos( $class_name, 'e20r' ) ) {
-			return false;
+			return;
 		}
 
-		$parts     = explode( '\\', $class_name );
-		$c_name    = preg_replace( '/_/', '-', $parts[ ( count( $parts ) - 1 ) ] );
-		$c_name    = strtolower( $c_name );
-		$base_path = plugin_dir_path( __FILE__ ) . 'classes/';
-		$src_path  = plugin_dir_path( __FILE__ ) . 'src/';
+		$parts      = explode( '\\', $class_name );
+		$c_name     = strtolower( preg_replace( '/_/', '-', $parts[ ( count( $parts ) - 1 ) ] ) );
+		$base_paths = array();
 
-		if ( file_exists( $src_path ) ) {
-			$base_path = $src_path;
+		if ( file_exists( plugin_dir_path( __FILE__ ) . 'src/' ) ) {
+			$base_paths[] = plugin_dir_path( __FILE__ ) . 'src/';
+		}
+
+		if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/' ) ) {
+			$base_paths[] = plugin_dir_path( __FILE__ ) . 'classes/';
+		}
+
+		if ( file_exists( plugin_dir_path( __FILE__ ) . 'class/' ) ) {
+			$base_paths[] = plugin_dir_path( __FILE__ ) . 'class/';
+		}
+
+		if ( file_exists( plugin_dir_path( __FILE__ ) . 'blocks/' ) ) {
+			$base_paths[] = plugin_dir_path( __FILE__ ) . 'blocks/';
 		}
 
 		$filename = "class-{$c_name}.php";
 
-		$iterator = new \RecursiveDirectoryIterator(
-			$base_path,
-			\RecursiveDirectoryIterator::SKIP_DOTS |
-			\RecursiveIteratorIterator::SELF_FIRST |
-			\RecursiveIteratorIterator::CATCH_GET_CHILD |
-			\RecursiveDirectoryIterator::FOLLOW_SYMLINKS
-		);
+		foreach ( $base_paths as $base_path ) {
 
-		// Locate class member files, recursively
-		$filter = new \RecursiveCallbackFilterIterator(
-			$iterator,
-			/** @SuppressWarnings("unused") */
-			function( $current, $key, $iterator ) use ( $filename ) {
-				$file_name = $current->getFilename();
-
-				// Skip hidden files and directories.
-				if ( '.' === $file_name[0] || '..' === $file_name ) {
-					return false;
-				}
-
-				if ( $current->isDir() ) {
-					// Only recurse into intended subdirectories.
-					return $file_name() === $filename;
-				} else {
-					// Only consume files of interest.
-					return strpos( $file_name, $filename ) === 0;
-				}
+			try {
+				$iterator = new \RecursiveDirectoryIterator(
+					$base_path,
+					\RecursiveDirectoryIterator::SKIP_DOTS |
+					\RecursiveIteratorIterator::SELF_FIRST |
+					\RecursiveIteratorIterator::CATCH_GET_CHILD |
+					\RecursiveDirectoryIterator::FOLLOW_SYMLINKS
+				);
+			} catch ( \Exception $e ) {
+				print 'Error: ' . $e->getMessage(); // phpcs:ignore
+				return;
 			}
-		);
 
-		/** @SuppressWarnings("unused") */
-		foreach ( new \RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
+			try {
+				$filter = new \RecursiveCallbackFilterIterator(
+					$iterator,
+					function ( $current, $key, $iterator ) use ( $filename ) {
 
-			$class_path = sprintf( '%s/%s', $f_file->getPath(), basename( $f_filename ) );
+						// Skip hidden files and directories.
+						if ( '.' === $current->getFilename()[0] || '..' === $current->getFilename() ) {
+							return false;
+						}
 
-			if ( $f_file->isFile() && false !== strpos( $class_path, $filename ) ) {
-				/** @noinspection PhpIncludeInspection */
-				require_once $class_path;
+						if ( $current->isDir() ) {
+							// Only recurse into intended subdirectories.
+							return $current->getFilename() === $filename;
+						} else {
+							// Only consume files of interest.
+							return str_starts_with( $current->getFilename(), $filename );
+						}
+					}
+				);
+			} catch ( \Exception $e ) {
+				echo 'Autoloader error: ' . $e->getMessage(); // phpcs:ignore
+				return;
+			}
+
+			foreach ( new \RecursiveIteratorIterator( $iterator ) as $f_filename => $f_file ) {
+
+				$class_path = $f_file->getPath() . '/' . $f_file->getFilename();
+
+				if ( $f_file->isFile() && false !== stripos( $class_path, $filename ) ) {
+
+					require_once $class_path;
+				}
 			}
 		}
 	}
 }
 
+/**
+ * Load the required E20R Utilities Module functionality
+ */
+require_once plugin_dir_path( __FILE__ ) . "class-activateutilitiesplugin.php";
+
+if ( false === apply_filters( 'e20r_utilities_module_installed', false ) ) {
+
+	$required_plugin = "E20R: Single Use Trial Subscription for Paid Memberships Pro";
+
+	if ( false === \E20R\Utilities\ActivateUtilitiesPlugin::attempt_activation() ) {
+		add_action( 'admin_notices', function () use ( $required_plugin ) {
+			\E20R\Utilities\ActivateUtilitiesPlugin::plugin_not_installed( $required_plugin );
+		} );
+
+		return false;
+	}
+}
 
 // The one--click update handler
 try {
@@ -375,7 +411,9 @@ try {
 	return false;
 }
 
-Utilities::configureUpdateServerV4(
-	'e20r-single-use-trial',
-	plugin_dir_path( __FILE__ ) . 'e20r-single-use-trial.php'
-);
+if ( class_exists( 'E20R\Utilities\Utilities' ) ) {
+	Utilities::configure_update(
+		'e20r-single-use-trial',
+		plugin_dir_path(__FILE__) . 'e20r-single-use-trial.php'
+	);
+}
