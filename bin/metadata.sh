@@ -1,35 +1,35 @@
 #!/usr/bin/env bash
-short_name="${1}"
+short_name="${E20R_PLUGIN_NAME}"
 server="eighty20results.com"
 sed="$(which sed)"
 wordpress_version=$(wget -q -O - http://api.wordpress.org/core/stable-check/1.0/  | grep latest | awk '{ print $1 }' | sed -e 's/"//g')
-version=$(grep -E "^Version:" ./"${short_name}.php" | sed 's/[[:alpha:]|(|[:space:]|\:]//g' | awk -F- '{printf "%s", $1}')
+version=$(./bin/get_plugin_version.sh "loader")
 today=$(date +%Y-%m-%d)
 url_info="https:\/\/${server}\/protected-content\/${short_name}\/${short_name}"
 url_with_version="${url_info}-${version}\.zip"
 metadata_template=$(cat <<- __EOF__
 {
-  "name": "Eighty/20 Results - Single Use Trial Memberships for Paid Memberships Pro",
-  "slug": "e20r-single-use-trial",
-  "download_url": "https://${server}/protected-content/${short_name}/${short_name}-${version}.zip",
+  "name": "Eighty/20 Results Utilities Module",
+  "slug": "${short_name}",
+  "download_url": "${url_with_version}",
   "version": "1.0",
   "tested": "1.0",
   "requires": "5.0",
   "author": "Thomas Sjolshagen <thomas@eighty20results.com>",
   "author_homepage": "https://eighty20results.com/thomas-sjolshagen",
   "last_updated": "2021-02-14 12:45:00 CET",
-  "homepage": "https://eighty20results.com/wordpress-plugins/paid-memberships-pro/${short_name}/",
+  "homepage": "https://eighty20results.com/wordpress-plugins/${short_name}/",
   "sections": {
-    "description": "Only allow a Paid Memberships Pro member to sign up for a trial membership level once.",
+    "description": "Adds various utility functions and license capabilities needed by some Eighty/20 Results developed plugins",
     "changelog": "See the linked <a href=\"CHANGELOG.md\" target=\"_blank\">Change Log</a> for details",
-    "faq": "<h3>I found a bug in the plugin.</h3><p>Please report your issue to us by using the <a href='https://github.com/eighty20results/e20r-single-use-trial/issues' target='_blank'>Github Issues page</a>, and we'll try to respond within 1 business day.</p>"
+    "faq": "<h3>I found a bug in the plugin.</h3><p>Please report your issue to us by using the <a href='https://github.com/eighty20results/Utilities/issues' target='_blank'>Github Issues page</a>, and we'll try to respond within 1 business day.</p>"
     }
 }
 __EOF__
 )
 
 if [[ ! -f ./metadata.json ]]; then
-	echo "${metadata_template}" > ./metadata.json
+	cat <<< "${metadata_template}" > ./metadata.json
 fi
 
 ###########
