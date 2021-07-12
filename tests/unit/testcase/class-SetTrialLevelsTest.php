@@ -37,7 +37,7 @@ class SetTrialLevelsTest extends \Codeception\Test\Unit {
 		Functions\when( 'plugin_dir_path' )
 			->justReturn( '/var/www/html/wp-content/plugins/e20r-single-use-trial/' );
 
-		require_once __DIR__ . '/../../e20r-single-use-trial.php';
+		require_once __DIR__ . '/../../../e20r-single-use-trial.php';
 	}
 
 	/**

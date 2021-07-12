@@ -21,6 +21,8 @@ namespace E20R\Tests\Unit\TestCase;
 use E20R\SingleUseTrial as SUT;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
+use Brain\Monkey\Functions;
+use Brain\Monkey\Filters;
 use Brain\Faker;
 use Faker\Generator;
 
@@ -47,10 +49,10 @@ class OptionSaveTest extends \Codeception\Test\Unit {
 		$this->faker   = Brain\faker();
 		$this->wpFaker = $this->faker->wp();
 
-		Brain\Monkey\Functions\when( 'plugin_dir_path' )
-			->justReturn(__DIR__ . "/../e20r-single-use-trial/");
+		Functions\when( 'plugin_dir_path' )
+			->justReturn( '/var/www/html/wp-content/plugins/e20r-single-use-trial' );
 
-		require_once __DIR__ . '/../../e20r-single-use-trial.php';
+		require_once __DIR__ . '/../../../e20r-single-use-trial.php';
 	}
 
 	/**
@@ -70,7 +72,7 @@ class OptionSaveTest extends \Codeception\Test\Unit {
 	 *
 	 * @dataProvider fixture_save_options
 	 *
-	 * @covers       E20R\SingleUseTrial\e20r_save_single_use_trial
+	 * @covers       SUT\e20r_save_single_use_trial
 	 */
 	public function test_e20r_save_single_use_trial( $options, $level_id, $expected ) {
 
@@ -81,13 +83,13 @@ class OptionSaveTest extends \Codeception\Test\Unit {
 			'is_email' => false,
 		);
 
-		Brain\Monkey\Functions\stubs( $mock_list );
+		Functions\stubs( $mock_list );
 
 		// get_option is called with the specific option(s) for this plugin
 		try {
-			Brain\Monkey\Functions\expect( 'get_option' )
+			Functions\expect( 'get_option' )
 				// with specified arguments, like get_option( 'plugin-settings', false );
-				->with( Mockery::type('string'), Mockery::type('mixed') )
+				->with( \Mockery::type('string'), \Mockery::type('mixed') )
 				->atLeast()
 				->once()
 				->andReturnUsing( function( $settings ) use ($options) {
@@ -100,9 +102,9 @@ class OptionSaveTest extends \Codeception\Test\Unit {
 
 		// update_option is called with the specific option(s) for this plugin
 		try {
-			Brain\Monkey\Functions\expect( 'update_option' )
+			Functions\expect( 'update_option' )
 				->zeroOrMoreTimes()
-				->with( Mockery::type('string'), Mockery::type('array' ), Mockery::type('string' ) )
+				->with( \Mockery::type('string'), \Mockery::type('array' ), \Mockery::type('string' ) )
 				->andReturnUsing( function( $option_name, $settings, $to_echo ) {
 					return 'e20rsut_settings' === $option_name;
 				} );
@@ -129,7 +131,7 @@ class OptionSaveTest extends \Codeception\Test\Unit {
 	 *
 	 * @dataProvider fixture_show_settings
 	 *
-	 * @covers       E20R\SingleUseTrial\e20r_single_use_trial_settings
+	 * @covers       SUT\e20r_single_use_trial_settings
 	 */
 	public function test_e20r_single_use_trial_settings( $level_id, $exists_status, $options, $checked_text ) {
 
@@ -146,26 +148,26 @@ class OptionSaveTest extends \Codeception\Test\Unit {
 			$mock_list['pmpro_getLevel'] = $exists_status;
 		}
 
-		Brain\Monkey\Functions\stubs( $mock_list );
+		Functions\stubs( $mock_list );
 
 		try {
-			Brain\Monkey\Functions\expect( '__' )
+			Functions\expect( '__' )
 				->zeroOrMoreTimes()
 				->andReturnFirstArg();
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			print( "Error while processing __(): {$e->getMessage()}" );
 			self::assertFalse( true );
 		}
 
 		try {
-			Brain\Monkey\Functions\expect( 'checked' )
+			Functions\expect( 'checked' )
 				->atLeast()
 				->once()
 				->andReturnUsing( function ( $request, $current, $echo ) {
 					return $request === $current ? 'checked="checked"' : '';
 				} );
 
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			print( "Error while processing checked(): {$e->getMessage()}" );
 			self::assertFalse( true );
 		}
