@@ -1,17 +1,14 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
 
 ---
 
 **Describe the bug**
-Please provide a clear and concise description of what the problem/bug is.
+Please answer 3 basic questions: What were you trying to do when the bug/issue happened? What did you expect to happen when you did that? What actually _did_ happen instead?
 
 **To Reproduce**
-Describe the steps needed in order to reproduce the faulty behavior:
+Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
