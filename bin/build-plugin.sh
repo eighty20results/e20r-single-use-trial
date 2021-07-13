@@ -4,8 +4,8 @@
 #
 # Copyright 2014 - 2021 (c) Eighty / 20 Results by Wicked Strong Chicks, LLC
 #
-short_name="${1}"
-remote_server="eighty20results.com"
+short_name="${E20R_PLUGIN_NAME}"
+remote_server="${2}"
 declare -a include=( \
 	"docs" \
 	"inc" \
@@ -35,18 +35,15 @@ declare -a exclude=( \
 	"vendor" \
 	)
 declare -a build=()
+src_path="$(pwd)"
 plugin_path="${short_name}"
 version=$(./bin/get_plugin_version.sh "loader")
-metadata="../metadata.json"
-src_path="$(pwd)/"
-dst_path="./build/${plugin_path}"
-kit_path="./kits"
+dst_path="${src_path}/build/${plugin_path}"
+kit_path="${src_path}/build/kits"
 kit_name="${kit_path}/${short_name}-${version}.zip"
+metadata="${src_path}/metadata.json"
 remote_path="./www/eighty20results.com/public_html/protected-content/"
 echo "Building ${short_name} kit for version ${version}"
-
-mkdir -p "${kit_path}"
-mkdir -p "${dst_path}"
 
 if [[ -f "${kit_name}" ]]
 then
@@ -55,16 +52,19 @@ then
     rm -f "${kit_name}"
 fi
 
+mkdir -p "${kit_path}"
+mkdir -p "${dst_path}"
+
 for p in "${include[@]}"; do
-  echo "Processing ${src_path}${p}"
-  if ls "${src_path}${p}" > /dev/null 2>&1; then
-    echo "Copying ${src_path}${p} to ${dst_path}"
-	  cp -R "${src_path}${p}" "${dst_path}"
+  echo "Processing ${src_path}/${p}"
+  if ls "${src_path}/${p}" > /dev/null 2>&1; then
+    echo "Copying ${src_path}/${p} to ${dst_path}"
+	  cp -R "${src_path}/${p}" "${dst_path}"
   fi
 done
 
 for e in "${exclude[@]}"; do
-  if ls "${src_path}${e}" 1> /dev/null 2>&1; then
+  if ls "${src_path}/${e}" 1> /dev/null 2>&1; then
   	if [[ "${e}" =~ '/' ]]; then
 			e=$(awk -F/ '{ print $NF }' <<< "${e}")
 		fi
@@ -74,8 +74,8 @@ for e in "${exclude[@]}"; do
 done
 
 for b in "${build[@]}"; do
-  if ls "${src_path}${b}" 1> /dev/null 2>&1; then
-      cp -R "${src_path}${b}" "${dst_path}"
+  if ls "${src_path}/${b}" 1> /dev/null 2>&1; then
+      cp -R "${src_path}/${b}" "${dst_path}"
   fi
 done
 
