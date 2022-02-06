@@ -17,16 +17,26 @@ extensions:
     - Codeception\Command\GenerateWPCanonical
     - Codeception\Command\GenerateWPXMLRPC
 params:
-  - tests/_envs/.env.testing
+    - ./tests/_envs/.env.testing
+bootstrap: _bootstrap.php
 settings:
   lint: true
   colors: true
+  memory_limit: 1024M
 coverage:
   enabled: true
-  show_only_summary: true
+  colors: true
+  remote_context_options:
+    http:
+      timeout: 60
+    ssl:
+      verify_peer: false
+  low_limit: 16
   include:
-    - src/*
-    - "*.php"
+    - ./inc/wp_plugins/00-e20r-utilities/*
+    - ./src/E20R/*
+    - ./e20r-single-use-trial.php
   exclude:
-    - tests/*
     - inc/*
+    - languages/*
+    - tests/*

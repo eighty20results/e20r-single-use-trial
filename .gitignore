@@ -4,26 +4,29 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
+.idea/**/workspace.xml
+.idea/**/tasks.xml
 .idea/dictionaries
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
 
 # Sensitive or high-churn files:
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/dataSources.local.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
 
 # Gradle:
-.idea/gradle.xml
-.idea/libraries
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# CMake
+cmake-build-debug/
+cmake-build-release/
 
 # Mongo Explorer plugin:
-.idea/mongoSettings.xml
+.idea/**/mongoSettings.xml
 
 ## File-based project format:
 *.iws
@@ -31,13 +34,16 @@
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
+out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -46,10 +52,35 @@ crashlytics-build.properties
 fabric.properties
 
 .idea/
-/build/
-/docker-env/e20r-single-use-trial.sql
-.DS_Store
-/composer.lock
-/.phpunit.result.cache
+.idea/codeStyles/
+.idea/copyright/
+.idea/deployment.xml
+.idea/e20r-single-use-trial.iml
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/php.xml
+.idea/sqldialects.xml
+.idea/vcs.xml
+/build_readmes/readme_changelog.txt
+/build_readmes/json_changelog.txt
+/build_readmes/
+!/build_readmes/skel/CHANGELOG.md
+!/build_readmes/skel/metadata.json
+!/build_readmes/skel/README.txt
+docker-env/e20r-single-use-trial.sql
+/.circleci/docker/test/db_backup/e20r-single-use-trial.sql
+/composer
 /composer.phar
+/composer.lock
+/build/e20r-single-use-trial
+/docker.hub.key
+/workflow/
+/_actions/
 /inc/
+build/
+!build/kits/.gitignore
+!build/kits/.gitkeep
+/.phpunit.result.cache
+/github/

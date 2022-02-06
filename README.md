@@ -38,7 +38,7 @@
 <br />
 <div align="center">
   <a href="https://eighty20results.com/product/single-use-trial-membership-for-paid-memberships-pro/">
-    <img src="./assets/e20r-single-use-trial.png" alt="Logo" width="80" height="80">
+    <img src=".wordpress-org/e20r-single-use-trial.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">E20R Single Use Trial Membership Settings</h3>
@@ -193,4 +193,4 @@ Project Link: [https://github.com/eighty20results/e20r-single-use-trial](https:/
 [license-url]: https://github.com/eighty20results/e20r-single-use-trial/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/thomassjolshagen
-[product-screenshot]: assets/e20r-single-use-trial-screenshot.png
+[product-screenshot]: .wordpress-org/e20r-single-use-trial-screenshot.png

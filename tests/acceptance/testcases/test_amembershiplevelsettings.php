@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 - 2020. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ * Copyright (c) 2016 - 2022. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,10 +20,47 @@ namespace acceptance;
 
 use Codeception\Actor as Actor;
 
-class Test_APluginManagement extends Actor {
+
+class Test_AMembershipLevelSettings extends Actor {
 
 	// DO NOT ever remove this line!
 	use _generated\AcceptanceTesterActions;
 
 	private $i = null;
+
+	/**
+	 *
+	 * @param $scenario
+	 */
+	public function __construct( $scenario ) {
+		self::$i = new AcceptanceTester( $scenario );
+	}
+
+	/**
+	 * Test scenario:
+	 *
+	 * Test description:
+	 */
+	public function activatePlugin() {
+
+	}
+
+	/**
+	 * Test scenario:
+	 *
+	 * Test description:
+	 */
+	public function settingsAreOnLevelsPage() {
+
+	}
+
+	/**
+	 * Test scenario:
+	 *
+	 * Test description:
+	 */
+	public function deactivatePlugin() {
+
+	}
+
 }
