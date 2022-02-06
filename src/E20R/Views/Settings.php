@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 - 2021. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
+ * Copyright (c) 2016 - 2022. - Eighty / 20 Results by Wicked Strong Chicks <thomas@eighty20results.com>. ALL RIGHTS RESERVED
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,10 +31,8 @@ class Settings {
 	 *
 	 * @return string
 	 */
-	public static function membership_level($level_settings, $level_id)
-	{
-		$level_html = "";
-		$level_html .= sprintf("\t<h3 class='topborder'>%s</h3>\n", \__("Single Use Trial Settings", "e20r-single-use-trial"));
+	public static function membership_level($level_settings, $level_id) {
+		$level_html = sprintf( "\t<h3 class='topborder'>%s</h3>\n", \__( "Single Use Trial Settings", "e20r-single-use-trial" ) );
 		$level_html .= sprintf("\t<p class='e20r-description'>\n");
 		$level_html .= sprintf("\t\t<p class='e20r-description'>\n");
 		$level_html .= sprintf("\t\t\t%s\n</p>\n", \__(
