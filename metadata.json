@@ -1,17 +1,17 @@
 {
-  "name" : "Eighty/20 Results - Single Use Trial Memberships for Paid Memberships Pro",
-  "slug" : "e20r-single-use-trial",
-  "download_url" : "https://eighty20results.com/protected-content/e20r-single-use-trial/e20r-single-use-trial-2.3.zip",
-  "version" : "3.0",
-  "tested" : "5.5",
-  "requires" : "5.0",
-  "author" : "Thomas Sjolshagen <thomas@eighty20results.com>",
-  "author_homepage" : "https://eighty20results.com/thomas-sjolshagen",
-  "last_updated" : "2020-08-31 16:00:00 MST",
-  "homepage" : "https://eighty20results.com/product/single-use-trial-membership-for-paid-memberships-pro/",
-  "sections" : {
-    "description" : "Limit a user from signing up to a trial membership level more than once when using Paid Memberships Pro.",
-    "changelog" : "See the linked <a href='CHANGELOG.md' target='_blank'>Change Log</a> for details",
-    "faq" : "<h3>I found a bug in the plugin.</h3>Please report your issue to us by using the <a href='https://github.com/eighty20results/e20r-single-use-trial/issues' target='_blank'>GitHub Issues page</a> and we'll try to respond as quickly as possible to your inquiry."
+  "name": "E20R: Single Use Trial Subscription for Paid Memberships Pro",
+  "slug": "e20r-single-use-trial",
+  "download_url": "https://eighty20results.com/protected-content/e20r-single-use-trial/e20r-single-use-trial-.zip",
+  "version": "",
+  "tested": "5.9",
+  "requires": "5.0",
+  "author": "Thomas Sjolshagen <thomas@eighty20results.com>",
+  "author_homepage": "https://eighty20results.com/thomas-sjolshagen",
+  "last_updated": "2022-02-07 08:05:10 CET",
+  "homepage": "https://eighty20results.com/plugins/e20r-single-use-trial/",
+  "sections": {
+    "description": "Allow a member to sign up once for the specified trial membership level",
+    "changelog": "See the linked <a href='CHANGELOG.md' target='_blank'>Change Log</a> for details",
+    "faq": "<h3>I found a bug in the plugin.</h3><p>Please report your issue to us by using the <a href='https://github.com/eighty20results/e20r-single-use-trial//issues' target='_blank'>Github Issues page</a>, and we'll try to respond within 1 business day.</p>"
     }
 }
