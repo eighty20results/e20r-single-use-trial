@@ -18,242 +18,237 @@
 
 namespace E20R\SingleUseTrial;
 
-use E20R\SingleUseTrial\Views\Settings;
 use E20R\Utilities\Utilities;
+use E20R\Utilities\Message;
+use E20R\Utilities\ActivateUtilitiesPlugin;
+use E20R\SingleUseTrial\Views\Settings_View;
 
-/**
- * Configuration section on the Membership Levels page (in settings).
- *
- * @return string|null
- *
- * @uses $_REQUEST['edit']
- */
-function e20r_single_use_trial_settings() {
+require_once __DIR__ . '/inc/autoload.php';
 
-	$utils          = Utilities::get_instance();
-	$level_id       = $utils->get_variable( 'edit', null );
-	$level_settings = \get_option( 'e20rsut_settings', false );
-	$html           = Settings::membership_level( $level_settings, $level_id );
-
-	if ( isset( $_SERVER['REQUEST_METHOD'] ) ) {
-		echo $html; // phpcs:ignore
-		return null;
-	}
-
-	return $html;
+if ( ! defined( 'ABSPATH' ) && ! defined( 'PLUGIN_PHPUNIT' ) ) {
+	die( 'WordPress not loaded. Naughty, naughty!' );
 }
 
-\add_action(
-	'pmpro_membership_level_after_other_settings',
-	'E20R\SingleUseTrial\e20r_single_use_trial_settings'
-);
-
-/**
- * Save settings for a given membership level.
- *
- * @param int $level_id ID of level being saved
- *
- * @return bool
- */
-function e20r_save_single_use_trial( $level_id = 0 ) {
-
-	$utils   = Utilities::get_instance();
-	$options = get_option( 'e20rsut_settings', false );
-
-	// Make sure we have a valid Level ID number to process
-	if ( 0 === $level_id ) {
-		return false;
-	}
-
-	// Get the setting value from the $_REQUEST array
-	$setting = (bool) $utils->get_variable( 'e20r-single-use-trial', false );
-
-	// If the options are empty or not an array, create one (array)
-	if ( false === $options || ! is_array( $options ) ) {
-		$options = array();
-	}
-
-	// Set the single-use trial setting for the specific level ID
-	$options[ $level_id ] = $setting;
-
-	// Save the settings
-	return update_option( 'e20rsut_settings', $options, 'no' );
+if ( ! defined( 'E20R_SINGLE_USE_TRIAL_VER' ) ) {
+	define( 'E20R_SINGLE_USE_TRIAL_VER', '3.0' );
 }
 
-add_action( 'pmpro_save_membership_level', 'E20R\SingleUseTrial\e20r_save_single_use_trial' );
+if ( ! class_exists( 'E20R\SingleUseTrial\SingleUseTrial' ) ) {
+	/**
+	 * The primary Single Use Trial Membership class
+	 */
+	class SingleUseTrial {
 
-/**
- * Grab levels that are counted as "single-use trial membership levels"
- *
- * @param array $level_array Array of level IDs (one or more).
- *
- * @return int[]             Array of level ID(s).
- *
- */
+		/**
+		 * Instance of the Utilities class
+		 *
+		 * @var null
+		 */
+		private $utils = null;
 
-function e20r_get_trial_levels( $level_array ) {
+		/**
+		 * Settings for the SingeUseTrial\Main class
+		 *
+		 * @var Settings|null
+		 */
+		private $settings = null;
 
-	if ( function_exists( 'pmpro_isLevelFree' ) &&
-		true === apply_filters( 'e20r_all_free_levels_are_single_use_trials', false ) ) {
+		/**
+		 * The class instance for the Settings View
+		 *
+		 * @var Settings_View|null $settings_view
+		 */
+		private $settings_view = null;
 
-		$all_levels = pmpro_getAllLevels( true, true );
+		/**
+		 * The suspected IP address for the client computer (connected computer).
+		 * NOTE: This is often wrong, so we do not include this in the checks by default
+		 *
+		 * @var null|string $client_ip
+		 */
+		private $client_ip = null;
 
-		// Add all free levels (trials?) to the filter array
-		foreach ( $all_levels as $level ) {
-			$level_array = e20r_update_trial_levels( $level_array, $level );
+		/**
+		 *  Configuration section on the Membership Levels page (in settings).
+		 *
+		 * @param Settings|null      $settings      Instance of the Settings class
+		 * @param Settings_View|null $settings_view Instance of the Settings_View() class
+		 * @param Utilities|null     $utils         Instance of the Utilities class
+		 * @param false|int[]        $options       The configured options
+		 *
+		 * @uses $_REQUEST['edit']
+		 */
+		public function __construct( $settings = null, $settings_view = null, $utils = null, $options = false ) {
+
+			if ( empty( $utils ) ) {
+				$message = new Message();
+				$utils   = new Utilities( $message );
+			}
+
+			$this->utils = $utils;
+
+			if ( empty( $settings_view ) ) {
+				$settings_view = new Settings_View( $this->utils );
+			}
+
+			$this->settings_view = $settings_view;
+
+			if ( empty( $settings ) ) {
+				$settings = new Settings( $this->settings_view, $this->utils, $options );
+			}
+
+			$this->settings = $settings;
 		}
-	} else {
 
-		$settings = get_option( 'e20rsut_settings', false );
-		foreach ( $settings as $level_id => $is_sut ) {
-			if ( false !== $is_sut && ! in_array( $level_id, $level_array, true ) ) {
-				$level_array[] = $level_id;
+		/**
+		 * Load the action and filter handlers used by this plugin
+		 *
+		 * @return void
+		 */
+		public function load_hooks() {
+
+			// Don't do anything unless PMPro is loaded
+			if ( ! function_exists( 'pmpro_isLevelFree' ) ) {
+				$this->utils->add_message(
+					esc_attr__( 'Please install and/or activate the Paid Memberships Pro plugin!', 'e20r-single-use-trial' ),
+					'error',
+					'backend'
+				);
+				return;
+			}
+
+			// Load action hooks
+			add_action( 'init', array( $this, 'load_text_domain' ), 1 );
+
+			add_action(
+				'pmpro_membership_level_after_other_settings',
+				array( $this->settings, 'load_view' ),
+				10
+			);
+			add_action(
+				'pmpro_save_membership_level',
+				array( $this->settings, 'save' ),
+				99
+			);
+			add_action(
+				'pmpro_after_change_membership_level',
+				array( $this, 'after_change_membership_level' ),
+				10,
+				2
+			);
+
+			// Load filter hooks
+			add_filter(
+				'e20r_set_single_use_trial_level_ids',
+				array( $this->settings, 'get_trial_levels' ),
+				1,
+				1
+			);
+
+			add_filter(
+				'pmpro_registration_checks',
+				array( $this, 'pmpro_registration_checks' ),
+				99999
+			);
+		}
+
+		/**
+		 * During checkout (for renewals), verify if the user has consumed their trial already.
+		 *
+		 * @param bool $value The current registration check value as we process the filter(s)
+		 *
+		 * @return bool
+		 */
+		public function pmpro_registration_checks( $value ) {
+
+			// Skip if we're not logged in - so not a renewal
+			if ( function_exists( 'is_user_logged_in' ) && false === \is_user_logged_in() ) {
+				return $value;
+			}
+
+			/** List of levels with trial policy set */
+			$trial_levels = apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
+			$use_ip_addr  = apply_filters( 'e20r_set_single_use_trial_use_ip', false );
+			$level_id     = $this->utils->get_variable( 'level', null );
+			$user         = \wp_get_current_user();
+			$set_warning  = false;
+
+			if ( isset( $user->ID ) && true === $use_ip_addr ) {
+				$user_ip      = $this->utils->get_client_ip();
+				$user_ip_list = get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_ip_addrs", array() );
+				$set_warning  = in_array( $user_ip, $user_ip_list, true );
+			}
+
+			if ( isset( $user->ID ) && in_array( $level_id, $trial_levels, true ) ) {
+				// Does the currently logged-in user have a trial level they've used
+				$set_warning = \get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_used", true );
+			}
+
+			if ( true === $set_warning ) {
+				$msg = \esc_attr__(
+					'You have already used your trial membership. Please select a different membership to checkout.',
+					'e20r-single-use-trial'
+				);
+				pmpro_setMessage( $msg, 'error' );
+				$value = false;
+			}
+
+			return $value;
+		}
+
+		/**
+		 * Record that a user checked out for a trial membership
+		 *
+		 * @param int $level_id The PMPro Membership Level ID
+		 * @param int $user_id  The WordPress User's ID
+		 */
+		public function after_change_membership_level( $level_id, $user_id ) {
+
+			// Level(s) where we limit sign-up to one for a given user ID
+			$trial_levels = apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
+
+			if ( in_array( $level_id, $trial_levels, true ) ) {
+				// Usermeta is used to record the user's previous trial (free) membership level(s)
+				update_user_meta( $user_id, "e20r_trial_level_{$level_id}_used", true );
 			}
 		}
-	}
 
-	return $level_array;
-}
+		/**
+		 * Load translation (I18N) file(s) if applicable
+		 */
+		public function load_text_domain() {
 
-add_filter(
-	'e20r_set_single_use_trial_level_ids',
-	'E20R\SingleUseTrial\e20r_get_trial_levels',
-	1,
-	1
-);
+			$locale  = apply_filters( 'plugin_locale', get_locale(), 'e20r-single-use-trial' );
+			$mo_file = "e20r-single-use-trial-{$locale}.mo";
 
-/**
- * Update the list of membership level IDs that should be trial level(s)
- *
- * @param array $level_array
- * @param \stdClass $level
- *
- * @return int[]
- */
-function e20r_update_trial_levels( $level_array, $level ) {
+			// Path(s) to local and global (WP).
+			$mo_file_local  = dirname( __FILE__ ) . "/languages/{$mo_file}";
+			$mo_file_global = WP_LANG_DIR . "/e20r-single-use-trial/{$mo_file}";
 
-	// If the level is free _and_ not in the list already
-	if ( true === pmpro_isLevelFree( $level ) &&
-		! in_array( $level->id, $level_array, true )
-	) {
-		$level_array[] = $level->id;
-		// Don't allow the inclusion of levels that aren't free
-		// And has to exist in the list obviously...
-	} elseif ( false === pmpro_isLevelFree( $level ) &&
-		false !== ( $l_key = array_search( $level->id, $level_array, true ) ) ) { // phpcs:ignore
-		unset( $level_array[ $l_key ] );
-	}
+			// Start with the global file.
+			if ( file_exists( $mo_file_global ) ) {
 
-	return $level_array;
-}
+				load_textdomain(
+					'e20r-single-use-trial',
+					$mo_file_global
+				);
+			}
 
-/**
- * Record that a user checked out for a trial membership
- *
- * @param int $level_id
- * @param int $user_id
- */
-function e20r_after_change_membership_level( $level_id, $user_id ) {
-
-	// Level(s) where we limit sign-up to one for a given user ID
-	$trial_levels = apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
-
-	if ( in_array( $level_id, $trial_levels, true ) ) {
-		// Usermeta is used to record the user's previous trial (free) membership level(s)
-		update_user_meta( $user_id, "e20r_trial_level_{$level_id}_used", true );
-	}
-}
-
-add_action( 'pmpro_after_change_membership_level', 'E20R\SingleUseTrial\e20r_after_change_membership_level', 10, 2 );
-
-/**
- * During checkout (for renewals), verify if the user has consumed their trial already.
- *
- * @param bool $value
- *
- * @return bool
- */
-function e20r_registration_checks( $value ) {
-
-	// Skip if we're not logged in - so not a renewal
-	if ( function_exists( 'is_user_logged_in' ) && false === \is_user_logged_in() ) {
-		return $value;
-	}
-
-	/** List of levels with trial policy set */
-	$trial_levels = \apply_filters( 'e20r_set_single_use_trial_level_ids', array() );
-	$utils        = Utilities::get_instance();
-	$level_id     = $utils->get_variable( 'level', null );
-	$user         = \wp_get_current_user();
-
-	if ( $user->ID && in_array( $level_id, $trial_levels, true ) ) {
-
-		// Does the currently logged in user have a trial level they've used
-		$already = \get_user_meta( $user->ID, "e20r_trial_level_{$level_id}_used", true );
-
-		if ( ! empty( $already ) ) {
-
-			global $pmpro_msg, $pmpro_msgt;
-
-			$pmpro_msg  = \__(
-				'You have already used your trial subscription. Please select a full subscription to checkout.',
-				'e20r-single-use-trial'
+			// Load from local next (if applicable).
+			load_textdomain(
+				'e20r-single-use-trial',
+				$mo_file_local
 			);
-			$pmpro_msgt = 'pmpro_error';
 
-			$value = false;
+			// Load with plugin_textdomain or GlotPress.
+			load_plugin_textdomain(
+				'e20r-single-use-trial',
+				false,
+				dirname( __FILE__ ) . '/languages/'
+			);
 		}
 	}
-
-	return $value;
 }
-
-\add_filter( 'pmpro_registration_checks', 'E20R\SingleUseTrial\e20r_registration_checks' );
-
-/**
- * Change the error message text when selecting membership level after the trial has been used
- *
- * @param string $text - The text to show when there is an error
- * @param \stdClass $level - The membership Level info
- *
- * @return string|void
- *
- * @filter e20r_set_trial_level_ids
- */
-function e20r_level_expiration_text( $text, $level ) {
-
-	$user_id      = get_current_user_id();
-	$level_id     = $level->id;
-	$trial_levels = apply_filters( 'e20r_set_trial_level_ids', array() );
-	$has_used     = get_user_meta( $user_id, "e20r_trial_level_{$level_id}_used", true );
-
-	if ( ! empty( $user_id ) && ! empty( $has_used ) && in_array( $level_id, $trial_levels, true ) ) {
-
-		$text = __(
-			'You have already used your trial subscription. Please select a full subscription to checkout.',
-			'e20r-single-use-trial'
-		);
-	}
-
-	return $text;
-}
-
-add_filter( 'pmpro_level_expiration_text', 'E20R\SingleUseTrial\e20r_level_expiration_text', 10, 2 );
-
-if ( ! function_exists( 'e20r_force_tls_12' ) ) {
-	/**
-	 * Connect to the license server using TLS 1.2
-	 *
-	 * @param $handle - File handle for the pipe to the CURL process
-	 */
-	function e20r_force_tls_12( $handle ) {
-
-		// set the CURL option to use.
-		curl_setopt( $handle, CURLOPT_SSLVERSION, 6 ); // phpcs:ignore
-	}
-}
-
-add_action( 'http_api_curl', 'E20R\SingleUseTrial\e20r_force_tls_12' );
 
 if ( ! function_exists( 'boolval' ) ) {
 	/**
@@ -271,25 +266,32 @@ if ( ! function_exists( 'boolval' ) ) {
 /**
  * Load the required E20R Utilities Module functionality
  */
-require_once plugin_dir_path( __FILE__ ) . "/ActivateUtilitiesPlugin.php";
+require_once __DIR__ . '/ActivateUtilitiesPlugin.php';
 
-if ( false === apply_filters( 'e20r_utilities_module_installed', false ) ) {
+if ( function_exists( 'apply_filters' ) && false === apply_filters( 'e20r_utilities_module_installed', false ) ) {
 
-	$required_plugin = "E20R: Single Use Trial Subscription for Paid Memberships Pro";
+	$required_plugin = 'E20R Single Use Trial Membership for Paid Memberships Pro';
 
-	if ( false === \E20R\Utilities\ActivateUtilitiesPlugin::attempt_activation() ) {
-		add_action( 'admin_notices', function () use ( $required_plugin ) {
-			\E20R\Utilities\ActivateUtilitiesPlugin::plugin_not_installed( $required_plugin );
-		} );
+	if ( false === ActivateUtilitiesPlugin::attempt_activation() ) {
+		add_action(
+			'admin_notices',
+			function () use ( $required_plugin ) {
+				ActivateUtilitiesPlugin::plugin_not_installed( $required_plugin );
+			}
+		);
 
 		return false;
 	}
 }
 
+if ( function_exists( 'add_action' ) ) {
+	$e20r_single_use_trial = new SingleUseTrial();
+	add_action( 'plugins_loaded', array( $e20r_single_use_trial, 'load_hooks' ) );
+}
 
-if ( class_exists( 'E20R\Utilities\Utilities' ) ) {
+if ( class_exists( 'E20R\Utilities\Utilities' ) && defined( 'ABSPATH' ) ) {
 	Utilities::configureUpdateServerV4(
 		'e20r-single-use-trial',
-		plugin_dir_path(__FILE__) . 'e20r-single-use-trial.php'
+		__DIR__ . '/e20r-single-use-trial.php'
 	);
 }
