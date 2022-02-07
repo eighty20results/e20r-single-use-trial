@@ -44,3 +44,22 @@ add_filter(
 	}
 );
 ```
+
+### e20r_single_use_trial_rejection_text
+
+Modifies: Modifies the 'membership expiration' text for a given membership level when/if a user has already used this membership level.  
+
+Dependencies: N/A
+
+Default: 'You have already used your trial membership. Please select a different membership level.'
+
+Example:
+```php
+add_filter(
+	'e20r_single_use_trial_rejection_text',
+	function( $text, $level ) {
+		$text = 'This membership level is not available to you at this time'; 
+		return $text;
+	}
+);
+```
