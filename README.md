@@ -5,7 +5,7 @@
 `Tested up to: 5.9` <br />
 Stable tag:
 
-div align="center">
+<div align="center">
   <a href="https://eighty20results.com/product/single-use-trial-membership-for-paid-memberships-pro/">
     <img src=".wordpress-org/e20r-single-use-trial.png" alt="Logo" width="80" height="80">
   </a>
