@@ -3,9 +3,28 @@ Contributors: eighty20results
 Tags: customizations, memberships, paid memberships pro, trial membership, single use trial membership
 Requires at least: 5.0
 Tested up to: 5.9
-Stable tag: 
+Stable tag:
 
-Limits a registered PMPro member from signing up for a specific membership level more than once.
+div align="center">
+  <a href="https://eighty20results.com/product/single-use-trial-membership-for-paid-memberships-pro/">
+    <img src=".wordpress-org/e20r-single-use-trial.png" alt="Logo" width="80" height="80">
+  </a>
+
+<h3 align="center">E20R Single Use Trial Membership Settings</h3>
+
+  <p align="center">
+    Limits a registered PMPro member from signing up for a specific membership level more than once.
+    <br />
+    <a href="https://github.com/eighty20results/e20r-single-use-trial"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/eighty20results/e20r-single-use-trial">View Demo</a>
+    ·
+    <a href="https://github.com/eighty20results/e20r-single-use-trial/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/eighty20results/e20r-single-use-trial/issues">Request Feature</a>
+  </p>
+</div>
 
 == Description ==
 This plugin requires the Paid Memberships Pro plugin by Stranger Studios, LLC.
