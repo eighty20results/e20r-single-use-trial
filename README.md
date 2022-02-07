@@ -3,7 +3,7 @@
 `Tags: customizations, memberships, paid memberships pro, trial membership, single use trial membership` <br />
 `Requires at least: 5.0` <br />
 `Tested up to: 5.9` <br />
-Stable tag:
+`Stable tag: 3.0`
 
 <div align="center">
   <a href="https://eighty20results.com/product/single-use-trial-membership-for-paid-memberships-pro/">
