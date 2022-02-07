@@ -1,0 +1,22 @@
+{
+  "name": "e20r-single-use-trial",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/eighty20results/e20r-single-use-trial.git"
+  },
+  "version": "3.0",
+  "description": "E20R Single Use Trial Subscription for Paid Memberships Pro",
+  "homepage": "https://github.com/eighty20results.com/e20r-single-use-trial",
+  "bugs": {
+    "url": "https://github.com/eighty20results/e20r-single-use-trial/issues",
+    "email": "thomas@eighty20results.com"
+  },
+  "license": "GPL-2.0",
+  "author": {
+    "name": "Thomas Sjolshagen",
+    "email": "thomas@sjolshagen.net",
+    "url": "https://eighty20results.com/thomas-sjolshagen"
+  },
+  "dependencies": {
+  }
+}

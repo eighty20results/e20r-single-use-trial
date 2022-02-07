@@ -1,6 +1,9 @@
 {
     "config": {
-        "vendor-dir": "inc/"
+        "vendor-dir": "inc/",
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     },
       "name": "eighty20results/e20r-single-use-trial",
       "description": "Limits a registered PMPro member from signing up for a specific membership level more than once.",
@@ -39,6 +42,7 @@
         "spatie/phpunit-snapshot-assertions": "^4.2.5",
         "lucatume/wp-browser": "^3.0",
         "brain/monkey": ">=2.3.0",
+        "brain/faker": "dev-master",
         "szepeviktor/phpstan-wordpress": "^v0.7",
         "mikey179/vfsstream": "~1",
         "phpstan/extension-installer": "^1.1",
@@ -48,17 +52,23 @@
     "scripts": {
         "post-install-cmd": "if [ -f inc/bin/phpcs ] ; then inc/bin/phpcs --config-set installed_paths inc/wp-coding-standards/wpcs ; fi",
         "post-update-cmd" : "if [ -f inc/bin/phpcs ] ; then inc/bin/phpcs --config-set installed_paths inc/wp-coding-standards/wpcs ; fi",
-        "lint": "docker-compose -p ${PROJECT} --env-file ${DC_ENV_FILE} --file ${DC_CONFIG_FILE} exec -T -w /var/www/html/wp-content/plugins/e20r-members-list/ wordpress ./inc/bin/phpcs --report=full --colors -p --standard=WordPress-Extra --ignore=*/inc/*,*/node_modules/* --extensions=php *.php src/*/*.php"
+        "lint": "docker-compose -p ${PROJECT} --env-file ${DC_ENV_FILE} --file ${DC_CONFIG_FILE} exec -T -w /var/www/html/wp-content/plugins/e20r-single-use-trial/ wordpress ./inc/bin/phpcs --report=full --colors -p --standard=WordPress-Extra --ignore=*/inc/*,*/node_modules/* --extensions=php *.php src/*/*.php"
     },
     "autoload": {
         "psr-4": {
             "ProjectRoot\\": ".",
             "NamespaceInSourceDir\\": "",
-            "E20R\\": "src/E20R"
+            "E20R\\": "src/E20R",
+            "E20R\\SingleUseTrial\\": "src/E20R/SingleUseTrial",
+            "E20R\\SingleUseTrial\\Exceptions\\": "src/E20R/SingleUseTrial/Exceptions",
+            "E20R\\SingleUseTrial\\Views\\": "src/E20R/SingleUseTrial/Views"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "ProjectRoot\\": ".",
+            "NamespaceInSourceDir\\": "",
+            "E20R\\": "src/E20R",
             "E20R\\Tests\\": "tests/",
             "E20R\\Tests\\Unit\\": "tests/unit/testcases/",
             "E20R\\Tests\\Integration\\": "tests/integration/testcases/",

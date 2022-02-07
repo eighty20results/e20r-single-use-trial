@@ -1,6 +1,6 @@
 E20R_PLUGIN_NAME ?= default-plugin-name
 E20R_PLUGIN_BASE_FILE ?= e20r-single-use-trial.php
-E20R_DEPLOYMENT_SERVER ?= wordpress.org
+E20R_DEPLOYMENT_SERVER ?= eighty20results.com
 LOCAL_NETWORK_IF ?= en0
 
 ifneq ($(LOCAL_NETWORK_IF), "")
@@ -32,6 +32,6 @@ WP_VERSION ?= latest
 DB_VERSION ?= latest
 WP_IMAGE_VERSION ?= 1.0
 
-PHP_CODE_PATHS := *.php src/*/*/*/*.php src/*/*/*/*/*.php
+PHP_CODE_PATHS := *.php src/*/*/*.php src/*/*/*/*.php
 PHP_IGNORE_PATHS := $(COMPOSER_DIR)/*,node_modules/*,src/utilities/*
 E20R_MAIN_BRANCH_NAME := main

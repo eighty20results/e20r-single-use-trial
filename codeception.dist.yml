@@ -34,7 +34,7 @@ coverage:
   low_limit: 16
   include:
     - ./inc/wp_plugins/00-e20r-utilities/*
-    - ./src/E20R/*
+    - ./src/E20R/SingleUseTrial/*
     - ./e20r-single-use-trial.php
   exclude:
     - inc/*

@@ -11,7 +11,7 @@ Import and create user + PMPro member records from a CSV file to your WordPress 
 
 == Description ==
 
-![Release to wordpress.org](https://github.com/eighty20results/pmpro-import-members-from-csv/workflows/Release%20to%20wordpress.org/badge.svg?branch=main)
+![Release to wordpress.org](https://github.com/eighty20results/e20r-single-use-trial/workflows/Release%20to%20wordpress.org/badge.svg?branch=main)
 
 This plugin is designed to give you an error free import of a user/member to a WordPress/Paid Memberships Pro site. It supports both adding and changing user data.
 
@@ -44,8 +44,8 @@ This plugin supports Network Activation on a WordPress Multisite (WPMU) installa
 
 *NOTE*: The plugin may not import some of data if it detects a problem. To find out what the problem was, read this documentation and the FAQ section to ensure you have correctly formatted _all_ of your import data.
 
-For feature request and bug reports, [please use the issues section on GitHub](https://github.com/eighty20results/import-members-from-csv/issues).
-Code contributions are welcome [on Github](https://github.com/eighty20results/import-members-from-csv).
+For feature request and bug reports, [please use the issues section on GitHub](https://github.com/eighty20results/e20r-single-use-trial/issues).
+Code contributions are welcome [on Github](https://github.com/eighty20results/e20r-single-use-trial).
 
 NOTE: In order to hide the "Donation" button after a donation, this plugin will attempt to track the admin's IP address. This action may have GDPR implications for you or your administrators.
 
@@ -67,19 +67,18 @@ For an automatic installation through WordPress:
 
 Or use a nifty tool by WordPress lead developer Mark Jaquith:
 
-1. Visit [this link](http://coveredwebservices.com/wp-plugin-install/?plugin=pmpro-import-members-from-csv) and follow the instructions.
+1. Visit [this link](http://coveredwebservices.com/wp-plugin-install/?plugin=e20r-single-use-trial) and follow the instructions.
 
 
 For a manual installation via FTP:
 
-1. Upload the `pmpro-import-members-from-csv` directory to the `/wp-content/plugins/` directory
+1. Upload the `e20r-single-use-trial` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' screen in your WordPress admin area
-1. Upload your CSV file in the 'Members' menu, under 'Import Members'
 
 
 To upload the plugin through WordPress, instead of FTP:
 
-1. Search for the plugin ("Paid Memberships Pro Import Members from CSV" on the 'Add New' plugins screen in your WordPress admin area and activate.
+1. Search for the plugin ("Single Use Trial for PMPro" on the 'Add New' plugins screen in your WordPress admin area and activate.
 1. Upload your CSV file in the 'Memberships' menu, under 'Import Members'
 
 == Frequently Asked Questions ==
