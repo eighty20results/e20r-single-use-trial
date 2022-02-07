@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## v2.3 - 2022-02-07
+## v3.0 - 2022-02-07
 - BUG FIX: Strip away unused acceptance tests (Eighty/20Results Bot on Github)
 - BUG FIX: Fixed some of the documentation (Eighty/20Results Bot on Github)
 - BUG FIX: Updated the CI/CD pipeline config (Eighty/20Results Bot on Github)
