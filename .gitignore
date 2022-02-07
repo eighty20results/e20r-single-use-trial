@@ -79,6 +79,7 @@ docker-env/e20r-single-use-trial.sql
 /workflow/
 /_actions/
 /inc/
+.DS_Store
 build/
 !build/kits/.gitignore
 !build/kits/.gitkeep
