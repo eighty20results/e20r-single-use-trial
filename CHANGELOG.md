@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## v - 2022-02-07
+## v2.3 - 2022-02-07
 - BUG FIX: Strip away unused acceptance tests (Eighty/20Results Bot on Github)
 - BUG FIX: Fixed some of the documentation (Eighty/20Results Bot on Github)
 - BUG FIX: Updated the CI/CD pipeline config (Eighty/20Results Bot on Github)
@@ -67,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial commit of LICENSE.txt file (Thomas Sjolshagen)
 - NIT: Comments & whitespace (Thomas Sjolshagen)
 - Update change logs and version number (v2.2) (Thomas Sjolshagen)
+
 ## 2.3 
 
 * REFACTOR: Remove submodule and add Utilities as subtree instead
